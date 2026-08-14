@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0F172A">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>CBC MASTER</title>
 
   <style>
     body{
       margin:0;
-      font-family:Arial, sans-serif;
+      font-family:Arial,sans-serif;
       background:#4b4b4b;
     }
 
@@ -59,6 +59,7 @@
       font-weight:bold;
       color:#111827;
       box-shadow:0 2px 6px rgba(0,0,0,.15);
+      cursor:pointer;
     }
 
     .card small{
@@ -84,13 +85,22 @@
       background:#115E59;
     }
 
-    input, select{
+    input,
+    select{
       width:100%;
-      padding:12px;
+      padding:13px;
       border:1px solid #ccc;
       border-radius:10px;
       margin-top:10px;
       box-sizing:border-box;
+      font-size:16px;
+      background:white;
+    }
+
+    input:focus,
+    select:focus{
+      outline:none;
+      border:2px solid #0F766E;
     }
 
     .result{
@@ -100,6 +110,8 @@
       border-radius:10px;
       margin-top:12px;
       display:none;
+      font-size:16px;
+      font-weight:normal;
     }
 
     .history-item{
@@ -109,6 +121,7 @@
       padding:10px;
       margin-top:10px;
       font-size:14px;
+      font-weight:normal;
     }
 
     .pay-btn{
@@ -121,11 +134,63 @@
       border-radius:10px;
       margin-top:12px;
       font-weight:bold;
+      font-size:16px;
+    }
+
+    .locked-screen{
+      min-height:100vh;
+      background:#111827;
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      box-sizing:border-box;
+    }
+
+    .activation-box{
+      width:100%;
+      max-width:420px;
+      background:white;
+      color:#111827;
+      padding:25px;
+      border-radius:15px;
+      box-sizing:border-box;
+      box-shadow:0 5px 20px rgba(0,0,0,.3);
+    }
+
+    .activation-box h2{
+      margin-top:0;
+      text-align:center;
+    }
+
+    .activation-box p{
+      text-align:center;
+      color:#64748b;
+      line-height:1.5;
+    }
+
+    .error{
+      color:#dc2626;
+      text-align:center;
+      margin-top:10px;
+      font-size:14px;
+      display:none;
+    }
+
+    footer{
+      text-align:center;
+      padding:15px;
+      font-size:12px;
+      color:#64748b;
+      background:#F5F7FA;
     }
   </style>
 </head>
 
 <body>
+
+<div id="app">
 
   <div class="header">
     <div class="menu">☰</div>
@@ -136,18 +201,27 @@
 
   <div class="container">
 
-    <div class="section-title">1. QUESTION AND ANSWER</div>
+    <div class="section-title">
+      1. QUESTION AND ANSWER
+    </div>
 
+    <!-- NOTES -->
     <div class="card" onclick="showNotes()">
       <h2>01 NOTES</h2>
       <small>Grade 4-6 revision notes</small>
     </div>
 
+    <!-- QUIZZES -->
     <div class="card">
       <h2>02 QUIZZES</h2>
       <small>Practice CBC questions</small>
 
-      <input id="student" placeholder="Student Name">
+      <input
+        id="student"
+        type="text"
+        placeholder="Student Name"
+        autocomplete="name"
+      >
 
       <select id="grade">
         <option value="4">Grade 4</option>
@@ -155,236 +229,718 @@
         <option value="6">Grade 6</option>
       </select>
 
-      <button onclick="startQuiz()">Start Quiz</button>
+      <button onclick="startQuiz()">
+        Start Quiz
+      </button>
 
       <div id="result" class="result"></div>
     </div>
 
+    <!-- HISTORY -->
     <div class="card">
       <h2>03 PROGRESS HISTORY</h2>
-      <small>Saved results for this phone</small>
+      <small>Saved results on this device</small>
 
-      <button onclick="showHistory()">View History</button>
+      <button onclick="showHistory()">
+        View History
+      </button>
 
       <div id="historyBox"></div>
     </div>
 
+    <!-- LEADERBOARD -->
     <div class="card">
       <h2>04 LEADERBOARD</h2>
-      <small>Top students this week</small>
+      <small>Top students on this device</small>
 
-      <button onclick="showLeaderboard()">View Leaderboard</button>
+      <button onclick="showLeaderboard()">
+        View Leaderboard
+      </button>
 
       <div id="leaderboardBox"></div>
     </div>
 
+    <!-- PROJECTS -->
     <div class="card" onclick="showProjects()">
       <h2>05 CBC PROJECTS</h2>
       <small>Grade 4-6 Projects + Marking Rubrics</small>
     </div>
 
+    <!-- PREMIUM -->
     <div class="card">
-  <h2>06 PREMIUM ACTIVATION</h2>
-  <small>Unlock all questions and future updates</small>
+      <h2>06 PREMIUM ACTIVATION</h2>
 
-  <p><strong>Price:</strong> KSh 300</p>
-  <p><strong>M-Pesa:</strong> 0707649890</p>
+      <small>
+        Unlock all questions and future updates
+      </small>
 
-  <input id="phoneInput" placeholder="Enter M-Pesa phone number">
-  <input id="codeInput" placeholder="Enter activation code">
+      <p>
+        <strong>Price:</strong> KSh 300
+      </p>
 
-  <button onclick="activateApp()">Activate App</button>
+      <p>
+        <strong>M-Pesa:</strong> 0707649890
+      </p>
 
-  <a class="pay-btn" href="https://wa.me/254707649890?text=Hello%20Joseph,%20I%20want%20to%20activate%20CBC%20MASTER">
-    📲 Pay via M-Pesa
-  </a>
+      <input
+        id="phoneInput"
+        type="tel"
+        inputmode="numeric"
+        autocomplete="tel"
+        placeholder="Enter M-Pesa phone number"
+      >
+
+      <input
+        id="codeInput"
+        type="text"
+        inputmode="text"
+        autocomplete="off"
+        placeholder="Enter activation code"
+      >
+
+      <button onclick="activateApp()">
+        🔓 Activate App
+      </button>
+
+      <div id="activationError" class="error"></div>
+
+      <a
+        class="pay-btn"
+        href="https://wa.me/254707649890?text=Hello%20Joseph,%20I%20want%20to%20activate%20CBC%20MASTER"
+      >
+        📲 Pay via M-Pesa
+      </a>
     </div>
 
+    <!-- SUPPORT -->
     <div class="card">
       <h2>07 CONTACT SUPPORT</h2>
-      <small>WhatsApp support and activation</small>
+
+      <small>
+        WhatsApp support and activation
+      </small>
 
       <p>📞 0707649890</p>
       <p>📧 mbuijoseph51@gmail.com</p>
 
-      <a class="pay-btn" href="https://wa.me/254707649890">
+      <a
+        class="pay-btn"
+        href="https://wa.me/254707649890"
+      >
         💬 WhatsApp Support
       </a>
     </div>
 
   </div>
 
-  <script>
-    const SECRET = "K9";
-
-    const APPROVED_PHONES = [
-      "0707649890",
-      "0782609857"
-    ];
-
-    function generateCode(phone){
-      return "CBC-" + SECRET + "-" + phone.slice(-4);
-    }
-
-    function checkAccess() {
-      let saved = localStorage.getItem("cbc_code");
-
-      if(saved){
-        for(let phone of APPROVED_PHONES){
-          if(saved === generateCode(phone)){
-            return true;
-          }
-        }
-      }
-
-      let phone = prompt("Enter your M-Pesa phone number");
-
-      if(!APPROVED_PHONES.includes(phone)){
-        lockApp();
-        return false;
-      }
-
-      let code = prompt("Enter activation code");
-
-      if(code === generateCode(phone)){
-        localStorage.setItem("cbc_code", code);
-        alert("Access granted");
-        return true;
-      }
-
-      lockApp();
-      return false;
-    }
-
-    function lockApp(){
-      document.body.innerHTML = `
-        <div style="padding:20px;text-align:center;font-family:Arial">
-          <h2>CBC MASTER Locked</h2>
-          <p>Pay KSh 300 to 0707649890</p>
-          <p>WhatsApp payment screenshot for activation</p>
-        </div>`;
-    }
-
-    if(!checkAccess()){
-      throw new Error("Access denied");
-    }
-
-    function saveHistory(student, grade, score, total){
-      const history = JSON.parse(localStorage.getItem('cbc_history') || '[]');
-
-      history.push({
-        student,
-        grade,
-        score,
-        total,
-        percent: Math.round(score/total*100),
-        date: new Date().toLocaleString()
-      });
-
-      localStorage.setItem('cbc_history', JSON.stringify(history));
-    }
-
-    function startQuiz(){
-      const student = document.getElementById('student').value || 'Student';
-      const grade = document.getElementById('grade').value;
-
-      let score = 0;
-      let total = 2;
-
-      const q1 = prompt('Grade ' + grade + ' Math: 345 + 129 = ?');
-      if(q1 === '474') score++;
-
-      const q2 = prompt('Grade ' + grade + ' Social Studies: Capital city of Kenya?');
-      if(q2 && q2.toLowerCase().trim() === 'nairobi') score++;
-
-      saveHistory(student, grade, score, total);
-
-      const percent = Math.round(score/total*100);
-
-      const box = document.getElementById('result');
-      box.style.display = 'block';
-
-      if(percent >= 50){
-        box.innerHTML = `✅ Excellent ${student}! Score: ${score}/${total} (${percent}%)`;
-      }else{
-        box.innerHTML = `❌ Keep practicing ${student}. Score: ${score}/${total} (${percent}%)`;
-      }
-
-      showLeaderboard();
-    }
-
-    function showNotes() {
-      alert(
-        "Notes za Grade 4-6 zinakuja hivi karibuni!\n\n" +
-        "Kwa sasa fanya QUIZ kwanza. Tutapakia Notes za CBC hapa soon."
-      );
-    }
-
-    function showProjects() {
-      alert(
-        "CBC PROJECTS:\n\n" +
-        "1. Grade 4: Water Filter - Science\n" +
-        "2. Grade 5: Budget Project - Maths\n" +
-        "3. Grade 6: Community Solution - Social\n\n" +
-        "Details complete kwa Update 2.0"
-      );
-    }
-
-    function showHistory(){
-      const history = JSON.parse(localStorage.getItem('cbc_history') || '[]');
-      const box = document.getElementById('historyBox');
-
-      if(history.length === 0){
-        box.innerHTML = '<p>No history saved yet.</p>';
-        return;
-      }
-
-      let html = '';
-
-      history.slice().reverse().forEach((h, i) => {
-        html += `
-          <div class="history-item">
-            <strong>${i+1}. ${h.student}</strong><br>
-            Grade: ${h.grade}<br>
-            Score: ${h.score}/${h.total} (${h.percent}%)<br>
-            Date: ${h.date}
-          </div>
-        `;
-      });
-
-      box.innerHTML = html;
-    }
-
-    function showLeaderboard(){
-      const history = JSON.parse(localStorage.getItem('cbc_history') || '[]');
-      const box = document.getElementById('leaderboardBox');
-
-      if(history.length === 0){
-        box.innerHTML = '<p>No scores yet.</p>';
-        return;
-      }
-
-      history.sort((a,b) => b.percent - a.percent);
-
-      let html = '';
-
-      history.slice(0,5).forEach((h,i) => {
-        html += `<div class="history-item">🏆 ${i+1}. ${h.student} - ${h.percent}%</div>`;
-      });
-
-      box.innerHTML = html;
-    }
-
-    showLeaderboard();
-
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./service-worker.js');
-    }
-  </script>
-
-  <footer style="text-align:center;padding:15px;font-size:12px;color:#64748b;background:#F5F7FA">
+  <footer>
     © 2026 CBC MASTER. Developed by Joseph Mbui
   </footer>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   ACTIVATION SETTINGS
+========================================= */
+
+const SECRET = "K9";
+
+const APPROVED_PHONES = [
+  "0707649890",
+  "0782609857"
+];
+
+
+/* =========================================
+   GENERATE ACTIVATION CODE
+   Example:
+   0707649890 → CBC-K9-9890
+========================================= */
+
+function generateCode(phone){
+
+  return "CBC-" +
+         SECRET +
+         "-" +
+         phone.slice(-4);
+
+}
+
+
+/* =========================================
+   CHECK SAVED ACTIVATION
+========================================= */
+
+function isActivated(){
+
+  const savedCode =
+    localStorage.getItem("cbc_code");
+
+  if(!savedCode){
+    return false;
+  }
+
+  for(const phone of APPROVED_PHONES){
+
+    if(savedCode === generateCode(phone)){
+      return true;
+    }
+
+  }
+
+  return false;
+}
+
+
+/* =========================================
+   ACTIVATE APP
+========================================= */
+
+function activateApp(){
+
+  const phoneInput =
+    document.getElementById("phoneInput");
+
+  const codeInput =
+    document.getElementById("codeInput");
+
+  const errorBox =
+    document.getElementById("activationError");
+
+  const phone =
+    phoneInput.value.trim();
+
+  const code =
+    codeInput.value.trim().toUpperCase();
+
+
+  errorBox.style.display = "none";
+
+
+  if(!phone){
+
+    errorBox.textContent =
+      "Please enter your M-Pesa phone number.";
+
+    errorBox.style.display = "block";
+
+    phoneInput.focus();
+
+    return;
+  }
+
+
+  if(!APPROVED_PHONES.includes(phone)){
+
+    errorBox.textContent =
+      "❌ Phone number is not approved.";
+
+    errorBox.style.display = "block";
+
+    phoneInput.focus();
+
+    return;
+  }
+
+
+  const correctCode =
+    generateCode(phone);
+
+
+  if(code !== correctCode){
+
+    errorBox.textContent =
+      "❌ Wrong activation code.";
+
+    errorBox.style.display = "block";
+
+    codeInput.focus();
+
+    return;
+  }
+
+
+  localStorage.setItem(
+    "cbc_code",
+    correctCode
+  );
+
+
+  alert(
+    "✅ Access granted!\n\nCBC MASTER is now activated."
+  );
+
+
+  location.reload();
+
+}
+
+
+/* =========================================
+   SHOW LOCK SCREEN
+========================================= */
+
+function showLockScreen(){
+
+  document.body.innerHTML = `
+
+    <div class="locked-screen">
+
+      <div class="activation-box">
+
+        <h2>🔒 CBC MASTER</h2>
+
+        <p>
+          This app is locked.
+        </p>
+
+        <p>
+          Pay <strong>KSh 300</strong>
+          to M-Pesa:
+          <strong>0707649890</strong>
+        </p>
+
+        <input
+          id="phoneInput"
+          type="tel"
+          inputmode="numeric"
+          autocomplete="tel"
+          placeholder="Enter M-Pesa phone number"
+        >
+
+        <input
+          id="codeInput"
+          type="text"
+          inputmode="text"
+          autocomplete="off"
+          placeholder="Enter activation code"
+        >
+
+        <button onclick="activateApp()">
+          🔓 Activate App
+        </button>
+
+        <div
+          id="activationError"
+          class="error"
+        ></div>
+
+        <a
+          class="pay-btn"
+          href="https://wa.me/254707649890?text=Hello%20Joseph,%20I%20want%20to%20activate%20CBC%20MASTER"
+        >
+          💬 Contact Support
+        </a>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================
+   START APP
+========================================= */
+
+if(!isActivated()){
+
+  showLockScreen();
+
+}
+
+
+/* =========================================
+   QUIZ HISTORY
+========================================= */
+
+function saveHistory(
+  student,
+  grade,
+  score,
+  total
+){
+
+  const history =
+    JSON.parse(
+      localStorage.getItem(
+        "cbc_history"
+      ) || "[]"
+    );
+
+
+  history.push({
+
+    student: student,
+
+    grade: grade,
+
+    score: score,
+
+    total: total,
+
+    percent:
+      Math.round(
+        score / total * 100
+      ),
+
+    date:
+      new Date().toLocaleString()
+
+  });
+
+
+  localStorage.setItem(
+    "cbc_history",
+    JSON.stringify(history)
+  );
+
+}
+
+
+/* =========================================
+   START QUIZ
+========================================= */
+
+function startQuiz(){
+
+  const student =
+    document.getElementById(
+      "student"
+    ).value.trim() || "Student";
+
+
+  const grade =
+    document.getElementById(
+      "grade"
+    ).value;
+
+
+  let score = 0;
+
+  const total = 2;
+
+
+  const q1 = prompt(
+    "Grade " +
+    grade +
+    " Math:\n\n345 + 129 = ?"
+  );
+
+
+  if(q1 &&
+     q1.trim() === "474"){
+
+    score++;
+
+  }
+
+
+  const q2 = prompt(
+    "Grade " +
+    grade +
+    " Social Studies:\n\nCapital city of Kenya?"
+  );
+
+
+  if(
+    q2 &&
+    q2.toLowerCase().trim()
+      === "nairobi"
+  ){
+
+    score++;
+
+  }
+
+
+  saveHistory(
+    student,
+    grade,
+    score,
+    total
+  );
+
+
+  const percent =
+    Math.round(
+      score / total * 100
+    );
+
+
+  const box =
+    document.getElementById(
+      "result"
+    );
+
+
+  box.style.display =
+    "block";
+
+
+  if(percent >= 50){
+
+    box.innerHTML =
+      "✅ Excellent " +
+      student +
+      "! Score: " +
+      score +
+      "/" +
+      total +
+      " (" +
+      percent +
+      "%)";
+
+  }else{
+
+    box.innerHTML =
+      "❌ Keep practicing " +
+      student +
+      ". Score: " +
+      score +
+      "/" +
+      total +
+      " (" +
+      percent +
+      "%)";
+
+  }
+
+}
+
+
+/* =========================================
+   NOTES
+========================================= */
+
+function showNotes(){
+
+  alert(
+    "CBC NOTES\n\n" +
+    "Grade 4-6 revision notes " +
+    "will be added in a future update.\n\n" +
+    "For now, use QUIZZES to practice."
+  );
+
+}
+
+
+/* =========================================
+   PROJECTS
+========================================= */
+
+function showProjects(){
+
+  alert(
+    "CBC PROJECTS\n\n" +
+
+    "1. Grade 4: Water Filter - Science\n\n" +
+
+    "2. Grade 5: Financial Budget Project - Maths\n\n" +
+
+    "3. Grade 6: Community Problem Solution - Social Studies\n\n" +
+
+    "Full project instructions and marking rubrics " +
+    "will be added in a future update."
+  );
+
+}
+
+
+/* =========================================
+   SHOW HISTORY
+========================================= */
+
+function showHistory(){
+
+  const history =
+    JSON.parse(
+      localStorage.getItem(
+        "cbc_history"
+      ) || "[]"
+    );
+
+
+  const box =
+    document.getElementById(
+      "historyBox"
+    );
+
+
+  if(!box){
+    return;
+  }
+
+
+  if(history.length === 0){
+
+    box.innerHTML =
+      "<p>No history saved yet.</p>";
+
+    return;
+
+  }
+
+
+  let html = "";
+
+
+  history
+    .slice()
+    .reverse()
+    .forEach(
+      (h, i) => {
+
+        html += `
+
+          <div class="history-item">
+
+            <strong>
+              ${i + 1}. ${h.student}
+            </strong>
+
+            <br>
+
+            Grade:
+            ${h.grade}
+
+            <br>
+
+            Score:
+            ${h.score}/${h.total}
+            (${h.percent}%)
+
+            <br>
+
+            Date:
+            ${h.date}
+
+          </div>
+
+        `;
+
+      }
+    );
+
+
+  box.innerHTML = html;
+
+}
+
+
+/* =========================================
+   LEADERBOARD
+========================================= */
+
+function showLeaderboard(){
+
+  const history =
+    JSON.parse(
+      localStorage.getItem(
+        "cbc_history"
+      ) || "[]"
+    );
+
+
+  const box =
+    document.getElementById(
+      "leaderboardBox"
+    );
+
+
+  if(!box){
+    return;
+  }
+
+
+  if(history.length === 0){
+
+    box.innerHTML =
+      "<p>No scores yet.</p>";
+
+    return;
+
+  }
+
+
+  const sorted =
+    history
+      .slice()
+      .sort(
+        (a,b) =>
+          b.percent - a.percent
+      );
+
+
+  let html = "";
+
+
+  sorted
+    .slice(0,5)
+    .forEach(
+      (h,i) => {
+
+        html += `
+
+          <div class="history-item">
+
+            🏆
+            ${i + 1}.
+            ${h.student}
+            -
+            ${h.percent}%
+
+          </div>
+
+        `;
+
+      }
+    );
+
+
+  box.innerHTML = html;
+
+}
+
+
+/* =========================================
+   SERVICE WORKER
+========================================= */
+
+if(
+  "serviceWorker" in navigator
+){
+
+  window.addEventListener(
+    "load",
+    function(){
+
+      navigator.serviceWorker
+        .register(
+          "./service-worker.js"
+        )
+        .catch(
+          function(error){
+
+            console.log(
+              "Service Worker registration failed:",
+              error
+            );
+
+          }
+        );
+
+    }
+  );
+
+}
+
+</script>
 
 </body>
 </html>
