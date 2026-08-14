@@ -1032,16 +1032,17 @@ function showLeaderboard(){
    MENU + SHARE FUNCTIONS
    ======================================= */
 
-function openMenu(){
+window.openMenu = function(){
   document.getElementById("sidebar").style.width = "270px";
   document.getElementById("overlay").style.display = "block";
 }
 
-function closeMenu(){
+window.closeMenu = function(){
   document.getElementById("sidebar").style.width = "0";
   document.getElementById("overlay").style.display = "none";
-  }
-function shareApp(){
+}
+
+window.shareApp = function(){
   const shareData = {
     title: "CBC MASTER",
     text: "CBC MASTER - Grade 4-6 quizzes, notes and projects.",
