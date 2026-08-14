@@ -6,6 +6,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CBC MASTER</title><style>
   <script>
+const SECRET = "K9";
+
+const APPROVED_PHONES = [
+  "0707649890",
+  "0782609857"
+];
+
+function generateCode(phone){
+  return "CBC-" + SECRET + "-" + phone.slice(-4);
+}
+
+function checkAccess() {
+  let saved = localStorage.getItem("cbc_code");
+
+  if(saved){
+    for(let phone of APPROVED_PHONES){
+      if(saved === generateCode(phone)){
+        return true;
+      }
+    }
+  }
+
+  let phone = prompt("Enter your M-Pesa phone number");
+
+  if(!APPROVED_PHONES.includes(phone)){
+    lockApp();
+    return false;
+  }
+
+  let code = prompt("Enter activation code");
+
+  if(code === generateCode(phone)){
+    localStorage.setItem("cbc_code", code);
+    alert("Access granted");
+    return true;
+  }
+
+  lockApp();
+  return false;
+}
+
+function lockApp(){
+  document.body.innerHTML = `
+    <div style="padding:20px;text-align:center;font-family:Arial">
+      <h2>CBC MASTER Locked</h2>
+      <p>Pay KSh 300 to 0707649890</p>
+      <p>WhatsApp payment screenshot for activation</p>
+    </div>`;
+}
+
+if(!checkAccess()){
+  throw new Error("Access denied");
+}
+
+// KEEP THE REST OF YOUR EXISTING FUNCTIONS BELOW THIS LINE
+function saveHistory(student, grade, score, total){
+   // existing code...
+}
+
+function startQuiz(){
+   // existing code...
+}
+</script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./service-worker.js');
 }
@@ -257,7 +320,11 @@ function showLeaderboard(){
 
   box.innerHTML = html;
 }
-
 showLeaderboard();
-</script></body>
+</script>
+
+<footer style="text-align:center;padding:15px;font-size:12px;color:#64748b;background:#F5F7FA">
+  © 2026 CBC MASTER. Developed by Joseph Mbui
+</footer>
+</body>
 </html>
