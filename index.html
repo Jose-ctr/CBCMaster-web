@@ -734,111 +734,105 @@ function saveHistory(
    START QUIZ
 ========================================= */
 
+/* =======================================
+   QUESTION BANK - 50 CBC QUESTIONS
+   ======================================= */
+const questionBank = [
+  // MATH - 10 Qs
+  {q: "345 + 289 =?", a: "634", subj: "MATH"},
+  {q: "72 x 6 =?", a: "432", subj: "MATH"},
+  {q: "1000 - 456 =?", a: "544", subj: "MATH"},
+  {q: "9 x 9 =?", a: "81", subj: "MATH"},
+  {q: "144 / 12 =?", a: "12", subj: "MATH"},
+  {q: "25% of 200 =?", a: "50", subj: "MATH"},
+  {q: "3/4 + 1/4 =?", a: "1", subj: "MATH"},
+  {q: "Square of 15 =?", a: "225", subj: "MATH"},
+  {q: "LCM of 4 and 6 =?", a: "12", subj: "MATH"},
+  {q: "Perimeter of square side 8cm =?", a: "32", subj: "MATH"},
+
+  // ENGLISH - 10 Qs
+  {q: "Correct spelling: A) Enviroment B) Environment C) Enviornment", a: "B", subj: "ENGLISH"},
+  {q: "Opposite of Brave?", a: "coward", subj: "ENGLISH"},
+  {q: "Plural of Child?", a: "children", subj: "ENGLISH"},
+  {q: "Synonym of Happy?", a: "joyful", subj: "ENGLISH"},
+  {q: "Past tense of Go?", a: "went", subj: "ENGLISH"},
+  {q: "A person who writes books is a?", a: "author", subj: "ENGLISH"},
+  {q: "Choose: I ___ to school yesterday. A) go B) went C) gone", a: "B", subj: "ENGLISH"},
+  {q: "Punctuation: What a beautiful day ___", a: "!", subj: "ENGLISH"},
+  {q: "Antonym of Expensive?", a: "cheap", subj: "ENGLISH"},
+  {q: "How many vowels in 'Education'?", a: "5", subj: "ENGLISH"},
+
+  // SCIENCE - 10 Qs
+  {q: "Part of plant that makes food? A) Root B) Leaf C) Stem", a: "B", subj: "SCIENCE"},
+  {q: "How many states of matter? A) 2 B) 3 C) 4", a: "B", subj: "SCIENCE"},
+  {q: "Water boils at ___ degrees C?", a: "100", subj: "SCIENCE"},
+  {q: "The largest planet?", a: "jupiter", subj: "SCIENCE"},
+  {q: "Humans have ___ bones", a: "206", subj: "SCIENCE"},
+  {q: "Gas we breathe in?", a: "oxygen", subj: "SCIENCE"},
+  {q: "Animal that lays eggs?", a: "chicken", subj: "SCIENCE"},
+  {q: "Source of light and heat?", a: "sun", subj: "SCIENCE"},
+  {q: "Name 1 part of an insect", a: "head", subj: "SCIENCE"},
+  {q: "Tool to measure temperature?", a: "thermometer", subj: "SCIENCE"},
+
+  // SOCIAL - 10 Qs
+  {q: "Capital of Kenya?", a: "nairobi", subj: "SOCIAL"},
+  {q: "Currency of Kenya?", a: "shilling", subj: "SOCIAL"},
+  {q: "Largest lake in Kenya?", a: "turkana", subj: "SOCIAL"},
+  {q: "National animal of Kenya?", a: "lion", subj: "SOCIAL"},
+  {q: "First president of Kenya?", a: "jomo kenyatta", subj: "SOCIAL"},
+  {q: "Country to the North of Kenya?", a: "ethiopia", subj: "SOCIAL"},
+  {q: "Madaraka Day is celebrated on?", a: "1st june", subj: "SOCIAL"},
+  {q: "Main port in Kenya?", a: "mombasa", subj: "SOCIAL"},
+  {q: "How many counties in Kenya?", a: "47", subj: "SOCIAL"},
+  {q: "National language of Kenya?", a: "swahili", subj: "SOCIAL"},
+
+  // CRE - 10 Qs
+  {q: "Who built the Ark?", a: "noah", subj: "CRE"},
+  {q: "How many days to create world?", a: "6", subj: "CRE"},
+  {q: "First man God created?", a: "adam", subj: "CRE"},
+  {q: "Number of disciples of Jesus?", a: "12", subj: "CRE"},
+  {q: "Book with 10 commandments?", a: "exodus", subj: "CRE"},
+  {q: "Who was swallowed by a big fish?", a: "jonah", subj: "CRE"},
+  {q: "Place Jesus was born?", a: "bethlehem", subj: "CRE"},
+  {q: "How many books in the Bible?", a: "66", subj: "CRE"},
+  {q: "Who denied Jesus 3 times?", a: "peter", subj: "CRE"},
+  {q: "Feast celebrating Jesus birth?", a: "christmas", subj: "CRE"}
+];
+
+/* =======================================
+   START QUIZ - 10 RANDOM FROM 50
+   ======================================= */
 function startQuiz(){
-
-  const student =
-    document.getElementById(
-      "student"
-    ).value.trim() || "Student";
-
-
-  const grade =
-    document.getElementById(
-      "grade"
-    ).value;
-
+  const student = document.getElementById("student").value.trim() || "Student";
+  const grade = document.getElementById("grade").value;
 
   let score = 0;
+  const total = 10; // Picks 10 random questions each time
+  
+  // Shuffle and pick 10 random questions
+  const shuffled = questionBank.sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, total);
 
-  const total = 2;
-
-
-  const q1 = prompt(
-    "Grade " +
-    grade +
-    " Math:\n\n345 + 129 = ?"
-  );
-
-
-  if(q1 &&
-     q1.trim() === "474"){
-
-    score++;
-
+  for(let i = 0; i < selected.length; i++){
+    const ques = selected[i];
+    const ans = prompt(`Grade ${grade} ${ques.subj}\n\nQ${i+1}/${total}: ${ques.q}`);
+    if(ans && ans.trim().toLowerCase() === ques.a.toLowerCase()){ 
+      score++; 
+    }
   }
 
-
-  const q2 = prompt(
-    "Grade " +
-    grade +
-    " Social Studies:\n\nCapital city of Kenya?"
-  );
-
-
-  if(
-    q2 &&
-    q2.toLowerCase().trim()
-      === "nairobi"
-  ){
-
-    score++;
-
-  }
-
-
-  saveHistory(
-    student,
-    grade,
-    score,
-    total
-  );
-
-
-  const percent =
-    Math.round(
-      score / total * 100
-    );
-
-
-  const box =
-    document.getElementById(
-      "result"
-    );
-
-
-  box.style.display =
-    "block";
-
+  const percent = Math.round(score / total * 100);
+  const box = document.getElementById("result");
+  box.style.display = "block";
 
   if(percent >= 50){
-
-    box.innerHTML =
-      "✅ Excellent " +
-      student +
-      "! Score: " +
-      score +
-      "/" +
-      total +
-      " (" +
-      percent +
-      "%)";
-
+    box.innerHTML = "✅ Excellent " + student + "! Score: " + score + "/" + total + " (" + percent + "%)";
   }else{
-
-    box.innerHTML =
-      "❌ Keep practicing " +
-      student +
-      ". Score: " +
-      score +
-      "/" +
-      total +
-      " (" +
-      percent +
-      "%)";
-
+    box.innerHTML = "❌ Keep practicing " + student + ". Score: " + score + "/" + total + " (" + percent + "%)";
   }
 
-}
+  saveHistory(grade, score, total);
+  }
 
 
 /* =========================================
