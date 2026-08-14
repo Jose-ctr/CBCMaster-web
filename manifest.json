@@ -1,0 +1,21 @@
+{
+  "name": "CBC MASTER",
+  "short_name": "CBC MASTER",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F5F7FA",
+  "theme_color": "#0F172A",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/Jose-ctr/CBCMaster-web/main/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/Jose-ctr/CBCMaster-web/main/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
