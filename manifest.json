@@ -1,6 +1,7 @@
 {
   "name": "CBC MASTER",
   "short_name": "CBC MASTER",
+  "author": "Joseph Mbui",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#F5F7FA",
