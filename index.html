@@ -1,8 +1,15 @@
 <!DOCTYPE html><html lang="en">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0F172A">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CBC MASTER</title><style>
+  <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.js');
+}
+</script>
 body{
   margin:0;
   font-family:Arial, sans-serif;
