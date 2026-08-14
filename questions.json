@@ -1,0 +1,63 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-08-14",
+  "grades": {
+    "4": {
+      "Mathematics": [
+        {"q": "345 + 129 = ?", "a": "474"},
+        {"q": "500 - 267 = ?", "a": "233"},
+        {"q": "24 × 5 = ?", "a": "120"}
+      ],
+      "English": [
+        {"q": "Plural of child", "a": "children"},
+        {"q": "Opposite of big", "a": "small"}
+      ],
+      "Science": [
+        {"q": "What do plants need to make food?", "a": "sunlight"},
+        {"q": "Name 3 parts of a plant", "a": "root stem leaf"}
+      ]
+    },
+    "5": {
+      "Mathematics": [
+        {"q": "240 ÷ 30 = ?", "a": "8"},
+        {"q": "3/4 of 100 = ?", "a": "75"}
+      ]
+    },
+    "6": {
+      "Mathematics": [
+        {"q": "20% of 500 = ?", "a": "100"},
+        {"q": "Convert 2.5 m to cm", "a": "250"}
+      ]
+    }
+  }
+}
+
+Tap Commit new file.
+
+---
+
+STEP 2 — Create "manifest.json"
+
+Add another file named manifest.json and paste:
+
+{
+  "name": "CBC MASTER",
+  "short_name": "CBC MASTER",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F5F7FA",
+  "theme_color": "#0F172A",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/Jose-ctr/CBCMaster-web/main/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/Jose-ctr/CBCMaster-web/main/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
