@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+pp<!DOCTYPE html>
 <html lang="en">
 <head>
   <link rel="manifest" href="manifest.json">
@@ -190,7 +190,59 @@
 
 <body>
 
+<!-- SIDE MENU -->
+<div id="sidebar" class="sidebar">
+
+  <div class="sidebar-header">
+    <img src="icon-192.png" alt="CBC MASTER">
+    <h3>CBC MASTER</h3>
+    <p>Grade 4-6 Learning</p>
+  </div>
+
+  <a href="javascript:void(0)"
+     onclick="showNotes(); closeMenu()">
+    📝 Notes
+  </a>
+
+  <a href="javascript:void(0)"
+     onclick="showProjects(); closeMenu()">
+    📚 CBC Projects
+  </a>
+
+  <a href="javascript:void(0)"
+     onclick="showHistory(); closeMenu()">
+    📊 Progress History
+  </a>
+
+  <a href="javascript:void(0)"
+     onclick="showLeaderboard(); closeMenu()">
+    🏆 Leaderboard
+  </a>
+
+  <a href="https://wa.me/254707649890">
+    💬 Contact Support
+  </a>
+
+  <a href="javascript:void(0)"
+     onclick="alert('CBC MASTER - Google Play listing coming soon')">
+    ⭐ Rate Us
+  </a>
+
+  <a href="javascript:void(0)"
+     onclick="shareApp()">
+    📤 Share App
+  </a>
+
+</div>
+
+<!-- DARK OVERLAY -->
+<div id="overlay"
+     class="overlay"
+     onclick="closeMenu()">
+</div>
+
 <div id="app">
+
 
   <div class="header">
     <div class="menu">☰</div>
