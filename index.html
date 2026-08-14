@@ -1028,6 +1028,32 @@ function showLeaderboard(){
 
 }
 
+/* =======================================
+   MENU + SHARE FUNCTIONS
+   ======================================= */
+function openMenu(){
+  document.getElementById("sidebar").style.width = "270px";
+  document.getElementById("overlay").style.display = "block";
+}
+
+function closeMenu(){
+  document.getElementById("sidebar").style.width = "0";
+  document.getElementById("overlay").style.display = "none";
+}
+
+function shareApp(){
+  const shareData = {
+    title: "CBC MASTER",
+    text: "CBC MASTER - Grade 4-6 quizzes, notes and projects.",
+    url: window.location.href
+  };
+
+  if(navigator.share){
+    navigator.share(shareData).catch(function(){});
+  }else{
+    alert("Share this link:\n\n" + window.location.href);
+  }
+  }
 
 /* =========================================
    SERVICE WORKER
