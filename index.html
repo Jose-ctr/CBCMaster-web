@@ -188,42 +188,61 @@ input, select{
   <div class="menu">☰</div>
   CBC MASTER
 </div><div class="accent"></div><div class="container">  <div class="section-title">1. QUESTION AND ANSWER</div>  <div class="card">
-    01 NOTES
-    <small>Grade 4–6 revision notes</small>
-  </div>  <div class="card">
-    02 QUIZZES
-    <small>Practice CBC questions</small><input id="student" placeholder="Student Name">
+  <div class="card" onclick="showNotes()">
+  <h2>01 NOTES</h2>
+  <small>Grade 4-6 revision notes</small>
+  </div>
+<div class="card">
+  <h2>02 QUIZZES</h2>
+  <small>Practice CBC questions</small>
+  <input id="student" placeholder="Student Name">
+  <select id="grade">
+    <option value="4">Grade 4</option>
+    <option value="5">Grade 5</option>
+    <option value="6">Grade 6</option>
+  </select>
+  <button onclick="startQuiz()">Start Quiz</button>
+  <div id="result" class="result"></div>
+</div>
 
-<select id="grade">
-  <option value="4">Grade 4</option>
-  <option value="5">Grade 5</option>
-  <option value="6">Grade 6</option>
-</select>
+<div class="card">
+  <h2>03 PROGRESS HISTORY</h2>
+  <small>Saved results for this phone</small>
+  <button onclick="showHistory()">View History</button>
+  <div id="historyBox"></div>
+</div>
 
-<button onclick="startQuiz()">Start Quiz</button>
+<div class="card">
+  <h2>04 LEADERBOARD</h2>
+  <small>Top students this week</small>
+  <button onclick="showLeaderboard()">View Leaderboard</button>
+</div>
 
-<div id="result" class="result"></div>
+<div class="card" onclick="showProjects()">
+  <h2>05 CBC PROJECTS</h2>
+  <small>Grade 4-6 Projects + Marking Rubrics</small>
+</div>
 
-  </div>  <div class="card">
-    03 PROGRESS HISTORY
-    <small>Saved results for this phone</small><button onclick="showHistory()">View History</button>
-<div id="historyBox"></div>
+<div class="card">
+  <h2>06 PREMIUM ACTIVATION</h2>
+  <small>Unlock all questions and future updates</small>
+  <p><strong>Price:</strong> KSh 300</p>
+  <p><strong>M-Pesa:</strong> 0707649890</p>
+  <a class="pay-btn" href="https://wa.me/254707649890?text=Hello%20Joseph,%20I%20want%20to%20activate%20CBC%20MASTER">
+  📲 Pay via M-Pesa
+  </a>
+</div>
 
-  </div>  <div class="card">
-    04 LEADERBOARD
-    <small>Top recent scores</small>
-    <div id="leaderboardBox"></div>
-  </div>  <div class="card">
-    05 PREMIUM ACTIVATION
-    <small>Unlock all questions and future updates</small><p><strong>Price:</strong> KSh 300</p>
-<p><strong>M-Pesa:</strong> 0707649890</p>
+<div class="card">
+  <h2>07 CONTACT SUPPORT</h2>
+  <small>WhatsApp support and activation</small>
+  <p>📞 0707649890</p>
+  <p>📧 mbuijoseph51@gmail.com</p>
+  <a class="pay-btn" href="https://wa.me/254707649890">
+  💬 WhatsApp Support
+  </a>
+</div>
 
-<a class="pay-btn"
-   href="https://wa.me/254707649890?text=Hello%20Joseph,%20I%20want%20to%20activate%20CBC%20MASTER">
-   💳 Pay via M-Pesa
-</a>
-
-  </div>  <div class="card">
     06 CONTACT SUPPORT
     <small>WhatsApp support and activation</small><p>📱 0707649890</p>
 <p>📧 mbuijoseph51@gmail.com</p>
@@ -274,7 +293,14 @@ function startQuiz(){
   }else{
     box.innerHTML = '❌ Keep practicing ' + student + '. Score: ' + score + '/' + total + ' (' + percent + '%)';
   }
-
+<script>
+function showNotes() {
+  alert(
+    "Notes za Grade 4-6 zinakuja hivi karibuni!\n\n" +
+    "Kwa sasa fanya QUIZ kwanza. Tutapakia Notes za CBC hapa soon."
+  );
+}
+</script>
   showLeaderboard();
 }
 
