@@ -675,9 +675,8 @@ if(!isActivated()){
 
 }
 
-
 /* =========================================
-   QUIZ HISTORY
+   SAVE QUIZ HISTORY
 ========================================= */
 
 function saveHistory(
@@ -685,43 +684,40 @@ function saveHistory(
   grade,
   score,
   total
-){
+) {
 
-  const history =
-    JSON.parse(
-      localStorage.getItem(
-        "cbc_history"
-      ) || "[]"
-    );
+  // Get existing history
+  const history = JSON.parse(
+    localStorage.getItem("cbc_history") || "[]"
+  );
 
+  // Calculate percentage
+  const percent = Math.round(
+    (score / total) * 100
+  );
 
-  history.push({
-
+  // Create new result
+  const result = {
     student: student,
-
     grade: grade,
-
     score: score,
-
     total: total,
+    percent: percent,
+    date: new Date().toLocaleString()
+  };
 
-    percent:
-      Math.round(
-        score / total * 100
-      ),
+  // Add result to history
+  history.push(result);
 
-    date:
-      new Date().toLocaleString()
-
-  });
-
-
+  // Save back to device
   localStorage.setItem(
     "cbc_history",
     JSON.stringify(history)
   );
 
-}
+  console.log("Quiz history saved:", result);
+  }
+
 
 
 /* =========================================
