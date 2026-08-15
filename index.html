@@ -1,302 +1,1625 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0F172A" />
-  <title>CBC MASTER</title>
-  <link rel="manifest" href="manifest.json">
 
-  <style>
-  /* (Your CSS — kept the original styles but move to an external file in production) */
-  *{box-sizing:border-box}
-  body{margin:0;font-family:Arial,sans-serif;background:#F5F7FA;color:#111827}
-  .header{background:#0B1F33;color:white;padding:16px;display:flex;align-items:center;font-size:22px;font-weight:bold}
-  .menu{font-size:28px;margin-right:16px;cursor:pointer;color:#F5B700;background:none;border:0}
-  .accent{height:5px;background:#0F766E}
-  .container{padding:14px}
-  .section-title{background:white;color:#0F766E;padding:14px;font-weight:bold;border-radius:8px;margin-bottom:18px;border-left:5px solid #F5B700}
-  .card{background:white;border-radius:10px;padding:22px;margin-bottom:18px;font-size:20px;font-weight:bold;color:#111827;box-shadow:0 2px 6px rgba(0,0,0,.15);cursor:pointer}
-  button{width:100%;padding:14px;border:none;border-radius:10px;background:#0F766E;color:white;font-size:16px;margin-top:12px;cursor:pointer;font-weight:bold}
-  input,select{width:100%;padding:13px;border:1px solid #CBD5E1;border-radius:10px;margin-top:10px;font-size:16px;background:white}
-  .result{background:#ECFEFF;border:1px solid #0F766E;padding:12px;border-radius:10px;margin-top:12px;display:none;font-size:16px;font-weight:normal}
-  .history-item{background:#F8FAFC;border:1px solid #D1D5DB;border-radius:10px;padding:10px;margin-top:10px;font-size:14px;font-weight:normal}
-  .pay-btn{display:block;text-align:center;background:#16A34A;color:white;text-decoration:none;padding:14px;border-radius:10px;margin-top:12px;font-weight:bold;font-size:16px}
-  .locked-screen{min-height:100vh;background:#0B1F33;color:white;display:flex;align-items:center;justify-content:center;padding:20px}
-  .activation-box{width:100%;max-width:420px;background:white;color:#111827;padding:25px;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,.3)}
-  .error{color:#DC2626;text-align:center;margin-top:10px;font-size:14px;display:none}
-  .sidebar{height:100%;width:0;position:fixed;z-index:1000;top:0;left:0;background:#0B1F33;overflow-x:hidden;transition:.3s;box-shadow:4px 0 15px rgba(0,0,0,.3)}
-  .sidebar-header{padding:25px 15px;background:#0F766E;color:white;text-align:center;border-bottom:4px solid #F5B700}
-  .overlay{height:100%;width:100%;position:fixed;z-index:999;top:0;left:0;background:rgba(0,0,0,.55);display:none}
-  footer{text-align:center;padding:15px;font-size:12px;color:#64748B;background:#F5F7FA}
-  </style>
+<meta charset="utf-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+
+<meta name="theme-color"
+      content="#0F172A">
+
+<title>CBC MASTER</title>
+
+<link rel="manifest" href="./manifest.json">
+
+<style>
+
+/* =========================================
+   BASIC
+========================================= */
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#F5F7FA;
+  color:#111827;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header{
+  background:#0B1F33;
+  color:white;
+  padding:16px;
+  display:flex;
+  align-items:center;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.menu{
+  width:auto;
+  padding:0;
+  margin:0 16px 0 0;
+
+  border:0;
+  background:transparent;
+
+  color:#F5B700;
+
+  font-size:30px;
+  line-height:1;
+
+  cursor:pointer;
+}
+
+.menu:active{
+  transform:scale(.9);
+}
+
+.accent{
+  height:5px;
+  background:#0F766E;
+}
+
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.container{
+  padding:14px;
+}
+
+.section-title{
+  background:white;
+  color:#0F766E;
+  padding:14px;
+  font-weight:bold;
+  border-radius:8px;
+  margin-bottom:18px;
+  border-left:5px solid #F5B700;
+}
+
+
+/* =========================================
+   CARDS
+========================================= */
+
+.card{
+  background:white;
+  border-radius:10px;
+  padding:22px;
+  margin-bottom:18px;
+
+  font-size:18px;
+  color:#111827;
+
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+
+.card h2,
+.card h3,
+.card h4{
+  margin-top:0;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+button{
+  width:100%;
+  padding:14px;
+
+  border:none;
+  border-radius:10px;
+
+  background:#0F766E;
+  color:white;
+
+  font-size:16px;
+  margin-top:12px;
+
+  cursor:pointer;
+  font-weight:bold;
+}
+
+button:hover{
+  background:#115E59;
+}
+
+
+/* =========================================
+   INPUTS
+========================================= */
+
+input,
+select{
+
+  width:100%;
+
+  padding:13px;
+
+  border:1px solid #CBD5E1;
+  border-radius:10px;
+
+  margin-top:10px;
+
+  font-size:16px;
+
+  background:white;
+}
+
+input:focus,
+select:focus{
+
+  outline:none;
+
+  border:2px solid #0F766E;
+}
+
+
+/* =========================================
+   RESULT
+========================================= */
+
+.result{
+
+  background:#ECFEFF;
+
+  border:1px solid #0F766E;
+
+  padding:12px;
+
+  border-radius:10px;
+
+  margin-top:12px;
+
+  display:none;
+
+  font-size:16px;
+
+  font-weight:normal;
+}
+
+
+/* =========================================
+   HISTORY
+========================================= */
+
+.history-item{
+
+  background:#F8FAFC;
+
+  border:1px solid #D1D5DB;
+
+  border-radius:10px;
+
+  padding:10px;
+
+  margin-top:10px;
+
+  font-size:14px;
+
+  font-weight:normal;
+}
+
+
+/* =========================================
+   PAYMENT BUTTON
+========================================= */
+
+.pay-btn{
+
+  display:block;
+
+  text-align:center;
+
+  background:#16A34A;
+
+  color:white;
+
+  text-decoration:none;
+
+  padding:14px;
+
+  border-radius:10px;
+
+  margin-top:12px;
+
+  font-weight:bold;
+
+  font-size:16px;
+}
+
+
+/* =========================================
+   LOCK SCREEN
+========================================= */
+
+.locked-screen{
+
+  min-height:100vh;
+
+  background:#0B1F33;
+
+  color:white;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+}
+
+.activation-box{
+
+  width:100%;
+
+  max-width:420px;
+
+  background:white;
+
+  color:#111827;
+
+  padding:25px;
+
+  border-radius:15px;
+
+  box-shadow:0 5px 20px rgba(0,0,0,.3);
+}
+
+.activation-box h2{
+
+  margin-top:0;
+
+  text-align:center;
+
+  color:#0F766E;
+}
+
+.activation-box p{
+
+  text-align:center;
+
+  color:#64748B;
+
+  line-height:1.5;
+}
+
+.error{
+
+  color:#DC2626;
+
+  text-align:center;
+
+  margin-top:10px;
+
+  font-size:14px;
+
+  display:none;
+}
+
+
+/* =========================================
+   SIDE MENU
+========================================= */
+
+.sidebar{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:280px;
+
+  height:100vh;
+
+  background:#0B1F33;
+
+  z-index:9999;
+
+  overflow-y:auto;
+  overflow-x:hidden;
+
+  transform:translateX(-100%);
+
+  transition:transform .3s ease;
+
+  box-shadow:5px 0 20px rgba(0,0,0,.35);
+}
+
+
+/* OPEN MENU */
+
+.sidebar.open{
+
+  transform:translateX(0);
+
+}
+
+
+/* =========================================
+   SIDEBAR HEADER
+========================================= */
+
+.sidebar-header{
+
+  padding:25px 15px;
+
+  background:#0F766E;
+
+  color:white;
+
+  text-align:center;
+
+  border-bottom:4px solid #F5B700;
+}
+
+.sidebar-header img{
+
+  width:65px;
+  height:65px;
+
+  border-radius:14px;
+
+  background:white;
+
+  padding:4px;
+
+  object-fit:cover;
+}
+
+.sidebar-header h3{
+
+  margin:10px 0 5px;
+
+  font-size:20px;
+}
+
+.sidebar-header p{
+
+  margin:0;
+
+  font-size:13px;
+
+  color:#E2E8F0;
+}
+
+
+/* =========================================
+   SIDEBAR LINKS
+========================================= */
+
+.sidebar a{
+
+  display:block;
+
+  padding:17px 20px;
+
+  color:#E2E8F0;
+
+  text-decoration:none;
+
+  font-size:16px;
+
+  border-bottom:1px solid #24364A;
+
+  cursor:pointer;
+}
+
+.sidebar a:hover,
+.sidebar a:active{
+
+  background:#0F766E;
+
+  color:white;
+}
+
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.overlay{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100vh;
+
+  background:rgba(0,0,0,.55);
+
+  z-index:9998;
+
+  opacity:0;
+
+  visibility:hidden;
+
+  transition:opacity .3s ease;
+}
+
+
+/* SHOW OVERLAY */
+
+.overlay.show{
+
+  opacity:1;
+
+  visibility:visible;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer{
+
+  text-align:center;
+
+  padding:15px;
+
+  font-size:12px;
+
+  color:#64748B;
+
+  background:#F5F7FA;
+}
+
+
+/* =========================================
+   QUIZ QUESTION
+========================================= */
+
+.quiz-info{
+
+  background:#F0FDFA;
+
+  border-left:4px solid #0F766E;
+
+  padding:12px;
+
+  border-radius:8px;
+
+  margin-bottom:15px;
+
+  font-size:14px;
+}
+
+</style>
+
 </head>
+
+
 <body>
-  <div id="sidebar" class="sidebar" aria-hidden="true">
-    <div class="sidebar-header">
-      <img src="icon-192.png" alt="CBC MASTER" style="width:65px;height:65px;border-radius:14px;background:white;padding:4px;object-fit:cover"/>
-      <h3>CBC MASTER</h3>
-      <p>Grade 4-6 Learning</p>
-    </div>
-    <a href="#" onclick="showNotes(); closeMenu(); return false;">📝 Notes</a>
-    <a href="#" onclick="showProjects(); closeMenu(); return false;">📚 CBC Projects</a>
-    <a href="#" onclick="showHistory(); closeMenu(); return false;">📊 Progress History</a>
-    <a href="#" onclick="showLeaderboard(); closeMenu(); return false;">🏆 Leaderboard</a>
-    <a href="https://wa.me/254707649890">💬 Contact Support</a>
-    <a href="#" onclick="alert('CBC MASTER - Google Play listing coming soon'); return false;">⭐ Rate Us</a>
-    <a href="#" onclick="shareApp(); return false;">📤 Share App</a>
+
+
+<!-- =========================================
+     SIDE MENU
+========================================= -->
+
+<div id="sidebar"
+     class="sidebar"
+     aria-hidden="true">
+
+  <div class="sidebar-header">
+
+    <img
+      src="icon-192.png"
+      alt="CBC MASTER">
+
+    <h3>CBC MASTER</h3>
+
+    <p>Grade 4-6 Learning</p>
+
   </div>
 
-  <!-- single overlay -->
-  <div id="overlay" class="overlay" onclick="closeMenu()"></div>
 
-  <div id="app">
-    <div class="header">
-      <button class="menu" type="button" onclick="openMenu()" aria-label="Open menu">☰</button>
-      CBC MASTER
+  <a href="#"
+     onclick="showNotes(); return false;">
+
+    📝 Notes
+
+  </a>
+
+
+  <a href="#"
+     onclick="showProjects(); return false;">
+
+    📚 CBC Projects
+
+  </a>
+
+
+  <a href="#"
+     onclick="showHistory(); return false;">
+
+    📊 Progress History
+
+  </a>
+
+
+  <a href="#"
+     onclick="showLeaderboard(); return false;">
+
+    🏆 Leaderboard
+
+  </a>
+
+
+  <a href="https://wa.me/254707649890">
+
+    💬 Contact Support
+
+  </a>
+
+
+  <a href="#"
+     onclick="
+       alert('CBC MASTER - Google Play listing coming soon');
+       closeMenu();
+       return false;
+     ">
+
+    ⭐ Rate Us
+
+  </a>
+
+
+  <a href="#"
+     onclick="shareApp(); return false;">
+
+    📤 Share App
+
+  </a>
+
+</div>
+
+
+<!-- =========================================
+     OVERLAY
+========================================= -->
+
+<div id="overlay"
+     class="overlay"
+     onclick="closeMenu()">
+</div>
+
+
+
+<!-- =========================================
+     MAIN APP
+========================================= -->
+
+<div id="app">
+
+
+  <!-- HEADER -->
+
+  <div class="header">
+
+    <button
+      class="menu"
+      type="button"
+      onclick="openMenu()"
+      aria-label="Open menu">
+
+      ☰
+
+    </button>
+
+    CBC MASTER
+
+  </div>
+
+
+  <div class="accent"></div>
+
+
+  <div class="container">
+
+
+    <div class="section-title">
+
+      1. QUESTION AND ANSWER
+
     </div>
 
-    <div class="accent"></div>
 
-    <div class="container">
+    <!-- =====================================
+         QUIZ
+    ====================================== -->
 
-      <div class="section-title">Activation & Quiz</div>
+    <div class="card">
 
-      <!-- Activation / Lock UI is shown by showLockScreen() when locked -->
-      <div id="mainContent" aria-live="polite">
-        <div class="card">
-          <label for="student">Student name</label>
-          <input id="student" type="text" placeholder="Student name" />
+      <h2>📝 QUIZZES</h2>
 
-          <label for="grade">Grade</label>
-          <select id="grade" aria-label="Grade">
-            <option value="4">Grade 4</option>
-            <option value="5">Grade 5</option>
-            <option value="6" selected>Grade 6</option>
-          </select>
+      <div class="quiz-info">
 
-          <button id="startBtn">Start Quiz</button>
+        Practice CBC questions for
+        Grade 4, Grade 5 and Grade 6.
 
-          <div id="result" class="result" role="status" aria-live="assertive"></div>
-        </div>
-
-        <div class="card">
-          <h4>History</h4>
-          <div id="historyBox"><p>No history saved yet.</p></div>
-        </div>
-
-        <div class="card">
-          <h4>Leaderboard</h4>
-          <div id="leaderboardBox"><p>No scores yet.</p></div>
-        </div>
       </div>
+
+
+      <label for="student">
+
+        Student Name
+
+      </label>
+
+
+      <input
+        id="student"
+        type="text"
+        placeholder="Enter student name"
+        autocomplete="name">
+
+
+      <label for="grade">
+
+        Grade
+
+      </label>
+
+
+      <select id="grade">
+
+        <option value="4">
+          Grade 4
+        </option>
+
+        <option value="5">
+          Grade 5
+        </option>
+
+        <option value="6">
+          Grade 6
+        </option>
+
+      </select>
+
+
+      <button
+        id="startBtn"
+        type="button">
+
+        🚀 Start Quiz
+
+      </button>
+
+
+      <div
+        id="result"
+        class="result">
+
+      </div>
+
     </div>
 
-    <footer>© CBC MASTER</footer>
+
+
+    <!-- =====================================
+         HISTORY
+    ====================================== -->
+
+    <div
+      id="historySection"
+      class="card">
+
+      <h2>📊 PROGRESS HISTORY</h2>
+
+      <p>
+        Saved quiz results on this device.
+      </p>
+
+      <div id="historyBox">
+
+        <p>
+          No history saved yet.
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =====================================
+         LEADERBOARD
+    ====================================== -->
+
+    <div
+      id="leaderboardSection"
+      class="card">
+
+      <h2>🏆 LEADERBOARD</h2>
+
+      <p>
+        Top students on this device.
+      </p>
+
+      <div id="leaderboardBox">
+
+        <p>
+          No scores yet.
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =====================================
+         NOTES
+    ====================================== -->
+
+    <div
+      id="notesSection"
+      class="card">
+
+      <h2>📝 NOTES</h2>
+
+      <p>
+        Grade 4-6 revision notes.
+      </p>
+
+      <button
+        type="button"
+        onclick="showNotes()">
+
+        Open Notes
+
+      </button>
+
+    </div>
+
+
+
+    <!-- =====================================
+         PROJECTS
+    ====================================== -->
+
+    <div
+      id="projectsSection"
+      class="card">
+
+      <h2>📚 CBC PROJECTS</h2>
+
+      <p>
+        Grade 4-6 projects and marking rubrics.
+      </p>
+
+      <button
+        type="button"
+        onclick="showProjects()">
+
+        View Projects
+
+      </button>
+
+    </div>
+
+
+
+    <!-- =====================================
+         PREMIUM
+    ====================================== -->
+
+    <div class="card">
+
+      <h2>🔓 PREMIUM ACTIVATION</h2>
+
+      <p>
+        Unlock CBC MASTER premium access.
+      </p>
+
+      <p>
+        <strong>Price:</strong> KSh 300
+      </p>
+
+      <p>
+        <strong>M-Pesa:</strong> 0707649890
+      </p>
+
+
+      <input
+        id="phoneInput"
+        type="tel"
+        inputmode="numeric"
+        placeholder="Enter M-Pesa phone number">
+
+
+      <input
+        id="codeInput"
+        type="text"
+        placeholder="Enter activation code">
+
+
+      <button
+        type="button"
+        onclick="activateApp()">
+
+        🔓 Activate App
+
+      </button>
+
+
+      <div
+        id="activationError"
+        class="error">
+
+      </div>
+
+
+      <a
+        class="pay-btn"
+        href="https://wa.me/254707649890?text=Hello%20Joseph,%20I%20want%20to%20activate%20CBC%20MASTER">
+
+        📲 Pay via M-Pesa
+
+      </a>
+
+    </div>
+
+
+
+    <!-- =====================================
+         SUPPORT
+    ====================================== -->
+
+    <div class="card">
+
+      <h2>💬 CONTACT SUPPORT</h2>
+
+      <p>
+        📞 0707649890
+      </p>
+
+      <p>
+        📧 mbuijoseph51@gmail.com
+      </p>
+
+
+      <a
+        class="pay-btn"
+        href="https://wa.me/254707649890">
+
+        💬 WhatsApp Support
+
+      </a>
+
+    </div>
+
+
   </div>
 
-  <script>
-  /**********************
-   * Activation settings
-   * NOTE: Putting secrets in client-side JS is insecure.
-   * For production, validate activation on the server.
-   **********************/
-  const SECRET = "K9";
-  const APPROVED_PHONES = ["254707649890","254782609857","0707649890","0782609857"]; // accept several formats or normalize
 
-  function normalizePhone(phone){
-    // Remove non digits and convert leading 0 to 254
-    const digits = (phone || "").replace(/\D/g,'');
-    if(digits.length === 10 && digits.startsWith("0")) return "254" + digits.slice(1);
-    if(digits.length === 12 && digits.startsWith("254")) return digits;
-    return digits; // best effort
+  <footer>
+
+    © 2026 CBC MASTER.
+    Developed by Joseph Mbui
+
+  </footer>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================
+   ACTIVATION
+========================================= */
+
+const SECRET = "K9";
+
+
+const APPROVED_PHONES = [
+
+  "254707649890",
+
+  "254782609857"
+
+];
+
+
+function normalizePhone(phone){
+
+  const digits =
+    (phone || "")
+      .replace(/\D/g,"");
+
+
+  if(
+    digits.length === 10 &&
+    digits.startsWith("0")
+  ){
+
+    return "254" + digits.slice(1);
+
   }
 
-  function generateCode(phone){
-    // phone should be normalized (e.g., 2547xxxxxxxx)
-    return "CBC-" + SECRET + "-" + phone.slice(-4);
+
+  if(
+    digits.length === 12 &&
+    digits.startsWith("254")
+  ){
+
+    return digits;
+
   }
 
-  function isActivated(){
-    const savedCode = localStorage.getItem("cbc_code");
-    if(!savedCode) return false;
-    for(const phone of APPROVED_PHONES){
-      if(savedCode === generateCode(phone)) return true;
-    }
+
+  return digits;
+
+}
+
+
+function generateCode(phone){
+
+  return "CBC-" +
+         SECRET +
+         "-" +
+         phone.slice(-4);
+
+}
+
+
+function isActivated(){
+
+  const savedCode =
+    localStorage.getItem("cbc_code");
+
+
+  if(!savedCode){
+
     return false;
+
   }
 
-  function showLockScreen(){
-    document.body.innerHTML = `
-      <div class="locked-screen">
-        <div class="activation-box">
-          <h2>🔒 CBC MASTER</h2>
-          <p>This app is locked.</p>
-          <p>Pay <strong>KSh 300</strong> to M-Pesa: <strong>0707649890</strong></p>
-          <input id="phoneInput" type="tel" placeholder="Enter M-Pesa phone number">
-          <input id="codeInput" type="text" placeholder="Enter activation code">
-          <button id="activateBtn">🔓 Activate App</button>
-          <div id="activationError" class="error" role="alert"></div>
-          <a class="pay-btn" href="https://wa.me/254707649890?text=Hello%20Joseph,%20I%20want%20to%20activate%20CBC%20MASTER">💬 Contact Support</a>
-        </div>
-      </div>
-    `;
-    document.getElementById('activateBtn').addEventListener('click', activateApp);
-  }
 
-  function activateApp(){
-    const phoneInput = document.getElementById("phoneInput");
-    const codeInput = document.getElementById("codeInput");
-    const errorBox = document.getElementById("activationError");
-    const raw = phoneInput.value.trim();
-    const phone = normalizePhone(raw);
-    const code = (codeInput.value || "").trim().toUpperCase();
+  for(
+    const phone of APPROVED_PHONES
+  ){
 
-    errorBox.style.display = "none";
+    if(
+      savedCode ===
+      generateCode(phone)
+    ){
 
-    if(!phone){
-      errorBox.textContent = "Please enter your M-Pesa phone number.";
-      errorBox.style.display = "block";
-      phoneInput.focus();
-      return;
+      return true;
+
     }
 
-    // compare normalized phone to approved list
-    if(!APPROVED_PHONES.includes(phone) && !APPROVED_PHONES.includes(raw)){
-      errorBox.textContent = "❌ Phone number is not approved.";
-      errorBox.style.display = "block";
-      phoneInput.focus();
-      return;
-    }
-
-    const correctCode = generateCode(phone);
-
-    if(code !== correctCode){
-      errorBox.textContent = "❌ Wrong activation code.";
-      errorBox.style.display = "block";
-      codeInput.focus();
-      return;
-    }
-
-    localStorage.setItem("cbc_code", correctCode);
-    alert("✅ Access granted!\n\nCBC MASTER is now activated.");
-    location.reload();
   }
 
-  // history saver
-  function saveHistory(student, grade, score, total) {
-    const history = JSON.parse(localStorage.getItem("cbc_history") || "[]");
-    const percent = Math.round((score / total) * 100);
-    const result = { student, grade, score, total, percent, date: new Date().toLocaleString() };
-    history.push(result);
-    localStorage.setItem("cbc_history", JSON.stringify(history));
-    console.log("Quiz history saved:", result);
+
+  return false;
+
+}
+
+
+/* =========================================
+   ACTIVATE
+========================================= */
+
+function activateApp(){
+
+  const phoneInput =
+    document.getElementById(
+      "phoneInput"
+    );
+
+
+  const codeInput =
+    document.getElementById(
+      "codeInput"
+    );
+
+
+  const errorBox =
+    document.getElementById(
+      "activationError"
+    );
+
+
+  if(
+    !phoneInput ||
+    !codeInput ||
+    !errorBox
+  ){
+
+    return;
+
   }
 
-  // question bank (kept same)
-  const questionBank = [ /* your 50 questions here — omitted for brevity in this snippet */ ];
 
-  // Fisher-Yates shuffle (non-mutating copy)
-  function pickRandomQuestions(bank, n){
-    const arr = bank.slice(); // copy
-    for(let i = arr.length - 1; i > 0; i--){
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr.slice(0, n);
+  const phone =
+    normalizePhone(
+      phoneInput.value.trim()
+    );
+
+
+  const code =
+    codeInput.value
+      .trim()
+      .toUpperCase();
+
+
+  errorBox.style.display =
+    "none";
+
+
+  if(!phone){
+
+    errorBox.textContent =
+      "Please enter your M-Pesa phone number.";
+
+    errorBox.style.display =
+      "block";
+
+    phoneInput.focus();
+
+    return;
+
   }
 
-  // A simple in-page quiz using prompt() for now — replace with UI later
-  function startQuiz(){
-    const student = document.getElementById("student").value.trim() || "Student";
-    const grade = document.getElementById("grade").value;
-    let score = 0;
-    const total = 10;
-    const selected = pickRandomQuestions(questionBank, total);
 
-    for(let i = 0; i < selected.length; i++){
-      const que = selected[i];
-      const ans = prompt(`Grade ${grade} ${que.subj}\n\nQ${i+1}/${total}: ${que.q}`);
-      if(ans && ans.trim().toLowerCase() === String(que.a).toLowerCase()){
-        score++;
-      }
-    }
+  if(
+    !APPROVED_PHONES.includes(phone)
+  ){
 
-    const percent = Math.round((score / total) * 100);
-    const box = document.getElementById("result");
-    box.style.display = "block";
-    if(percent >= 50){
-      box.innerHTML = `✅ Excellent ${student}! Score: ${score}/${total} (${percent}%)`;
-    } else {
-      box.innerHTML = `❌ Keep practicing ${student}. Score: ${score}/${total} (${percent}%)`;
-    }
+    errorBox.textContent =
+      "❌ Phone number is not approved.";
 
-    // FIX: pass student first, matching function signature
-    saveHistory(student, grade, score, total);
-    renderHistory();
-    renderLeaderboard();
+    errorBox.style.display =
+      "block";
+
+    phoneInput.focus();
+
+    return;
+
   }
 
-  function renderHistory(){
-    const history = JSON.parse(localStorage.getItem("cbc_history") || "[]");
-    const box = document.getElementById("historyBox");
-    if(!history.length){
-      box.innerHTML = "<p>No history saved yet.</p>";
-      return;
-    }
-    let html = "";
-    history.slice().reverse().forEach((h,i) => {
-      html += `<div class="history-item"><strong>${i+1}. ${h.student}</strong><br>Grade: ${h.grade}<br>Score: ${h.score}/${h.total} (${h.percent}%)<br>Date: ${h.date}</div>`;
-    });
-    box.innerHTML = html;
+
+  const correctCode =
+    generateCode(phone);
+
+
+  if(code !== correctCode){
+
+    errorBox.textContent =
+      "❌ Wrong activation code.";
+
+    errorBox.style.display =
+      "block";
+
+    codeInput.focus();
+
+    return;
+
   }
 
-  function renderLeaderboard(){
-    const history = JSON.parse(localStorage.getItem("cbc_history") || "[]");
-    const box = document.getElementById("leaderboardBox");
-    if(!history.length){
-      box.innerHTML = "<p>No scores yet.</p>";
-      return;
-    }
-    const sorted = history.slice().sort((a,b) => b.percent - a.percent);
-    let html = "";
-    sorted.slice(0,5).forEach((h,i) => {
-      html += `<div class="history-item">🏆 ${i+1}. ${h.student} - ${h.percent}%</div>`;
-    });
-    box.innerHTML = html;
+
+  localStorage.setItem(
+    "cbc_code",
+    correctCode
+  );
+
+
+  alert(
+    "✅ Access granted!\n\n" +
+    "CBC MASTER is now activated."
+  );
+
+
+  location.reload();
+
+}
+
+
+/* =========================================
+   QUESTION BANK - 50 QUESTIONS
+========================================= */
+
+const questionBank = [
+
+
+  /* MATH */
+
+  {
+    q:"345 + 289 =?",
+    a:"634",
+    subj:"MATH"
+  },
+
+  {
+    q:"72 x 6 =?",
+    a:"432",
+    subj:"MATH"
+  },
+
+  {
+    q:"1000 - 456 =?",
+    a:"544",
+    subj:"MATH"
+  },
+
+  {
+    q:"9 x 9 =?",
+    a:"81",
+    subj:"MATH"
+  },
+
+  {
+    q:"144 / 12 =?",
+    a:"12",
+    subj:"MATH"
+  },
+
+  {
+    q:"25% of 200 =?",
+    a:"50",
+    subj:"MATH"
+  },
+
+  {
+    q:"3/4 + 1/4 =?",
+    a:"1",
+    subj:"MATH"
+  },
+
+  {
+    q:"Square of 15 =?",
+    a:"225",
+    subj:"MATH"
+  },
+
+  {
+    q:"LCM of 4 and 6 =?",
+    a:"12",
+    subj:"MATH"
+  },
+
+  {
+    q:"Perimeter of square side 8cm =?",
+    a:"32",
+    subj:"MATH"
+  },
+
+
+  /* ENGLISH */
+
+  {
+    q:"Correct spelling: A) Enviroment B) Environment C) Enviornment",
+    a:"B",
+    subj:"ENGLISH"
+  },
+
+  {
+    q:"Opposite of Brave?",
+    a:"coward",
+    subj:"ENGLISH"
+  },
+
+  {
+    q:"Plural of Child?",
+    a:"children",
+    subj:"ENGLISH"
+  },
+
+  {
+    q:"Synonym of Happy?",
+    a:"joyful",
+    subj:"ENGLISH"
+  },
+
+  {
+    q:"Past tense of Go?",
+    a:"went",
+    subj:"ENGLISH"
+  },
+
+  {
+    q:"A person who writes books is a?",
+    a:"author",
+    subj:"ENGLISH"
+  },
+
+  {
+    q:"Choose: I ___ to school yesterday. A) go B) went C) gone",
+    a:"B",
+    subj:"ENGLISH"
+  },
+
+  {
+    q:"Punctuation: What a beautiful day ___",
+    a:"!",
+    subj:"ENGLISH"
+  },
+
+  {
+    q:"Antonym of Expensive?",
+    a:"cheap",
+    subj:"ENGLISH"
+  },
+
+  {
+    q:"How many vowels in 'Education'?",
+    a:"5",
+    subj:"ENGLISH"
+  },
+
+
+  /* SCIENCE */
+
+  {
+    q:"Part of plant that makes food? A) Root B) Leaf C) Stem",
+    a:"B",
+    subj:"SCIENCE"
+  },
+
+  {
+    q:"How many states of matter? A) 2 B) 3 C) 4",
+    a:"B",
+    subj:"SCIENCE"
+  },
+
+  {
+    q:"Water boils at ___ degrees C?",
+    a:"100",
+    subj:"SCIENCE"
+  },
+
+  {
+    q:"The largest planet?",
+    a:"jupiter",
+    subj:"SCIENCE"
+  },
+
+  {
+    q:"Humans have ___ bones",
+    a:"206",
+    subj:"SCIENCE"
+  },
+
+  {
+    q:"Gas we breathe in?",
+    a:"oxygen",
+    subj:"SCIENCE"
+  },
+
+  {
+    q:"Animal that lays eggs?",
+    a:"chicken",
+    subj:"SCIENCE"
+  },
+
+  {
+    q:"Source of light and heat?",
+    a:"sun",
+    subj:"SCIENCE"
+  },
+
+  {
+    q:"Name 1 part of an insect",
+    a:"head",
+    subj:"SCIENCE"
+  },
+
+  {
+    q:"Tool to measure temperature?",
+    a:"thermometer",
+    subj:"SCIENCE"
+  },
+
+
+  /* SOCIAL STUDIES */
+
+  {
+    q:"Capital of Kenya?",
+    a:"nairobi",
+    subj:"SOCIAL"
+  },
+
+  {
+    q:"Currency of Kenya?",
+    a:"shilling",
+    subj:"SOCIAL"
+  },
+
+  {
+    q:"Largest lake in Kenya?",
+    a:"turkana",
+    subj:"SOCIAL"
+  },
+
+  {
+    q:"National animal of Kenya?",
+    a:"lion",
+    subj:"SOCIAL"
+  },
+
+  {
+    q:"First president of Kenya?",
+    a:"jomo kenyatta",
+    subj:"SOCIAL"
+  },
+
+  {
+    q:"Country to the North of Kenya?",
+    a:"ethiopia",
+    subj:"SOCIAL"
+  },
+
+  {
+    q:"Madaraka Day is celebrated on?",
+    a:"1st june",
+    subj:"SOCIAL"
+  },
+
+  {
+    q:"Main port in Kenya?",
+    a:"mombasa",
+    subj:"SOCIAL"
+  },
+
+  {
+    q:"How many counties in Kenya?",
+    a:"47",
+    subj:"SOCIAL"
+  },
+
+  {
+    q:"National language of Kenya?",
+    a:"swahili",
+    subj:"SOCIAL"
+  },
+
+
+  /* CRE */
+
+  {
+    q:"Who built the Ark?",
+    a:"noah",
+    subj:"CRE"
+  },
+
+  {
+    q:"How many days to create world?",
+    a:"6",
+    subj:"CRE"
+  },
+
+  {
+    q:"First man God created?",
+    a:"adam",
+    subj:"CRE"
+  },
+
+  {
+    q:"Number of disciples of Jesus?",
+    a:"12",
+    subj:"CRE"
+  },
+
+  {
+    q:"Book with 10 commandments?",
+    a:"exodus",
+    subj:"CRE"
+  },
+
+  {
+    q:"Who was swallowed by a big fish?",
+    a:"jonah",
+    subj:"CRE"
+  },
+
+  {
+    q:"Place Jesus was born?",
+    a:"bethlehem",
+    subj:"CRE"
+  },
+
+  {
+    q:"How many books in the Bible?",
+    a:"66",
+    subj:"CRE"
+  },
+
+  {
+    q:"Who denied Jesus 3 times?",
+    a:"peter",
+    subj:"CRE"
+  },
+
+  {
+    q:"Feast celebrating Jesus birth?",
+    a:"christmas",
+    subj:"CRE"
   }
 
-  // menu and sharing
-  window.openMenu = function(){ document.getElementById("sidebar").style.width = "270px"; document.getElementById("overlay").style.display = "block"; document.getElementById("sidebar").setAttribute('aria-hidden','false'); }
-  window.closeMenu = function(){ document.getElementById("sidebar").style.width = "0"; document.getElementById("overlay").style.display = "none"; document.getElementById("sidebar").setAttribute('aria-hidden','true'); }
-  window.shareApp = function(){
-    const shareData = { title: "CBC MASTER", text: "CBC MASTER - Grade 4-6 quizzes, notes and projects.", url: window.location.href };
-    if(navigator.share) navigator.share(shareData).catch(()=>{});
-    else alert("Share this link:\n\n" + window.location.href);
+];
+
+
+/* =========================================
+   SHUFFLE QUESTIONS
+========================================= */
+
+function pickRandomQuestions(
+  bank,
+  number
+){
+
+  const arr =
+    bank.slice();
+
+
+  for(
+    let i = arr.length - 1;
+    i > 0;
+    i--
+  ){
+
+    const j =
+      Math.floor(
+        Math.random() * (i + 1)
+      );
+
+
+    [
+      arr[i],
+      arr[j]
+    ] = [
+      arr[j],
+      arr[i]
+    ];
+
   }
 
-  function showNotes(){ alert("CBC NOTES\n\nGrade 4-6 revision notes will be added in a future update.\n\nFor now, use QUIZZES to practice."); }
-  function showProjects(){ alert("CBC PROJECTS\n\n1. Grade 4: Water Filter - Science\n\n2. Grade 5: Financial Budget Project - Maths\n\n3. Grade 6: Community Problem Solution - Social Studies"); }
 
-  // Start-up
-  document.addEventListener('DOMContentLoaded', function(){
-    // If not activated, show lock screen
-    if(!isActivated()){
-      showLockScreen();
-      return;
-    }
-    // wire up start button
-    document.getElementById('startBtn').addEventListener('click', startQuiz);
-    renderHistory();
-    renderLeaderboard();
-  });
+  return arr.slice(
+    0,
+    number
+  );
 
-  // Service worker registration (use absolute path if needed)
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function(){
-      navigator.serviceWorker.register('/service-worker.js').then(function(reg){ console.log('SW registered', reg.scope); }).catch(function(err){ console.log('SW registration failed', err); });
-    });
-  }
-  </script>
-</body>
-</html>
+}
+
+
+/* =========================================
+   SAVE HISTORY
+========================================= */
+
+function saveHistory(
+  student,
+  grade,
+  score,
+  total
+){
+
+  const history =
+    JSON.parse(
+      localStorage.getItem(
+        "cbc_history"
+      ) || "[]"
+    );
+
+
+  const percent =
+    Math.round(
+      (score / total) * 100
+    );
+
+
+  const result = {
+
+    student:student,
+
+    grade:grade,
+
+    score:score,
+
+    total:total,
+
+    percent:percent,
+
+    date:
+      new Date()
+        .toLocaleString()
+
+  };
+
+
+  history.push(result);
+
+
+  localStorage.setItem(
+    "cbc_history",
+    JSON.stringify(history)
+  );
+
+}
+
+
+/* =========================================
+   START QUIZ
+========================================= */
+
+function startQuiz(){
+
+  const studentInput =
+    document.getElementById(
+      "student"
+    );
+
+
+  const gradeInput =
+    document.getElementById(
+      "grade"
+    );
+
+
+  const student =
+    studentInput.value.trim() ||
+    "Student";
+
+
+  const grade =
+    gradeInput.value;
+
+
+  const total = 10;
+
+  let score = 0;
+
+
+  const selected =
+    pickRandomQuestions(
+      questionBank,
+      total
+    );
+
+
+  for(
+    let i = 0;
+    i < selected.length;
+    i++
+  ){
+
+    const question =
+      selected[i];
+
+
+    const answer =
+      prompt(
+
+        `Grade ${grade} - ${question.subj}\n\n` +
+
+    Tim
