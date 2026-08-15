@@ -265,32 +265,38 @@ footer{
 
 <body>
 <div id="overlay" class="overlay" onclick="closeMenu()"></div>
-<!-- SIDE MENU -->
+<!-- =========================================
+     CBC MASTER SIDE MENU
+========================================= -->
+
 <div id="sidebar" class="sidebar">
 
   <div class="sidebar-header">
-    <img src="icon-192.png" alt="CBC MASTER">
+
+    <img
+      src="icon-192.png"
+      alt="CBC MASTER"
+    >
+
     <h3>CBC MASTER</h3>
+
     <p>Grade 4-6 Learning</p>
+
   </div>
 
-  <a href="javascript:void(0)"
-     onclick="showNotes(); closeMenu()">
+  <a href="#" onclick="showNotes(); closeMenu(); return false;">
     📝 Notes
   </a>
 
-  <a href="javascript:void(0)"
-     onclick="showProjects(); closeMenu()">
+  <a href="#" onclick="showProjects(); closeMenu(); return false;">
     📚 CBC Projects
   </a>
 
-  <a href="javascript:void(0)"
-     onclick="showHistory(); closeMenu()">
+  <a href="#" onclick="showHistory(); closeMenu(); return false;">
     📊 Progress History
   </a>
 
-  <a href="javascript:void(0)"
-     onclick="showLeaderboard(); closeMenu()">
+  <a href="#" onclick="showLeaderboard(); closeMenu(); return false;">
     🏆 Leaderboard
   </a>
 
@@ -298,24 +304,49 @@ footer{
     💬 Contact Support
   </a>
 
-  <a href="javascript:void(0)"
-     onclick="alert('CBC MASTER - Google Play listing coming soon')">
+  <a
+    href="#"
+    onclick="alert('CBC MASTER - Google Play listing coming soon'); return false;"
+  >
     ⭐ Rate Us
   </a>
 
-  <a href="javascript:void(0)"
-     onclick="shareApp()">
+  <a
+    href="#"
+    onclick="shareApp(); return false;"
+  >
     📤 Share App
   </a>
 
 </div>
 
+
+<!-- DARK OVERLAY -->
+
+<div
+  id="overlay"
+  class="overlay"
+  onclick="closeMenu()">
+</div>
+
+
 <div id="app">
 
+  <!-- HEADER -->
 
   <div class="header">
-    <div class="menu" onclick="openMenu()">☰</div>
+
+    <button
+      class="menu"
+      type="button"
+      onclick="openMenu()"
+      aria-label="Open menu"
+    >
+      ☰
+    </button>
+
     CBC MASTER
+
   </div>
 
   <div class="accent"></div>
@@ -323,146 +354,7 @@ footer{
   <div class="container">
 
     <div class="section-title">
-      1. QUESTION AND ANSWER
-    </div>
-
-    <!-- NOTES -->
-    <div class="card" onclick="showNotes()">
-      <h2>01 NOTES</h2>
-      <small>Grade 4-6 revision notes</small>
-    </div>
-
-    <!-- QUIZZES -->
-    <div class="card">
-      <h2>02 QUIZZES</h2>
-      <small>Practice CBC questions</small>
-
-      <input
-        id="student"
-        type="text"
-        placeholder="Student Name"
-        autocomplete="name"
-      >
-
-      <select id="grade">
-        <option value="4">Grade 4</option>
-        <option value="5">Grade 5</option>
-        <option value="6">Grade 6</option>
-      </select>
-
-      <button onclick="startQuiz()">
-        Start Quiz
-      </button>
-
-      <div id="result" class="result"></div>
-    </div>
-
-    <!-- HISTORY -->
-    <div class="card">
-      <h2>03 PROGRESS HISTORY</h2>
-      <small>Saved results on this device</small>
-
-      <button onclick="showHistory()">
-        View History
-      </button>
-
-      <div id="historyBox"></div>
-    </div>
-
-    <!-- LEADERBOARD -->
-    <div class="card">
-      <h2>04 LEADERBOARD</h2>
-      <small>Top students on this device</small>
-
-      <button onclick="showLeaderboard()">
-        View Leaderboard
-      </button>
-
-      <div id="leaderboardBox"></div>
-    </div>
-
-    <!-- PROJECTS -->
-    <div class="card" onclick="showProjects()">
-      <h2>05 CBC PROJECTS</h2>
-      <small>Grade 4-6 Projects + Marking Rubrics</small>
-    </div>
-
-    <!-- PREMIUM -->
-    <div class="card">
-      <h2>06 PREMIUM ACTIVATION</h2>
-
-      <small>
-        Unlock all questions and future updates
-      </small>
-
-      <p>
-        <strong>Price:</strong> KSh 300
-      </p>
-
-      <p>
-        <strong>M-Pesa:</strong> 0707649890
-      </p>
-
-      <input
-        id="phoneInput"
-        type="tel"
-        inputmode="numeric"
-        autocomplete="tel"
-        placeholder="Enter M-Pesa phone number"
-      >
-
-      <input
-        id="codeInput"
-        type="text"
-        inputmode="text"
-        autocomplete="off"
-        placeholder="Enter activation code"
-      >
-
-      <button onclick="activateApp()">
-        🔓 Activate App
-      </button>
-
-      <div id="activationError" class="error"></div>
-
-      <a
-        class="pay-btn"
-        href="https://wa.me/254707649890?text=Hello%20Joseph,%20I%20want%20to%20activate%20CBC%20MASTER"
-      >
-        📲 Pay via M-Pesa
-      </a>
-    </div>
-
-    <!-- SUPPORT -->
-    <div class="card">
-      <h2>07 CONTACT SUPPORT</h2>
-
-      <small>
-        WhatsApp support and activation
-      </small>
-
-      <p>📞 0707649890</p>
-      <p>📧 mbuijoseph51@gmail.com</p>
-
-      <a
-        class="pay-btn"
-        href="https://wa.me/254707649890"
-      >
-        💬 WhatsApp Support
-      </a>
-    </div>
-
-  </div>
-
-  <footer>
-    © 2026 CBC MASTER. Developed by Joseph Mbui
-  </footer>
-
-</div>
-
-
-<script>
-
+  
 /* =========================================
    ACTIVATION SETTINGS
 ========================================= */
