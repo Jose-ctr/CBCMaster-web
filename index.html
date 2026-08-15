@@ -538,7 +538,24 @@ footer{
   }
 
 }
-
+.install-btn {
+  background: #00A859; /* M-Pesa green */
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 20px auto;
+  cursor: pointer;
+  display: none; /* Hidden until browser supports it */
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+.install-btn:hover {
+  background: #008a48;
+}  
 </style>
 </head>
 
@@ -546,7 +563,8 @@ footer{
 <body>
 
 
-<!-- ==================================================
+<button class="install-btn" id="installBtn">📲 INSTALL CBC MASTER APP</button>
+==================================================
      SIDEBAR
 ================================================== -->
 
@@ -1632,9 +1650,9 @@ const questionBank = [
     a:"mombasa",
     subj:"SOCIAL"
   },
-p
 
-      l00l0
+
+
   {
     q:"How many counties in Kenya?",
     a:"47",
@@ -1649,4 +1667,4 @@ p
 
 
   {
-    q:"Who built the Ark?jn
+    q:"Who built the Ark?
