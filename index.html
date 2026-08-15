@@ -1,75 +1,87 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-
 <meta charset="utf-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1">
-
-<meta name="theme-color"
-      content="#0F172A">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0B1F33">
+<meta name="apple-mobile-web-app-capable" content="yes">
 
 <title>CBC MASTER</title>
 
-<link rel="manifest" href="./manifest.json">
+<link rel="manifest" href="manifest.json">
 
 <style>
 
-/* =========================================
-   BASIC
-========================================= */
+/* ================================
+   RESET
+================================ */
 
 *{
   box-sizing:border-box;
 }
 
-html{
-  scroll-behavior:smooth;
-}
-
+html,
 body{
   margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
   font-family:Arial,sans-serif;
   background:#F5F7FA;
   color:#111827;
 }
 
 
-/* =========================================
+/* ================================
    HEADER
-========================================= */
+================================ */
 
 .header{
+  height:64px;
   background:#0B1F33;
   color:white;
-  padding:16px;
+
   display:flex;
   align-items:center;
+
+  padding:0 15px;
+
   font-size:22px;
   font-weight:bold;
+
+  position:relative;
+  z-index:100;
 }
 
 .menu{
-  width:auto;
-  padding:0;
-  margin:0 16px 0 0;
+  width:48px;
+  height:48px;
 
-  border:0;
+  margin-right:10px;
+
+  border:none;
   background:transparent;
 
   color:#F5B700;
 
   font-size:30px;
-  line-height:1;
+  line-height:48px;
 
   cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .menu:active{
-  transform:scale(.9);
+  transform:scale(.92);
 }
+
+
+/* ================================
+   ACCENT
+================================ */
 
 .accent{
   height:5px;
@@ -77,9 +89,9 @@ body{
 }
 
 
-/* =========================================
-   CONTAINER
-========================================= */
+/* ================================
+   CONTENT
+================================ */
 
 .container{
   padding:14px;
@@ -88,28 +100,31 @@ body{
 .section-title{
   background:white;
   color:#0F766E;
+
   padding:14px;
+
   font-weight:bold;
+
   border-radius:8px;
+
   margin-bottom:18px;
+
   border-left:5px solid #F5B700;
 }
 
-
-/* =========================================
-   CARDS
-========================================= */
-
 .card{
   background:white;
+
   border-radius:10px;
-  padding:22px;
+
+  padding:20px;
+
   margin-bottom:18px;
 
-  font-size:18px;
   color:#111827;
 
-  box-shadow:0 2px 6px rgba(0,0,0,.15);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,.15);
 }
 
 .card h2,
@@ -118,45 +133,23 @@ body{
   margin-top:0;
 }
 
-
-/* =========================================
-   BUTTONS
-========================================= */
-
-button{
-  width:100%;
-  padding:14px;
-
-  border:none;
-  border-radius:10px;
-
-  background:#0F766E;
-  color:white;
-
-  font-size:16px;
-  margin-top:12px;
-
-  cursor:pointer;
-  font-weight:bold;
-}
-
-button:hover{
-  background:#115E59;
+.card small{
+  color:#64748B;
 }
 
 
-/* =========================================
+/* ================================
    INPUTS
-========================================= */
+================================ */
 
 input,
 select{
-
   width:100%;
 
   padding:13px;
 
   border:1px solid #CBD5E1;
+
   border-radius:10px;
 
   margin-top:10px;
@@ -168,19 +161,47 @@ select{
 
 input:focus,
 select:focus{
-
   outline:none;
-
   border:2px solid #0F766E;
 }
 
 
-/* =========================================
+/* ================================
+   BUTTONS
+================================ */
+
+button.action-btn{
+  width:100%;
+
+  padding:14px;
+
+  border:none;
+
+  border-radius:10px;
+
+  background:#0F766E;
+
+  color:white;
+
+  font-size:16px;
+
+  margin-top:12px;
+
+  cursor:pointer;
+
+  font-weight:bold;
+}
+
+button.action-btn:active{
+  transform:scale(.98);
+}
+
+
+/* ================================
    RESULT
-========================================= */
+================================ */
 
 .result{
-
   background:#ECFEFF;
 
   border:1px solid #0F766E;
@@ -199,12 +220,11 @@ select:focus{
 }
 
 
-/* =========================================
+/* ================================
    HISTORY
-========================================= */
+================================ */
 
 .history-item{
-
   background:#F8FAFC;
 
   border:1px solid #D1D5DB;
@@ -216,17 +236,14 @@ select:focus{
   margin-top:10px;
 
   font-size:14px;
-
-  font-weight:normal;
 }
 
 
-/* =========================================
-   PAYMENT BUTTON
-========================================= */
+/* ================================
+   PAY BUTTON
+================================ */
 
 .pay-btn{
-
   display:block;
 
   text-align:center;
@@ -249,9 +266,183 @@ select:focus{
 }
 
 
-/* =========================================
+/* ================================
+   SIDEBAR
+================================ */
+
+.sidebar{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:0;
+
+  height:100vh;
+
+  background:#0B1F33;
+
+  z-index:2000;
+
+  overflow-x:hidden;
+  overflow-y:auto;
+
+  transition:
+    width .30s ease;
+
+  box-shadow:
+    5px 0 20px rgba(0,0,0,.35);
+
+}
+
+
+/* OPEN STATE */
+
+.sidebar.open{
+  width:280px;
+}
+
+
+/* ================================
+   SIDEBAR HEADER
+================================ */
+
+.sidebar-header{
+
+  padding:25px 15px;
+
+  background:#0F766E;
+
+  color:white;
+
+  text-align:center;
+
+  border-bottom:4px solid #F5B700;
+}
+
+.sidebar-header img{
+
+  width:70px;
+  height:70px;
+
+  border-radius:14px;
+
+  background:white;
+
+  padding:4px;
+
+  object-fit:cover;
+}
+
+.sidebar-header h3{
+  margin:10px 0 5px;
+  font-size:20px;
+}
+
+.sidebar-header p{
+  margin:0;
+  font-size:13px;
+  color:#E2E8F0;
+}
+
+
+/* ================================
+   SIDEBAR LINKS
+================================ */
+
+.sidebar-link{
+
+  display:block;
+
+  width:100%;
+
+  padding:17px 20px;
+
+  color:#E2E8F0;
+
+  background:#0B1F33;
+
+  border:none;
+
+  border-bottom:1px solid #24364A;
+
+  text-align:left;
+
+  text-decoration:none;
+
+  font-size:16px;
+
+  cursor:pointer;
+}
+
+.sidebar-link:hover{
+  background:#0F766E;
+  color:white;
+}
+
+.sidebar-link:active{
+  background:#115E59;
+}
+
+
+/* ================================
+   CLOSE BUTTON
+================================ */
+
+.close-menu{
+
+  position:absolute;
+
+  top:10px;
+  right:10px;
+
+  width:40px;
+  height:40px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.15);
+
+  color:white;
+
+  font-size:25px;
+
+  cursor:pointer;
+}
+
+
+/* ================================
+   OVERLAY
+================================ */
+
+.overlay{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100vh;
+
+  background:rgba(0,0,0,.60);
+
+  z-index:1500;
+
+  display:none;
+}
+
+.overlay.show{
+  display:block;
+}
+
+
+/* ================================
    LOCK SCREEN
-========================================= */
+================================ */
 
 .locked-screen{
 
@@ -284,24 +475,19 @@ select:focus{
 
   border-radius:15px;
 
-  box-shadow:0 5px 20px rgba(0,0,0,.3);
+  box-shadow:
+    0 5px 20px rgba(0,0,0,.3);
 }
 
 .activation-box h2{
-
   margin-top:0;
-
   text-align:center;
-
   color:#0F766E;
 }
 
 .activation-box p{
-
   text-align:center;
-
   color:#64748B;
-
   line-height:1.5;
 }
 
@@ -319,162 +505,9 @@ select:focus{
 }
 
 
-/* =========================================
-   SIDE MENU
-========================================= */
-
-.sidebar{
-
-  position:fixed;
-
-  top:0;
-  left:0;
-
-  width:280px;
-
-  height:100vh;
-
-  background:#0B1F33;
-
-  z-index:9999;
-
-  overflow-y:auto;
-  overflow-x:hidden;
-
-  transform:translateX(-100%);
-
-  transition:transform .3s ease;
-
-  box-shadow:5px 0 20px rgba(0,0,0,.35);
-}
-
-
-/* OPEN MENU */
-
-.sidebar.open{
-
-  transform:translateX(0);
-
-}
-
-
-/* =========================================
-   SIDEBAR HEADER
-========================================= */
-
-.sidebar-header{
-
-  padding:25px 15px;
-
-  background:#0F766E;
-
-  color:white;
-
-  text-align:center;
-
-  border-bottom:4px solid #F5B700;
-}
-
-.sidebar-header img{
-
-  width:65px;
-  height:65px;
-
-  border-radius:14px;
-
-  background:white;
-
-  padding:4px;
-
-  object-fit:cover;
-}
-
-.sidebar-header h3{
-
-  margin:10px 0 5px;
-
-  font-size:20px;
-}
-
-.sidebar-header p{
-
-  margin:0;
-
-  font-size:13px;
-
-  color:#E2E8F0;
-}
-
-
-/* =========================================
-   SIDEBAR LINKS
-========================================= */
-
-.sidebar a{
-
-  display:block;
-
-  padding:17px 20px;
-
-  color:#E2E8F0;
-
-  text-decoration:none;
-
-  font-size:16px;
-
-  border-bottom:1px solid #24364A;
-
-  cursor:pointer;
-}
-
-.sidebar a:hover,
-.sidebar a:active{
-
-  background:#0F766E;
-
-  color:white;
-}
-
-
-/* =========================================
-   OVERLAY
-========================================= */
-
-.overlay{
-
-  position:fixed;
-
-  top:0;
-  left:0;
-
-  width:100%;
-  height:100vh;
-
-  background:rgba(0,0,0,.55);
-
-  z-index:9998;
-
-  opacity:0;
-
-  visibility:hidden;
-
-  transition:opacity .3s ease;
-}
-
-
-/* SHOW OVERLAY */
-
-.overlay.show{
-
-  opacity:1;
-
-  visibility:visible;
-}
-
-
-/* =========================================
+/* ================================
    FOOTER
-========================================= */
+================================ */
 
 footer{
 
@@ -490,40 +523,43 @@ footer{
 }
 
 
-/* =========================================
-   QUIZ QUESTION
-========================================= */
+/* ================================
+   MOBILE
+================================ */
 
-.quiz-info{
+@media(max-width:480px){
 
-  background:#F0FDFA;
+  .sidebar.open{
+    width:285px;
+  }
 
-  border-left:4px solid #0F766E;
+  .header{
+    font-size:20px;
+  }
 
-  padding:12px;
-
-  border-radius:8px;
-
-  margin-bottom:15px;
-
-  font-size:14px;
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- =========================================
-     SIDE MENU
-========================================= -->
+<!-- ==================================================
+     SIDEBAR
+================================================== -->
 
-<div id="sidebar"
-     class="sidebar"
-     aria-hidden="true">
+<div id="sidebar" class="sidebar">
+
+  <button
+    id="closeMenuBtn"
+    class="close-menu"
+    type="button"
+    aria-label="Close menu">
+    ×
+  </button>
+
 
   <div class="sidebar-header">
 
@@ -538,81 +574,90 @@ footer{
   </div>
 
 
-  <a href="#"
-     onclick="showNotes(); return false;">
+  <button
+    class="sidebar-link"
+    id="notesBtn"
+    type="button">
 
     📝 Notes
 
-  </a>
+  </button>
 
 
-  <a href="#"
-     onclick="showProjects(); return false;">
+  <button
+    class="sidebar-link"
+    id="projectsBtn"
+    type="button">
 
     📚 CBC Projects
 
-  </a>
+  </button>
 
 
-  <a href="#"
-     onclick="showHistory(); return false;">
+  <button
+    class="sidebar-link"
+    id="historyBtn"
+    type="button">
 
     📊 Progress History
 
-  </a>
+  </button>
 
 
-  <a href="#"
-     onclick="showLeaderboard(); return false;">
+  <button
+    class="sidebar-link"
+    id="leaderboardBtn"
+    type="button">
 
     🏆 Leaderboard
 
-  </a>
+  </button>
 
 
-  <a href="https://wa.me/254707649890">
+  <a
+    class="sidebar-link"
+    href="https://wa.me/254707649890">
 
     💬 Contact Support
 
   </a>
 
 
-  <a href="#"
-     onclick="
-       alert('CBC MASTER - Google Play listing coming soon');
-       closeMenu();
-       return false;
-     ">
+  <button
+    class="sidebar-link"
+    id="rateBtn"
+    type="button">
 
     ⭐ Rate Us
 
-  </a>
+  </button>
 
 
-  <a href="#"
-     onclick="shareApp(); return false;">
+  <button
+    class="sidebar-link"
+    id="shareBtn"
+    type="button">
 
     📤 Share App
 
-  </a>
+  </button>
 
 </div>
 
 
-<!-- =========================================
+<!-- ==================================================
      OVERLAY
-========================================= -->
+================================================== -->
 
-<div id="overlay"
-     class="overlay"
-     onclick="closeMenu()">
+<div
+  id="overlay"
+  class="overlay">
 </div>
 
 
-
-<!-- =========================================
+<!-- ==================================================
      MAIN APP
-========================================= -->
+================================================== -->
 
 <div id="app">
 
@@ -622,10 +667,11 @@ footer{
   <div class="header">
 
     <button
+      id="menuBtn"
       class="menu"
       type="button"
-      onclick="openMenu()"
-      aria-label="Open menu">
+      aria-label="Open menu"
+      aria-expanded="false">
 
       ☰
 
@@ -639,6 +685,8 @@ footer{
   <div class="accent"></div>
 
 
+  <!-- CONTENT -->
+
   <div class="container">
 
 
@@ -649,41 +697,22 @@ footer{
     </div>
 
 
-    <!-- =====================================
-         QUIZ
-    ====================================== -->
+    <!-- QUIZ -->
 
     <div class="card">
 
-      <h2>📝 QUIZZES</h2>
+      <h3>🎯 QUIZZES</h3>
 
-      <div class="quiz-info">
-
-        Practice CBC questions for
-        Grade 4, Grade 5 and Grade 6.
-
-      </div>
-
-
-      <label for="student">
-
-        Student Name
-
-      </label>
+      <small>
+        Practice CBC questions for Grade 4-6
+      </small>
 
 
       <input
         id="student"
         type="text"
-        placeholder="Enter student name"
+        placeholder="Student Name"
         autocomplete="name">
-
-
-      <label for="grade">
-
-        Grade
-
-      </label>
 
 
       <select id="grade">
@@ -705,9 +734,10 @@ footer{
 
       <button
         id="startBtn"
+        class="action-btn"
         type="button">
 
-        🚀 Start Quiz
+        Start Quiz
 
       </button>
 
@@ -715,26 +745,60 @@ footer{
       <div
         id="result"
         class="result">
-
       </div>
 
     </div>
 
 
+    <!-- NOTES -->
 
-    <!-- =====================================
-         HISTORY
-    ====================================== -->
+    <div class="card">
 
-    <div
-      id="historySection"
-      class="card">
+      <h3>📝 NOTES</h3>
 
-      <h2>📊 PROGRESS HISTORY</h2>
+      <small>
+        Grade 4-6 revision notes
+      </small>
 
-      <p>
-        Saved quiz results on this device.
-      </p>
+      <button
+        id="notesMainBtn"
+        class="action-btn"
+        type="button">
+
+        Open Notes
+
+      </button>
+
+    </div>
+
+
+    <!-- PROJECTS -->
+
+    <div class="card">
+
+      <h3>📚 CBC PROJECTS</h3>
+
+      <small>
+        Grade 4-6 projects and marking rubrics
+      </small>
+
+      <button
+        id="projectsMainBtn"
+        class="action-btn"
+        type="button">
+
+        View Projects
+
+      </button>
+
+    </div>
+
+
+    <!-- HISTORY -->
+
+    <div class="card">
+
+      <h3>📊 PROGRESS HISTORY</h3>
 
       <div id="historyBox">
 
@@ -747,20 +811,11 @@ footer{
     </div>
 
 
+    <!-- LEADERBOARD -->
 
-    <!-- =====================================
-         LEADERBOARD
-    ====================================== -->
+    <div class="card">
 
-    <div
-      id="leaderboardSection"
-      class="card">
-
-      <h2>🏆 LEADERBOARD</h2>
-
-      <p>
-        Top students on this device.
-      </p>
+      <h3>🏆 LEADERBOARD</h3>
 
       <div id="leaderboardBox">
 
@@ -773,145 +828,31 @@ footer{
     </div>
 
 
-
-    <!-- =====================================
-         NOTES
-    ====================================== -->
-
-    <div
-      id="notesSection"
-      class="card">
-
-      <h2>📝 NOTES</h2>
-
-      <p>
-        Grade 4-6 revision notes.
-      </p>
-
-      <button
-        type="button"
-        onclick="showNotes()">
-
-        Open Notes
-
-      </button>
-
-    </div>
-
-
-
-    <!-- =====================================
-         PROJECTS
-    ====================================== -->
-
-    <div
-      id="projectsSection"
-      class="card">
-
-      <h2>📚 CBC PROJECTS</h2>
-
-      <p>
-        Grade 4-6 projects and marking rubrics.
-      </p>
-
-      <button
-        type="button"
-        onclick="showProjects()">
-
-        View Projects
-
-      </button>
-
-    </div>
-
-
-
-    <!-- =====================================
-         PREMIUM
-    ====================================== -->
+    <!-- PREMIUM -->
 
     <div class="card">
 
-      <h2>🔓 PREMIUM ACTIVATION</h2>
+      <h3>🔓 PREMIUM ACTIVATION</h3>
 
       <p>
-        Unlock CBC MASTER premium access.
+        Unlock CBC MASTER for
+        <strong>KSh 300</strong>.
       </p>
 
       <p>
-        <strong>Price:</strong> KSh 300
+        M-Pesa:
+        <strong>0707649890</strong>
       </p>
-
-      <p>
-        <strong>M-Pesa:</strong> 0707649890
-      </p>
-
-
-      <input
-        id="phoneInput"
-        type="tel"
-        inputmode="numeric"
-        placeholder="Enter M-Pesa phone number">
-
-
-      <input
-        id="codeInput"
-        type="text"
-        placeholder="Enter activation code">
 
 
       <button
-        type="button"
-        onclick="activateApp()">
+        id="contactBtn"
+        class="action-btn"
+        type="button">
 
-        🔓 Activate App
+        💬 Contact Support
 
       </button>
-
-
-      <div
-        id="activationError"
-        class="error">
-
-      </div>
-
-
-      <a
-        class="pay-btn"
-        href="https://wa.me/254707649890?text=Hello%20Joseph,%20I%20want%20to%20activate%20CBC%20MASTER">
-
-        📲 Pay via M-Pesa
-
-      </a>
-
-    </div>
-
-
-
-    <!-- =====================================
-         SUPPORT
-    ====================================== -->
-
-    <div class="card">
-
-      <h2>💬 CONTACT SUPPORT</h2>
-
-      <p>
-        📞 0707649890
-      </p>
-
-      <p>
-        📧 mbuijoseph51@gmail.com
-      </p>
-
-
-      <a
-        class="pay-btn"
-        href="https://wa.me/254707649890">
-
-        💬 WhatsApp Support
-
-      </a>
 
     </div>
 
@@ -930,21 +871,17 @@ footer{
 </div>
 
 
-
 <script>
 
-
-/* =========================================
+/* ==================================================
    ACTIVATION
-========================================= */
+================================================== */
 
 const SECRET = "K9";
-
 
 const APPROVED_PHONES = [
 
   "254707649890",
-
   "254782609857"
 
 ];
@@ -953,7 +890,7 @@ const APPROVED_PHONES = [
 function normalizePhone(phone){
 
   const digits =
-    (phone || "")
+    String(phone || "")
       .replace(/\D/g,"");
 
 
@@ -962,17 +899,8 @@ function normalizePhone(phone){
     digits.startsWith("0")
   ){
 
-    return "254" + digits.slice(1);
-
-  }
-
-
-  if(
-    digits.length === 12 &&
-    digits.startsWith("254")
-  ){
-
-    return digits;
+    return "254" +
+      digits.substring(1);
 
   }
 
@@ -985,20 +913,20 @@ function normalizePhone(phone){
 function generateCode(phone){
 
   return "CBC-" +
-         SECRET +
-         "-" +
-         phone.slice(-4);
+    SECRET +
+    "-" +
+    phone.slice(-4);
 
 }
 
 
 function isActivated(){
 
-  const savedCode =
+  const saved =
     localStorage.getItem("cbc_code");
 
 
-  if(!savedCode){
+  if(!saved){
 
     return false;
 
@@ -1010,7 +938,7 @@ function isActivated(){
   ){
 
     if(
-      savedCode ===
+      saved ===
       generateCode(phone)
     ){
 
@@ -1026,133 +954,453 @@ function isActivated(){
 }
 
 
-/* =========================================
-   ACTIVATE
-========================================= */
+/* ==================================================
+   MENU
+================================================== */
 
-function activateApp(){
+function openMenu(){
 
-  const phoneInput =
-    document.getElementById(
-      "phoneInput"
-    );
+  const sidebar =
+    document.getElementById("sidebar");
 
+  const overlay =
+    document.getElementById("overlay");
 
-  const codeInput =
-    document.getElementById(
-      "codeInput"
-    );
+  const menuBtn =
+    document.getElementById("menuBtn");
 
 
-  const errorBox =
-    document.getElementById(
-      "activationError"
-    );
+  sidebar.classList.add("open");
 
+  overlay.classList.add("show");
 
-  if(
-    !phoneInput ||
-    !codeInput ||
-    !errorBox
-  ){
-
-    return;
-
-  }
-
-
-  const phone =
-    normalizePhone(
-      phoneInput.value.trim()
-    );
-
-
-  const code =
-    codeInput.value
-      .trim()
-      .toUpperCase();
-
-
-  errorBox.style.display =
-    "none";
-
-
-  if(!phone){
-
-    errorBox.textContent =
-      "Please enter your M-Pesa phone number.";
-
-    errorBox.style.display =
-      "block";
-
-    phoneInput.focus();
-
-    return;
-
-  }
-
-
-  if(
-    !APPROVED_PHONES.includes(phone)
-  ){
-
-    errorBox.textContent =
-      "❌ Phone number is not approved.";
-
-    errorBox.style.display =
-      "block";
-
-    phoneInput.focus();
-
-    return;
-
-  }
-
-
-  const correctCode =
-    generateCode(phone);
-
-
-  if(code !== correctCode){
-
-    errorBox.textContent =
-      "❌ Wrong activation code.";
-
-    errorBox.style.display =
-      "block";
-
-    codeInput.focus();
-
-    return;
-
-  }
-
-
-  localStorage.setItem(
-    "cbc_code",
-    correctCode
+  menuBtn.setAttribute(
+    "aria-expanded",
+    "true"
   );
-
-
-  alert(
-    "✅ Access granted!\n\n" +
-    "CBC MASTER is now activated."
-  );
-
-
-  location.reload();
 
 }
 
 
-/* =========================================
-   QUESTION BANK - 50 QUESTIONS
-========================================= */
+function closeMenu(){
+
+  const sidebar =
+    document.getElementById("sidebar");
+
+  const overlay =
+    document.getElementById("overlay");
+
+  const menuBtn =
+    document.getElementById("menuBtn");
+
+
+  sidebar.classList.remove("open");
+
+  overlay.classList.remove("show");
+
+  menuBtn.setAttribute(
+    "aria-expanded",
+    "false"
+  );
+
+}
+
+
+/* ==================================================
+   NOTES
+================================================== */
+
+function showNotes(){
+
+  closeMenu();
+
+
+  alert(
+    "📝 CBC NOTES\n\n" +
+
+    "Grade 4-6 revision notes\n\n" +
+
+    "Notes will be added in the next update.\n\n" +
+
+    "For now, use QUIZZES to practice."
+  );
+
+}
+
+
+/* ==================================================
+   PROJECTS
+================================================== */
+
+function showProjects(){
+
+  closeMenu();
+
+
+  alert(
+    "📚 CBC PROJECTS\n\n" +
+
+    "Grade 4:\n" +
+    "Water Filter - Science\n\n" +
+
+    "Grade 5:\n" +
+    "Financial Budget Project - Maths\n\n" +
+
+    "Grade 6:\n" +
+    "Community Problem Solution - Social Studies"
+  );
+
+}
+
+
+/* ==================================================
+   HISTORY
+================================================== */
+
+function showHistory(){
+
+  closeMenu();
+
+
+  const box =
+    document.getElementById(
+      "historyBox"
+    );
+
+
+  if(box){
+
+    box.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  }
+
+}
+
+
+/* ==================================================
+   LEADERBOARD
+================================================== */
+
+function showLeaderboard(){
+
+  closeMenu();
+
+
+  const box =
+    document.getElementById(
+      "leaderboardBox"
+    );
+
+
+  if(box){
+
+    box.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  }
+
+}
+
+
+/* ==================================================
+   SHARE
+================================================== */
+
+async function shareApp(){
+
+  closeMenu();
+
+
+  const shareData = {
+
+    title:
+      "CBC MASTER",
+
+    text:
+      "CBC MASTER - Grade 4-6 quizzes, notes and projects.",
+
+    url:
+      window.location.href
+
+  };
+
+
+  if(
+    navigator.share
+  ){
+
+    try{
+
+      await navigator.share(
+        shareData
+      );
+
+    }catch(error){
+
+      console.log(
+        "Share cancelled"
+      );
+
+    }
+
+  }else{
+
+    alert(
+      "Share this link:\n\n" +
+      window.location.href
+    );
+
+  }
+
+}
+
+
+/* ==================================================
+   SAVE HISTORY
+================================================== */
+
+function saveHistory(
+  student,
+  grade,
+  score,
+  total
+){
+
+  const history =
+    JSON.parse(
+      localStorage.getItem(
+        "cbc_history"
+      ) || "[]"
+    );
+
+
+  const percent =
+    Math.round(
+      (score / total) * 100
+    );
+
+
+  const result = {
+
+    student:
+      student,
+
+    grade:
+      grade,
+
+    score:
+      score,
+
+    total:
+      total,
+
+    percent:
+      percent,
+
+    date:
+      new Date()
+        .toLocaleString()
+
+  };
+
+
+  history.push(result);
+
+
+  localStorage.setItem(
+    "cbc_history",
+    JSON.stringify(history)
+  );
+
+
+  return result;
+
+}
+
+
+/* ==================================================
+   RENDER HISTORY
+================================================== */
+
+function renderHistory(){
+
+  const history =
+    JSON.parse(
+      localStorage.getItem(
+        "cbc_history"
+      ) || "[]"
+    );
+
+
+  const box =
+    document.getElementById(
+      "historyBox"
+    );
+
+
+  if(!box){
+
+    return;
+
+  }
+
+
+  if(history.length === 0){
+
+    box.innerHTML =
+      "<p>No history saved yet.</p>";
+
+    return;
+
+  }
+
+
+  let html = "";
+
+
+  history
+    .slice()
+    .reverse()
+    .forEach(
+      function(h,index){
+
+        html += `
+
+          <div class="history-item">
+
+            <strong>
+              ${index + 1}.
+              ${h.student}
+            </strong>
+
+            <br>
+
+            Grade:
+            ${h.grade}
+
+            <br>
+
+            Score:
+            ${h.score}/${h.total}
+
+            (${h.percent}%)
+
+            <br>
+
+            Date:
+            ${h.date}
+
+          </div>
+
+        `;
+
+      }
+    );
+
+
+  box.innerHTML =
+    html;
+
+}
+
+
+/* ==================================================
+   RENDER LEADERBOARD
+================================================== */
+
+function renderLeaderboard(){
+
+  const history =
+    JSON.parse(
+      localStorage.getItem(
+        "cbc_history"
+      ) || "[]"
+    );
+
+
+  const box =
+    document.getElementById(
+      "leaderboardBox"
+    );
+
+
+  if(!box){
+
+    return;
+
+  }
+
+
+  if(history.length === 0){
+
+    box.innerHTML =
+      "<p>No scores yet.</p>";
+
+    return;
+
+  }
+
+
+  const sorted =
+    history
+      .slice()
+      .sort(
+        function(a,b){
+
+          return b.percent -
+                 a.percent;
+
+        }
+      );
+
+
+  let html = "";
+
+
+  sorted
+    .slice(0,5)
+    .forEach(
+      function(h,index){
+
+        html += `
+
+          <div class="history-item">
+
+            🏆
+
+            <strong>
+              ${index + 1}.
+              ${h.student}
+            </strong>
+
+            -
+
+            ${h.percent}%
+
+          </div>
+
+        `;
+
+      }
+    );
+
+
+  box.innerHTML =
+    html;
+
+}
+
+
+/* ==================================================
+   QUESTION BANK
+================================================== */
 
 const questionBank = [
-
-
-  /* MATH */
 
   {
     q:"345 + 289 =?",
@@ -1215,8 +1463,6 @@ const questionBank = [
   },
 
 
-  /* ENGLISH */
-
   {
     q:"Correct spelling: A) Enviroment B) Environment C) Enviornment",
     a:"B",
@@ -1272,13 +1518,11 @@ const questionBank = [
   },
 
   {
-    q:"How many vowels in 'Education'?",
+    q:"How many vowels in Education?",
     a:"5",
     subj:"ENGLISH"
   },
 
-
-  /* SCIENCE */
 
   {
     q:"Part of plant that makes food? A) Root B) Leaf C) Stem",
@@ -1341,8 +1585,6 @@ const questionBank = [
   },
 
 
-  /* SOCIAL STUDIES */
-
   {
     q:"Capital of Kenya?",
     a:"nairobi",
@@ -1390,7 +1632,9 @@ const questionBank = [
     a:"mombasa",
     subj:"SOCIAL"
   },
+p
 
+      l00l0
   {
     q:"How many counties in Kenya?",
     a:"47",
@@ -1404,222 +1648,5 @@ const questionBank = [
   },
 
 
-  /* CRE */
-
   {
-    q:"Who built the Ark?",
-    a:"noah",
-    subj:"CRE"
-  },
-
-  {
-    q:"How many days to create world?",
-    a:"6",
-    subj:"CRE"
-  },
-
-  {
-    q:"First man God created?",
-    a:"adam",
-    subj:"CRE"
-  },
-
-  {
-    q:"Number of disciples of Jesus?",
-    a:"12",
-    subj:"CRE"
-  },
-
-  {
-    q:"Book with 10 commandments?",
-    a:"exodus",
-    subj:"CRE"
-  },
-
-  {
-    q:"Who was swallowed by a big fish?",
-    a:"jonah",
-    subj:"CRE"
-  },
-
-  {
-    q:"Place Jesus was born?",
-    a:"bethlehem",
-    subj:"CRE"
-  },
-
-  {
-    q:"How many books in the Bible?",
-    a:"66",
-    subj:"CRE"
-  },
-
-  {
-    q:"Who denied Jesus 3 times?",
-    a:"peter",
-    subj:"CRE"
-  },
-
-  {
-    q:"Feast celebrating Jesus birth?",
-    a:"christmas",
-    subj:"CRE"
-  }
-
-];
-
-
-/* =========================================
-   SHUFFLE QUESTIONS
-========================================= */
-
-function pickRandomQuestions(
-  bank,
-  number
-){
-
-  const arr =
-    bank.slice();
-
-
-  for(
-    let i = arr.length - 1;
-    i > 0;
-    i--
-  ){
-
-    const j =
-      Math.floor(
-        Math.random() * (i + 1)
-      );
-
-
-    [
-      arr[i],
-      arr[j]
-    ] = [
-      arr[j],
-      arr[i]
-    ];
-
-  }
-
-
-  return arr.slice(
-    0,
-    number
-  );
-
-}
-
-
-/* =========================================
-   SAVE HISTORY
-========================================= */
-
-function saveHistory(
-  student,
-  grade,
-  score,
-  total
-){
-
-  const history =
-    JSON.parse(
-      localStorage.getItem(
-        "cbc_history"
-      ) || "[]"
-    );
-
-
-  const percent =
-    Math.round(
-      (score / total) * 100
-    );
-
-
-  const result = {
-
-    student:student,
-
-    grade:grade,
-
-    score:score,
-
-    total:total,
-
-    percent:percent,
-
-    date:
-      new Date()
-        .toLocaleString()
-
-  };
-
-
-  history.push(result);
-
-
-  localStorage.setItem(
-    "cbc_history",
-    JSON.stringify(history)
-  );
-
-}
-
-
-/* =========================================
-   START QUIZ
-========================================= */
-
-function startQuiz(){
-
-  const studentInput =
-    document.getElementById(
-      "student"
-    );
-
-
-  const gradeInput =
-    document.getElementById(
-      "grade"
-    );
-
-
-  const student =
-    studentInput.value.trim() ||
-    "Student";
-
-
-  const grade =
-    gradeInput.value;
-
-
-  const total = 10;
-
-  let score = 0;
-
-
-  const selected =
-    pickRandomQuestions(
-      questionBank,
-      total
-    );
-
-
-  for(
-    let i = 0;
-    i < selected.length;
-    i++
-  ){
-
-    const question =
-      selected[i];
-
-
-    const answer =
-      prompt(
-
-        `Grade ${grade} - ${question.subj}\n\n` +
-
-    Tim
+    q:"Who built the Ark?jn
