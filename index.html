@@ -1,20 +1,40 @@
 <!doctype html>
 <html lang="en">
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0B1F33">
-<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1">
+
+<meta
+  name="theme-color"
+  content="#0B1F33">
+
+<meta
+  name="apple-mobile-web-app-capable"
+  content="yes">
+
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="black">
+
+<meta
+  name="description"
+  content="CBC MASTER - Grade 4, 5 and 6 learning, quizzes, notes and projects">
 
 <title>CBC MASTER</title>
 
-<link rel="manifest" href="manifest.json">
+<link
+  rel="manifest"
+  href="manifest.json">
 
 <style>
 
-/* ================================
+/* ==================================================
    RESET
-================================ */
+================================================== */
 
 *{
   box-sizing:border-box;
@@ -31,10 +51,14 @@ body{
   color:#111827;
 }
 
+body{
+  overflow-x:hidden;
+}
 
-/* ================================
+
+/* ==================================================
    HEADER
-================================ */
+================================================== */
 
 .header{
   height:64px;
@@ -78,22 +102,20 @@ body{
   transform:scale(.92);
 }
 
-
-/* ================================
-   ACCENT
-================================ */
-
 .accent{
   height:5px;
   background:#0F766E;
 }
 
 
-/* ================================
-   CONTENT
-================================ */
+/* ==================================================
+   CONTAINER
+================================================== */
 
 .container{
+  width:100%;
+  max-width:800px;
+  margin:auto;
   padding:14px;
 }
 
@@ -137,10 +159,14 @@ body{
   color:#64748B;
 }
 
+.card p{
+  line-height:1.5;
+}
 
-/* ================================
+
+/* ==================================================
    INPUTS
-================================ */
+================================================== */
 
 input,
 select{
@@ -162,13 +188,14 @@ select{
 input:focus,
 select:focus{
   outline:none;
+
   border:2px solid #0F766E;
 }
 
 
-/* ================================
+/* ==================================================
    BUTTONS
-================================ */
+================================================== */
 
 button.action-btn{
   width:100%;
@@ -196,17 +223,61 @@ button.action-btn:active{
   transform:scale(.98);
 }
 
+button.secondary-btn{
+  background:#0B1F33;
+}
 
-/* ================================
+
+/* ==================================================
+   DOWNLOAD BUTTON
+================================================== */
+
+.download-btn{
+
+  display:block;
+
+  width:90%;
+
+  max-width:420px;
+
+  margin:20px auto;
+
+  padding:16px 20px;
+
+  text-align:center;
+
+  text-decoration:none;
+
+  background:#16A34A;
+
+  color:white;
+
+  border-radius:12px;
+
+  font-size:18px;
+
+  font-weight:bold;
+
+  box-shadow:
+    0 4px 10px rgba(0,0,0,.18);
+
+}
+
+.download-btn:active{
+  transform:scale(.97);
+}
+
+
+/* ==================================================
    RESULT
-================================ */
+================================================== */
 
 .result{
   background:#ECFEFF;
 
   border:1px solid #0F766E;
 
-  padding:12px;
+  padding:14px;
 
   border-radius:10px;
 
@@ -216,59 +287,92 @@ button.action-btn:active{
 
   font-size:16px;
 
-  font-weight:normal;
+  line-height:1.6;
 }
 
 
-/* ================================
+/* ==================================================
+   QUIZ
+================================================== */
+
+.quiz-box{
+  display:none;
+}
+
+.quiz-question{
+
+  background:#F8FAFC;
+
+  border:1px solid #CBD5E1;
+
+  border-radius:10px;
+
+  padding:18px;
+
+  margin-top:15px;
+
+  font-size:18px;
+
+  font-weight:bold;
+
+  line-height:1.5;
+
+}
+
+.quiz-number{
+
+  color:#0F766E;
+
+  font-size:14px;
+
+  margin-bottom:8px;
+
+}
+
+.answer-input{
+  margin-top:15px;
+}
+
+.quiz-score{
+
+  text-align:center;
+
+  font-size:22px;
+
+  font-weight:bold;
+
+  color:#0F766E;
+
+  margin:15px 0;
+}
+
+
+/* ==================================================
    HISTORY
-================================ */
+================================================== */
 
 .history-item{
+
   background:#F8FAFC;
 
   border:1px solid #D1D5DB;
 
   border-radius:10px;
 
-  padding:10px;
+  padding:12px;
 
   margin-top:10px;
 
   font-size:14px;
+
+  line-height:1.6;
+
 }
 
 
-/* ================================
-   PAY BUTTON
-================================ */
-
-.pay-btn{
-  display:block;
-
-  text-align:center;
-
-  background:#16A34A;
-
-  color:white;
-
-  text-decoration:none;
-
-  padding:14px;
-
-  border-radius:10px;
-
-  margin-top:12px;
-
-  font-weight:bold;
-
-  font-size:16px;
-}
-
-
-/* ================================
+/* ==================================================
    SIDEBAR
-================================ */
+================================================== */
 
 .sidebar{
 
@@ -293,20 +397,16 @@ button.action-btn:active{
 
   box-shadow:
     5px 0 20px rgba(0,0,0,.35);
-
 }
-
-
-/* OPEN STATE */
 
 .sidebar.open{
   width:280px;
 }
 
 
-/* ================================
+/* ==================================================
    SIDEBAR HEADER
-================================ */
+================================================== */
 
 .sidebar-header{
 
@@ -347,9 +447,9 @@ button.action-btn:active{
 }
 
 
-/* ================================
+/* ==================================================
    SIDEBAR LINKS
-================================ */
+================================================== */
 
 .sidebar-link{
 
@@ -386,9 +486,9 @@ button.action-btn:active{
 }
 
 
-/* ================================
+/* ==================================================
    CLOSE BUTTON
-================================ */
+================================================== */
 
 .close-menu{
 
@@ -414,9 +514,9 @@ button.action-btn:active{
 }
 
 
-/* ================================
+/* ==================================================
    OVERLAY
-================================ */
+================================================== */
 
 .overlay{
 
@@ -440,80 +540,48 @@ button.action-btn:active{
 }
 
 
-/* ================================
-   LOCK SCREEN
-================================ */
+/* ==================================================
+   PREMIUM
+================================================== */
 
-.locked-screen{
+.price{
 
-  min-height:100vh;
+  font-size:28px;
 
-  background:#0B1F33;
+  font-weight:bold;
 
-  color:white;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:20px;
-}
-
-.activation-box{
-
-  width:100%;
-
-  max-width:420px;
-
-  background:white;
-
-  color:#111827;
-
-  padding:25px;
-
-  border-radius:15px;
-
-  box-shadow:
-    0 5px 20px rgba(0,0,0,.3);
-}
-
-.activation-box h2{
-  margin-top:0;
-  text-align:center;
-  color:#0F766E;
-}
-
-.activation-box p{
-  text-align:center;
-  color:#64748B;
-  line-height:1.5;
-}
-
-.error{
-
-  color:#DC2626;
+  color:#16A34A;
 
   text-align:center;
 
-  margin-top:10px;
+  margin:15px 0;
+}
 
-  font-size:14px;
+.mpesa{
 
-  display:none;
+  background:#ECFDF5;
+
+  border:1px solid #16A34A;
+
+  border-radius:10px;
+
+  padding:15px;
+
+  text-align:center;
+
+  margin-top:15px;
 }
 
 
-/* ================================
+/* ==================================================
    FOOTER
-================================ */
+================================================== */
 
 footer{
 
   text-align:center;
 
-  padding:15px;
+  padding:20px 15px;
 
   font-size:12px;
 
@@ -523,9 +591,9 @@ footer{
 }
 
 
-/* ================================
+/* ==================================================
    MOBILE
-================================ */
+================================================== */
 
 @media(max-width:480px){
 
@@ -537,45 +605,123 @@ footer{
     font-size:20px;
   }
 
-}
-.install-btn {
-  background: #00A859; /* M-Pesa green */
-  color: white;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 20px auto;
-  cursor: pointer;
-  display: none; /* Hidden until browser supports it */
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-}
-.install-btn:hover {
-  background: #008a48;
-}  
-</style>
-</head>
+  .card{
+    padding:16px;
+  }
 
+}
+   <script>
+
+function cbcOpenMenu(){
+
+  const sidebar =
+    document.getElementById("sidebar");
+
+  const overlay =
+    document.getElementById("overlay");
+
+  if(sidebar){
+    sidebar.classList.add("open");
+  }
+
+  if(overlay){
+    overlay.classList.add("show");
+  }
+
+}
+
+
+function cbcCloseMenu(){
+
+  const sidebar =
+    document.getElementById("sidebar");
+
+  const overlay =
+    document.getElementById("overlay");
+
+  if(sidebar){
+    sidebar.classList.remove("open");
+  }
+
+  if(overlay){
+    overlay.classList.remove("show");
+  }
+
+}
+
+
+/* Overlay closes menu */
+
+const overlay =
+  document.getElementById("overlay");
+
+if(overlay){
+
+  overlay.addEventListener(
+    "click",
+    cbcCloseMenu
+  );
+
+}
+
+
+/* Close button */
+
+const closeButton =
+  document.getElementById(
+    "closeMenuBtn"
+  );
+
+if(closeButton){
+
+  closeButton.addEventListener(
+    "click",
+    cbcCloseMenu
+  );
+
+}
+
+
+/* ESC closes menu */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Escape"){
+
+      cbcCloseMenu();
+
+    }
+
+  }
+);
+
+</script>
+
+</style>
+
+</head>
 
 <body>
 
 
-<button class="install-btn" id="installBtn">📲 INSTALL CBC MASTER APP</button>
-==================================================
+<!-- ==================================================
      SIDEBAR
 ================================================== -->
 
-<div id="sidebar" class="sidebar">
+<div
+  id="sidebar"
+  class="sidebar">
 
   <button
     id="closeMenuBtn"
     class="close-menu"
     type="button"
     aria-label="Close menu">
+
     ×
+
   </button>
 
 
@@ -587,7 +733,9 @@ footer{
 
     <h3>CBC MASTER</h3>
 
-    <p>Grade 4-6 Learning</p>
+    <p>
+      Grade 4-6 Learning
+    </p>
 
   </div>
 
@@ -703,6 +851,27 @@ footer{
   <div class="accent"></div>
 
 
+  <!-- ==================================================
+       DIRECT DOWNLOAD
+  ================================================== -->
+
+  <!--
+    IMPORTANT:
+    Replace YOUR-DIRECT-APK-URL.apk with the actual
+    APK download URL.
+  -->
+
+  <a
+    id="downloadBtn"
+    class="download-btn"
+   href="https://github.com/Jose-ctr/CBCMast/releases/download/v1/cbc-master.apk" 
+    download>
+
+    📲 DOWNLOAD CBC MASTER
+
+  </a>
+
+
   <!-- CONTENT -->
 
   <div class="container">
@@ -710,7 +879,7 @@ footer{
 
     <div class="section-title">
 
-      1. QUESTION AND ANSWER
+      🎓 CBC MASTER
 
     </div>
 
@@ -719,7 +888,9 @@ footer{
 
     <div class="card">
 
-      <h3>🎯 QUIZZES</h3>
+      <h3>
+        🎯 QUIZZES
+      </h3>
 
       <small>
         Practice CBC questions for Grade 4-6
@@ -755,7 +926,7 @@ footer{
         class="action-btn"
         type="button">
 
-        Start Quiz
+        🚀 Start Quiz
 
       </button>
 
@@ -768,11 +939,44 @@ footer{
     </div>
 
 
+    <!-- QUIZ AREA -->
+
+    <div
+      id="quizBox"
+      class="card quiz-box">
+
+      <div
+        id="quizQuestion"
+        class="quiz-question">
+      </div>
+
+
+      <input
+        id="answerInput"
+        class="answer-input"
+        type="text"
+        placeholder="Type your answer">
+
+
+      <button
+        id="nextBtn"
+        class="action-btn"
+        type="button">
+
+        Next Question →
+
+      </button>
+
+    </div>
+
+
     <!-- NOTES -->
 
     <div class="card">
 
-      <h3>📝 NOTES</h3>
+      <h3>
+        📝 NOTES
+      </h3>
 
       <small>
         Grade 4-6 revision notes
@@ -794,7 +998,9 @@ footer{
 
     <div class="card">
 
-      <h3>📚 CBC PROJECTS</h3>
+      <h3>
+        📚 CBC PROJECTS
+      </h3>
 
       <small>
         Grade 4-6 projects and marking rubrics
@@ -816,7 +1022,9 @@ footer{
 
     <div class="card">
 
-      <h3>📊 PROGRESS HISTORY</h3>
+      <h3>
+        📊 PROGRESS HISTORY
+      </h3>
 
       <div id="historyBox">
 
@@ -833,7 +1041,9 @@ footer{
 
     <div class="card">
 
-      <h3>🏆 LEADERBOARD</h3>
+      <h3>
+        🏆 LEADERBOARD
+      </h3>
 
       <div id="leaderboardBox">
 
@@ -850,17 +1060,40 @@ footer{
 
     <div class="card">
 
-      <h3>🔓 PREMIUM ACTIVATION</h3>
+      <h3>
+        🔓 CBC MASTER PREMIUM
+      </h3>
 
       <p>
-        Unlock CBC MASTER for
-        <strong>KSh 300</strong>.
+        Unlock the full CBC MASTER experience.
       </p>
 
-      <p>
-        M-Pesa:
-        <strong>0707649890</strong>
-      </p>
+      <div class="price">
+        KSh 150
+      </div>
+
+
+      <div class="mpesa">
+
+        <strong>
+          M-Pesa Payment
+        </strong>
+
+        <br><br>
+
+        Send:
+
+        <strong>
+          KSh 150
+        </strong>
+
+        to
+
+        <strong>
+          0707649890
+        </strong>
+
+      </div>
 
 
       <button
@@ -880,7 +1113,8 @@ footer{
 
   <footer>
 
-    © 2026 CBC MASTER.
+    © 2026 CBC MASTER<br>
+
     Developed by Joseph Mbui
 
   </footer>
@@ -892,25 +1126,32 @@ footer{
 <script>
 
 /* ==================================================
-   ACTIVATION
+   CBC MASTER
+   JAVASCRIPT - PART 2
+================================================== */
+
+
+/* ==================================================
+   CONFIGURATION
 ================================================== */
 
 const SECRET = "K9";
 
 const APPROVED_PHONES = [
-
   "254707649890",
   "254782609857"
-
 ];
 
+
+/* ==================================================
+   PHONE NORMALIZATION
+================================================== */
 
 function normalizePhone(phone){
 
   const digits =
     String(phone || "")
       .replace(/\D/g,"");
-
 
   if(
     digits.length === 10 &&
@@ -922,18 +1163,24 @@ function normalizePhone(phone){
 
   }
 
-
   return digits;
 
 }
 
 
+/* ==================================================
+   ACTIVATION CODE
+================================================== */
+
 function generateCode(phone){
+
+  const normalized =
+    normalizePhone(phone);
 
   return "CBC-" +
     SECRET +
     "-" +
-    phone.slice(-4);
+    normalized.slice(-4);
 
 }
 
@@ -943,13 +1190,9 @@ function isActivated(){
   const saved =
     localStorage.getItem("cbc_code");
 
-
   if(!saved){
-
     return false;
-
   }
-
 
   for(
     const phone of APPROVED_PHONES
@@ -966,452 +1209,71 @@ function isActivated(){
 
   }
 
-
   return false;
 
 }
 
 
 /* ==================================================
-   MENU
+   DOM ELEMENTS
 ================================================== */
 
-function openMenu(){
+const menuBtn =
+  document.getElementById("menuBtn");
 
-  const sidebar =
-    document.getElementById("sidebar");
+const closeMenuBtn =
+  document.getElementById("closeMenuBtn");
 
-  const overlay =
-    document.getElementById("overlay");
+const sidebar =
+  document.getElementById("sidebar");
 
-  const menuBtn =
-    document.getElementById("menuBtn");
+const overlay =
+  document.getElementById("overlay");
 
+const startBtn =
+  document.getElementById("startBtn");
 
-  sidebar.classList.add("open");
+const nextBtn =
+  document.getElementById("nextBtn");
 
-  overlay.classList.add("show");
+const studentInput =
+  document.getElementById("student");
 
-  menuBtn.setAttribute(
-    "aria-expanded",
-    "true"
-  );
+const gradeSelect =
+  document.getElementById("grade");
 
-}
+const quizBox =
+  document.getElementById("quizBox");
 
+const quizQuestion =
+  document.getElementById("quizQuestion");
 
-function closeMenu(){
+const answerInput =
+  document.getElementById("answerInput");
 
-  const sidebar =
-    document.getElementById("sidebar");
+const resultBox =
+  document.getElementById("result");
 
-  const overlay =
-    document.getElementById("overlay");
+const historyBox =
+  document.getElementById("historyBox");
 
-  const menuBtn =
-    document.getElementById("menuBtn");
-
-
-  sidebar.classList.remove("open");
-
-  overlay.classList.remove("show");
-
-  menuBtn.setAttribute(
-    "aria-expanded",
-    "false"
-  );
-
-}
+const leaderboardBox =
+  document.getElementById("leaderboardBox");
 
 
 /* ==================================================
-   NOTES
+   QUIZ VARIABLES
 ================================================== */
 
-function showNotes(){
+let currentQuestions = [];
 
-  closeMenu();
+let currentQuestionIndex = 0;
 
+let currentScore = 0;
 
-  alert(
-    "📝 CBC NOTES\n\n" +
+let currentStudent = "";
 
-    "Grade 4-6 revision notes\n\n" +
-
-    "Notes will be added in the next update.\n\n" +
-
-    "For now, use QUIZZES to practice."
-  );
-
-}
-
-
-/* ==================================================
-   PROJECTS
-================================================== */
-
-function showProjects(){
-
-  closeMenu();
-
-
-  alert(
-    "📚 CBC PROJECTS\n\n" +
-
-    "Grade 4:\n" +
-    "Water Filter - Science\n\n" +
-
-    "Grade 5:\n" +
-    "Financial Budget Project - Maths\n\n" +
-
-    "Grade 6:\n" +
-    "Community Problem Solution - Social Studies"
-  );
-
-}
-
-
-/* ==================================================
-   HISTORY
-================================================== */
-
-function showHistory(){
-
-  closeMenu();
-
-
-  const box =
-    document.getElementById(
-      "historyBox"
-    );
-
-
-  if(box){
-
-    box.scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
-
-  }
-
-}
-
-
-/* ==================================================
-   LEADERBOARD
-================================================== */
-
-function showLeaderboard(){
-
-  closeMenu();
-
-
-  const box =
-    document.getElementById(
-      "leaderboardBox"
-    );
-
-
-  if(box){
-
-    box.scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
-
-  }
-
-}
-
-
-/* ==================================================
-   SHARE
-================================================== */
-
-async function shareApp(){
-
-  closeMenu();
-
-
-  const shareData = {
-
-    title:
-      "CBC MASTER",
-
-    text:
-      "CBC MASTER - Grade 4-6 quizzes, notes and projects.",
-
-    url:
-      window.location.href
-
-  };
-
-
-  if(
-    navigator.share
-  ){
-
-    try{
-
-      await navigator.share(
-        shareData
-      );
-
-    }catch(error){
-
-      console.log(
-        "Share cancelled"
-      );
-
-    }
-
-  }else{
-
-    alert(
-      "Share this link:\n\n" +
-      window.location.href
-    );
-
-  }
-
-}
-
-
-/* ==================================================
-   SAVE HISTORY
-================================================== */
-
-function saveHistory(
-  student,
-  grade,
-  score,
-  total
-){
-
-  const history =
-    JSON.parse(
-      localStorage.getItem(
-        "cbc_history"
-      ) || "[]"
-    );
-
-
-  const percent =
-    Math.round(
-      (score / total) * 100
-    );
-
-
-  const result = {
-
-    student:
-      student,
-
-    grade:
-      grade,
-
-    score:
-      score,
-
-    total:
-      total,
-
-    percent:
-      percent,
-
-    date:
-      new Date()
-        .toLocaleString()
-
-  };
-
-
-  history.push(result);
-
-
-  localStorage.setItem(
-    "cbc_history",
-    JSON.stringify(history)
-  );
-
-
-  return result;
-
-}
-
-
-/* ==================================================
-   RENDER HISTORY
-================================================== */
-
-function renderHistory(){
-
-  const history =
-    JSON.parse(
-      localStorage.getItem(
-        "cbc_history"
-      ) || "[]"
-    );
-
-
-  const box =
-    document.getElementById(
-      "historyBox"
-    );
-
-
-  if(!box){
-
-    return;
-
-  }
-
-
-  if(history.length === 0){
-
-    box.innerHTML =
-      "<p>No history saved yet.</p>";
-
-    return;
-
-  }
-
-
-  let html = "";
-
-
-  history
-    .slice()
-    .reverse()
-    .forEach(
-      function(h,index){
-
-        html += `
-
-          <div class="history-item">
-
-            <strong>
-              ${index + 1}.
-              ${h.student}
-            </strong>
-
-            <br>
-
-            Grade:
-            ${h.grade}
-
-            <br>
-
-            Score:
-            ${h.score}/${h.total}
-
-            (${h.percent}%)
-
-            <br>
-
-            Date:
-            ${h.date}
-
-          </div>
-
-        `;
-
-      }
-    );
-
-
-  box.innerHTML =
-    html;
-
-}
-
-
-/* ==================================================
-   RENDER LEADERBOARD
-================================================== */
-
-function renderLeaderboard(){
-
-  const history =
-    JSON.parse(
-      localStorage.getItem(
-        "cbc_history"
-      ) || "[]"
-    );
-
-
-  const box =
-    document.getElementById(
-      "leaderboardBox"
-    );
-
-
-  if(!box){
-
-    return;
-
-  }
-
-
-  if(history.length === 0){
-
-    box.innerHTML =
-      "<p>No scores yet.</p>";
-
-    return;
-
-  }
-
-
-  const sorted =
-    history
-      .slice()
-      .sort(
-        function(a,b){
-
-          return b.percent -
-                 a.percent;
-
-        }
-      );
-
-
-  let html = "";
-
-
-  sorted
-    .slice(0,5)
-    .forEach(
-      function(h,index){
-
-        html += `
-
-          <div class="history-item">
-
-            🏆
-
-            <strong>
-              ${index + 1}.
-              ${h.student}
-            </strong>
-
-            -
-
-            ${h.percent}%
-
-          </div>
-
-        `;
-
-      }
-    );
-
-
-  box.innerHTML =
-    html;
-
-}
+let currentGrade = "";
 
 
 /* ==================================================
@@ -1419,6 +1281,10 @@ function renderLeaderboard(){
 ================================================== */
 
 const questionBank = [
+
+  /* =========================
+     MATHEMATICS
+  ========================= */
 
   {
     q:"345 + 289 =?",
@@ -1475,11 +1341,45 @@ const questionBank = [
   },
 
   {
-    q:"Perimeter of square side 8cm =?",
+    q:"Perimeter of a square with side 8cm =?",
     a:"32",
     subj:"MATH"
   },
 
+  {
+    q:"50 + 75 =?",
+    a:"125",
+    subj:"MATH"
+  },
+
+  {
+    q:"500 - 275 =?",
+    a:"225",
+    subj:"MATH"
+  },
+
+  {
+    q:"15 x 4 =?",
+    a:"60",
+    subj:"MATH"
+  },
+
+  {
+    q:"120 / 10 =?",
+    a:"12",
+    subj:"MATH"
+  },
+
+  {
+    q:"Half of 100 =?",
+    a:"50",
+    subj:"MATH"
+  },
+
+
+  /* =========================
+     ENGLISH
+  ========================= */
 
   {
     q:"Correct spelling: A) Enviroment B) Environment C) Enviornment",
@@ -1536,11 +1436,45 @@ const questionBank = [
   },
 
   {
-    q:"How many vowels in Education?",
+    q:"How many vowels are in Education?",
     a:"5",
     subj:"ENGLISH"
   },
 
+  {
+    q:"Opposite of Hot?",
+    a:"cold",
+    subj:"ENGLISH"
+  },
+
+  {
+    q:"Plural of Mouse?",
+    a:"mice",
+    subj:"ENGLISH"
+  },
+
+  {
+    q:"Past tense of Eat?",
+    a:"ate",
+    subj:"ENGLISH"
+  },
+
+  {
+    q:"Synonym of Big?",
+    a:"large",
+    subj:"ENGLISH"
+  },
+
+  {
+    q:"A young dog is called a?",
+    a:"puppy",
+    subj:"ENGLISH"
+  },
+
+
+  /* =========================
+     SCIENCE
+  ========================= */
 
   {
     q:"Part of plant that makes food? A) Root B) Leaf C) Stem",
@@ -1549,7 +1483,7 @@ const questionBank = [
   },
 
   {
-    q:"How many states of matter? A) 2 B) 3 C) 4",
+    q:"How many common states of matter? A) 2 B) 3 C) 4",
     a:"B",
     subj:"SCIENCE"
   },
@@ -1567,7 +1501,7 @@ const questionBank = [
   },
 
   {
-    q:"Humans have ___ bones",
+    q:"Humans have approximately ___ bones?",
     a:"206",
     subj:"SCIENCE"
   },
@@ -1585,23 +1519,57 @@ const questionBank = [
   },
 
   {
-    q:"Source of light and heat?",
+    q:"Source of light and heat for Earth?",
     a:"sun",
     subj:"SCIENCE"
   },
 
   {
-    q:"Name 1 part of an insect",
+    q:"Name one part of an insect.",
     a:"head",
     subj:"SCIENCE"
   },
 
   {
-    q:"Tool to measure temperature?",
+    q:"Tool used to measure temperature?",
     a:"thermometer",
     subj:"SCIENCE"
   },
 
+  {
+    q:"Which organ pumps blood around the body?",
+    a:"heart",
+    subj:"SCIENCE"
+  },
+
+  {
+    q:"Which sense organ is used for seeing?",
+    a:"eye",
+    subj:"SCIENCE"
+  },
+
+  {
+    q:"Plants need sunlight to make?",
+    a:"food",
+    subj:"SCIENCE"
+  },
+
+  {
+    q:"Water changes into ice when it is?",
+    a:"cold",
+    subj:"SCIENCE"
+  },
+
+  {
+    q:"Which planet do we live on?",
+    a:"earth",
+    subj:"SCIENCE"
+  },
+
+
+  /* =========================
+     SOCIAL STUDIES
+  ========================= */
 
   {
     q:"Capital of Kenya?",
@@ -1634,37 +1602,1820 @@ const questionBank = [
   },
 
   {
-    q:"Country to the North of Kenya?",
-    a:"ethiopia",
+    q:"Kenya is located in which continent?",
+    a:"africa",
     subj:"SOCIAL"
   },
 
   {
-    q:"Madaraka Day is celebrated on?",
-    a:"1st june",
+    q:"What is the capital city of Tanzania?",
+    a:"dodoma",
     subj:"SOCIAL"
   },
 
   {
-    q:"Main port in Kenya?",
-    a:"mombasa",
-    subj:"SOCIAL"
-  },
-
-
-
-  {
-    q:"How many counties in Kenya?",
-    a:"47",
+    q:"Which ocean borders Kenya?",
+    a:"indian ocean",
     subj:"SOCIAL"
   },
 
   {
-    q:"National language of Kenya?",
+    q:"What is the national language commonly used in Kenya?",
     a:"swahili",
     subj:"SOCIAL"
   },
 
-
   {
-    q:"Who built the Ark?
+    q:"How many counties does Kenya have?",
+    a:"47",
+    subj:"SOCIAL"
+  }
+
+];
+
+
+/* ==================================================
+   END OF PART 2
+================================================== */
+
+<script>
+
+/* ==================================================
+   CBC MASTER
+   FUNCTIONALITY - PART 3
+================================================== */
+
+
+/* ==================================================
+   MENU
+================================================== */
+
+function openMenu(){
+
+  if(sidebar){
+    sidebar.classList.add("open");
+  }
+
+  if(overlay){
+    overlay.classList.add("show");
+  }
+
+  if(menuBtn){
+    menuBtn.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+  }
+
+}
+
+
+function closeMenu(){
+
+  if(sidebar){
+    sidebar.classList.remove("open");
+  }
+
+  if(overlay){
+    overlay.classList.remove("show");
+  }
+
+  if(menuBtn){
+    menuBtn.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+  }
+
+}
+
+
+/* ==================================================
+   MENU EVENT LISTENERS
+================================================== */
+
+if(menuBtn){
+
+  menuBtn.addEventListener(
+    "click",
+    openMenu
+  );
+
+}
+
+
+if(closeMenuBtn){
+
+  closeMenuBtn.addEventListener(
+    "click",
+    closeMenu
+  );
+
+}
+
+
+if(overlay){
+
+  overlay.addEventListener(
+    "click",
+    closeMenu
+  );
+
+}
+
+
+/* ==================================================
+   NOTES
+================================================== */
+
+function showNotes(){
+
+  closeMenu();
+
+  alert(
+    "📝 CBC MASTER NOTES\n\n" +
+
+    "Grade 4-6 revision notes\n\n" +
+
+    "Mathematics\n" +
+    "• Numbers\n" +
+    "• Fractions\n" +
+    "• Measurement\n" +
+    "• Geometry\n\n" +
+
+    "English\n" +
+    "• Grammar\n" +
+    "• Vocabulary\n" +
+    "• Reading\n\n" +
+
+    "Science\n" +
+    "• Plants\n" +
+    "• Animals\n" +
+    "• Matter\n\n" +
+
+    "Social Studies\n" +
+    "• Kenya\n" +
+    "• Environment\n" +
+    "• Community\n\n" +
+
+    "More revision notes will be added in future updates."
+  );
+
+}
+
+
+const notesBtn =
+  document.getElementById("notesBtn");
+
+const notesMainBtn =
+  document.getElementById("notesMainBtn");
+
+
+if(notesBtn){
+
+  notesBtn.addEventListener(
+    "click",
+    showNotes
+  );
+
+}
+
+
+if(notesMainBtn){
+
+  notesMainBtn.addEventListener(
+    "click",
+    showNotes
+  );
+
+}
+
+
+/* ==================================================
+   PROJECTS
+================================================== */
+
+function showProjects(){
+
+  closeMenu();
+
+  alert(
+    "📚 CBC PROJECTS\n\n" +
+
+    "GRADE 4\n\n" +
+    "• Water Filter Project\n" +
+    "• Simple Weather Chart\n" +
+    "• Plant Growth Observation\n\n" +
+
+    "GRADE 5\n\n" +
+    "• Financial Budget Project\n" +
+    "• Environmental Conservation\n" +
+    "• Simple Machine Project\n\n" +
+
+    "GRADE 6\n\n" +
+    "• Community Problem Solution\n" +
+    "• Water Conservation\n" +
+    "• Environmental Research\n\n" +
+
+    "Project guides and marking rubrics will be expanded in future updates."
+  );
+
+}
+
+
+const projectsBtn =
+  document.getElementById("projectsBtn");
+
+const projectsMainBtn =
+  document.getElementById("projectsMainBtn");
+
+
+if(projectsBtn){
+
+  projectsBtn.addEventListener(
+    "click",
+    showProjects
+  );
+
+}
+
+
+if(projectsMainBtn){
+
+  projectsMainBtn.addEventListener(
+    "click",
+    showProjects
+  );
+
+}
+
+
+/* ==================================================
+   HISTORY
+================================================== */
+
+function getHistory(){
+
+  try{
+
+    return JSON.parse(
+      localStorage.getItem(
+        "cbc_history"
+      ) || "[]"
+    );
+
+  }catch(error){
+
+    console.error(
+      "History loading error:",
+      error
+    );
+
+    return [];
+
+  }
+
+}
+
+
+function saveHistory(
+  student,
+  grade,
+  score,
+  total
+){
+
+  const history =
+    getHistory();
+
+  const percent =
+    total > 0
+      ? Math.round(
+          (score / total) * 100
+        )
+      : 0;
+
+  const result = {
+
+    student:
+      student,
+
+    grade:
+      grade,
+
+    score:
+      score,
+
+    total:
+      total,
+
+    percent:
+      percent,
+
+    date:
+      new Date().toLocaleString()
+
+  };
+
+  history.push(result);
+
+  /*
+   * Keep the latest 50 results.
+   */
+
+  const limitedHistory =
+    history.slice(-50);
+
+  localStorage.setItem(
+    "cbc_history",
+    JSON.stringify(
+      limitedHistory
+    )
+  );
+
+  return result;
+
+}
+
+
+/* ==================================================
+   RENDER HISTORY
+================================================== */
+
+function renderHistory(){
+
+  const history =
+    getHistory();
+
+  if(!historyBox){
+    return;
+  }
+
+  if(history.length === 0){
+
+    historyBox.innerHTML =
+      "<p>No history saved yet.</p>";
+
+    return;
+
+  }
+
+  let html = "";
+
+  history
+    .slice()
+    .reverse()
+    .forEach(
+      function(item,index){
+
+        html += `
+
+          <div class="history-item">
+
+            <strong>
+              ${index + 1}.
+              ${escapeHTML(item.student)}
+            </strong>
+
+            <br>
+
+            Grade:
+            ${escapeHTML(item.grade)}
+
+            <br>
+
+            Score:
+            ${item.score}/${item.total}
+
+            (${item.percent}%)
+
+            <br>
+
+            Date:
+            ${escapeHTML(item.date)}
+
+          </div>
+
+        `;
+
+      }
+    );
+
+  historyBox.innerHTML =
+    html;
+
+}
+
+
+/* ==================================================
+   LEADERBOARD
+================================================== */
+
+function renderLeaderboard(){
+
+  const history =
+    getHistory();
+
+  if(!leaderboardBox){
+    return;
+  }
+
+  if(history.length === 0){
+
+    leaderboardBox.innerHTML =
+      "<p>No scores yet.</p>";
+
+    return;
+
+  }
+
+  const sorted =
+    history
+      .slice()
+      .sort(
+        function(a,b){
+
+          if(
+            b.percent !==
+            a.percent
+          ){
+
+            return (
+              b.percent -
+              a.percent
+            );
+
+          }
+
+          return (
+            b.score -
+            a.score
+          );
+
+        }
+      );
+
+  let html = "";
+
+  sorted
+    .slice(0,10)
+    .forEach(
+      function(item,index){
+
+        html += `
+
+          <div class="history-item">
+
+            🏆
+
+            <strong>
+              ${index + 1}.
+              ${escapeHTML(item.student)}
+            </strong>
+
+            <br>
+
+            Grade:
+            ${escapeHTML(item.grade)}
+
+            <br>
+
+            Score:
+            ${item.percent}%
+
+          </div>
+
+        `;
+
+      }
+    );
+
+  leaderboardBox.innerHTML =
+    html;
+
+}
+
+
+/* ==================================================
+   ESCAPE USER INPUT
+================================================== */
+
+function escapeHTML(value){
+
+  return String(value || "")
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* ==================================================
+   HISTORY MENU BUTTON
+================================================== */
+
+const historyBtn =
+  document.getElementById(
+    "historyBtn"
+  );
+
+
+if(historyBtn){
+
+  historyBtn.addEventListener(
+    "click",
+    function(){
+
+      closeMenu();
+
+      if(historyBox){
+
+        historyBox.scrollIntoView({
+          behavior:"smooth",
+          block:"center"
+        });
+
+      }
+
+    }
+  );
+
+}
+
+
+/* ==================================================
+   LEADERBOARD MENU BUTTON
+================================================== */
+
+const leaderboardBtn =
+  document.getElementById(
+    "leaderboardBtn"
+  );
+
+
+if(leaderboardBtn){
+
+  leaderboardBtn.addEventListener(
+    "click",
+    function(){
+
+      closeMenu();
+
+      if(leaderboardBox){
+
+        leaderboardBox.scrollIntoView({
+          behavior:"smooth",
+          block:"center"
+        });
+
+      }
+
+    }
+  );
+
+}
+
+
+/* ==================================================
+   START QUIZ
+================================================== */
+
+function startQuiz(){
+
+  const student =
+    String(
+      studentInput
+        ? studentInput.value
+        : ""
+    ).trim();
+
+  const grade =
+    String(
+      gradeSelect
+        ? gradeSelect.value
+        : "4"
+    );
+
+  if(!student){
+
+    alert(
+      "Please enter the student's name first."
+    );
+
+    if(studentInput){
+      studentInput.focus();
+    }
+
+    return;
+
+  }
+
+  currentStudent =
+    student;
+
+  currentGrade =
+    grade;
+
+  currentScore = 0;
+
+  currentQuestionIndex = 0;
+
+  /*
+   * Shuffle all questions and select
+   * 10 for this quiz.
+   */
+
+  currentQuestions =
+    questionBank
+      .slice()
+      .sort(
+        function(){
+          return Math.random() - 0.5;
+        }
+      )
+      .slice(0,10);
+
+  if(currentQuestions.length === 0){
+
+    alert(
+      "No questions are available."
+    );
+
+    return;
+
+  }
+
+  if(resultBox){
+
+    resultBox.style.display =
+      "none";
+
+    resultBox.innerHTML =
+      "";
+
+  }
+
+  if(quizBox){
+
+    quizBox.style.display =
+      "block";
+
+  }
+
+  displayQuestion();
+
+  if(quizBox){
+
+    quizBox.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  }
+
+}
+
+
+/* ==================================================
+   DISPLAY QUESTION
+================================================== */
+
+function displayQuestion(){
+
+  if(
+    !quizQuestion ||
+    !answerInput ||
+    !nextBtn
+  ){
+
+    return;
+
+  }
+
+  const question =
+    currentQuestions[
+      currentQuestionIndex
+    ];
+
+  if(!question){
+
+    finishQuiz();
+
+    return;
+
+  }
+
+  quizQuestion.innerHTML = `
+
+    <div class="quiz-number">
+
+      Question
+      ${currentQuestionIndex + 1}
+      of
+      ${currentQuestions.length}
+
+    </div>
+
+    <div>
+      ${escapeHTML(question.q)}
+    </div>
+
+    <div style="
+      margin-top:8px;
+      font-size:13px;
+      color:#64748B;
+      font-weight:normal;
+    ">
+
+      Subject:
+      ${escapeHTML(question.subj)}
+
+    </div>
+
+  `;
+
+  answerInput.value = "";
+
+  answerInput.focus();
+
+  if(
+    currentQuestionIndex ===
+    currentQuestions.length - 1
+  ){
+
+    nextBtn.textContent =
+      "Finish Quiz ✓";
+
+  }else{
+
+    nextBtn.textContent =
+      "Next Question →";
+
+  }
+
+}
+
+
+/* ==================================================
+   NORMALIZE ANSWERS
+================================================== */
+
+function normalizeAnswer(answer){
+
+  return String(answer || "")
+    .trim()
+    .toLowerCase()
+    .replace(
+      /\s+/g,
+      " "
+    );
+
+}
+
+
+/* ==================================================
+   CHECK ANSWER
+================================================== */
+
+function checkAnswer(){
+
+  if(!answerInput){
+    return;
+  }
+
+  const userAnswer =
+    normalizeAnswer(
+      answerInput.value
+    );
+
+  if(!userAnswer){
+
+    alert(
+      "Please enter an answer."
+    );
+
+    answerInput.focus();
+
+    return;
+
+  }
+
+  const question =
+    currentQuestions[
+      currentQuestionIndex
+    ];
+
+  const correctAnswer =
+    normalizeAnswer(
+      question.a
+    );
+
+  if(
+    userAnswer ===
+    correctAnswer
+  ){
+
+    currentScore++;
+
+  }
+
+  currentQuestionIndex++;
+
+  if(
+    currentQuestionIndex >=
+    currentQuestions.length
+  ){
+
+    finishQuiz();
+
+  }else{
+
+    displayQuestion();
+
+  }
+
+}
+
+
+/* ==================================================
+   FINISH QUIZ
+================================================== */
+
+function finishQuiz(){
+
+  const total =
+    currentQuestions.length;
+
+  const percent =
+    total > 0
+      ? Math.round(
+          (currentScore / total) *
+          100
+        )
+      : 0;
+
+  const saved =
+    saveHistory(
+      currentStudent,
+      currentGrade,
+      currentScore,
+      total
+    );
+
+  if(quizBox){
+
+    quizBox.style.display =
+      "none";
+
+  }
+
+  if(resultBox){
+
+    resultBox.style.display =
+      "block";
+
+    let message = "";
+
+    if(percent >= 80){
+
+      message =
+        "🎉 Excellent work!";
+
+    }else if(percent >= 60){
+
+      message =
+        "👏 Good work! Keep practicing.";
+
+    }else if(percent >= 40){
+
+      message =
+        "👍 Keep learning and try again.";
+
+    }else{
+
+      message =
+        "💪 Keep practicing. You can do it!";
+
+    }
+
+    resultBox.innerHTML = `
+
+      <div class="quiz-score">
+
+        ${escapeHTML(message)}
+
+      </div>
+
+      <strong>
+        Student:
+      </strong>
+
+      ${escapeHTML(saved.student)}
+
+      <br>
+
+      <strong>
+        Grade:
+      </strong>
+
+      ${escapeHTML(saved.grade)}
+
+      <br>
+
+      <strong>
+        Score:
+      </strong>
+
+      ${saved.score}/${saved.total}
+
+      <br>
+
+      <strong>
+        Percentage:
+      </strong>
+
+      ${saved.percent}%
+
+      <br><br>
+
+      <button
+        type="button"
+        class="action-btn"
+        onclick="startQuiz()">
+
+        🔄 Try Another Quiz
+
+      </button>
+
+    `;
+
+    resultBox.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+  }
+
+  renderHistory();
+
+  renderLeaderboard();
+
+}
+
+
+/* ==================================================
+   START / NEXT BUTTONS
+================================================== */
+
+if(startBtn){
+
+  startBtn.addEventListener(
+    "click",
+    startQuiz
+  );
+
+}
+
+
+if(nextBtn){
+
+  nextBtn.addEventListener(
+    "click",
+    checkAnswer
+  );
+
+}
+
+
+/* ==================================================
+   ENTER KEY FOR ANSWERS
+================================================== */
+
+if(answerInput){
+
+  answerInput.addEventListener(
+    "keydown",
+    function(event){
+
+      if(
+        event.key ===
+        "Enter"
+      ){
+
+        event.preventDefault();
+
+        checkAnswer();
+
+      }
+
+    }
+  );
+
+}
+
+
+/* ==================================================
+   RATE US
+================================================== */
+
+const rateBtn =
+  document.getElementById(
+    "rateBtn"
+  );
+
+
+if(rateBtn){
+
+  rateBtn.addEventListener(
+    "click",
+    function(){
+
+      closeMenu();
+
+      alert(
+        "⭐ Thank you for using CBC MASTER!\n\n" +
+        "If you enjoy the app, please rate it " +
+        "and share it with other learners."
+      );
+
+    }
+  );
+
+}
+
+
+/* ==================================================
+   SHARE APP
+================================================== */
+
+const shareBtn =
+  document.getElementById(
+    "shareBtn"
+  );
+
+
+async function shareApp(){
+
+  closeMenu();
+
+  const shareData = {
+
+    title:
+      "CBC MASTER",
+
+    text:
+      "CBC MASTER - Grade 4-6 quizzes, notes and projects.",
+
+    url:
+      window.location.href
+
+  };
+
+  if(
+    navigator.share
+  ){
+
+    try{
+
+      await navigator.share(
+        shareData
+      );
+
+    }catch(error){
+
+      console.log(
+        "Share cancelled."
+      );
+
+    }
+
+  }else{
+
+    try{
+
+      await navigator.clipboard.writeText(
+        window.location.href
+      );
+
+      alert(
+        "CBC MASTER link copied!\n\n" +
+        "You can now share it with others."
+      );
+
+    }catch(error){
+
+      alert(
+        "Share this link:\n\n" +
+        window.location.href
+      );
+
+    }
+
+  }
+
+}
+
+
+if(shareBtn){
+
+  shareBtn.addEventListener(
+    "click",
+    shareApp
+  );
+
+}
+
+
+/* ==================================================
+   CONTACT SUPPORT
+================================================== */
+
+const contactBtn =
+  document.getElementById(
+    "contactBtn"
+  );
+
+
+if(contactBtn){
+
+  contactBtn.addEventListener(
+    "click",
+    function(){
+
+      const message =
+        encodeURIComponent(
+          "Hello CBC MASTER Support. I would like to activate CBC MASTER Premium for KSh 150."
+        );
+
+      window.location.href =
+        "https://wa.me/254707649890?text=" +
+        message;
+
+    }
+  );
+
+}
+
+
+/* ==================================================
+   INITIAL DISPLAY
+================================================== */
+
+renderHistory();
+
+renderLeaderboard();
+
+
+/* ==================================================
+   KEYBOARD ESCAPE
+================================================== */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(
+      event.key ===
+      "Escape"
+    ){
+
+      closeMenu();
+
+    }
+
+  }
+);
+
+
+/* ==================================================
+   END PART 3
+================================================== */
+
+<script>
+
+/* ==================================================
+   CBC MASTER
+   FINAL PART - ACTIVATION / PAYMENT / PWA
+================================================== */
+
+
+/* ==================================================
+   PREMIUM ACTIVATION UI
+================================================== */
+
+function showActivation(){
+
+  closeMenu();
+
+  const existing =
+    document.getElementById(
+      "activationModal"
+    );
+
+  if(existing){
+    existing.remove();
+  }
+
+  const modal =
+    document.createElement("div");
+
+  modal.id =
+    "activationModal";
+
+  modal.style.cssText = `
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.70);
+    z-index:5000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  `;
+
+  modal.innerHTML = `
+
+    <div style="
+      width:100%;
+      max-width:420px;
+      background:white;
+      border-radius:16px;
+      padding:24px;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      color:#111827;
+    ">
+
+      <button
+        id="closeActivation"
+        type="button"
+        style="
+          float:right;
+          width:36px;
+          height:36px;
+          border:0;
+          border-radius:50%;
+          background:#E5E7EB;
+          font-size:22px;
+          cursor:pointer;
+        ">
+
+        ×
+
+      </button>
+
+      <h2 style="
+        margin-top:0;
+        color:#0F766E;
+        text-align:center;
+      ">
+
+        🔓 CBC MASTER PREMIUM
+
+      </h2>
+
+      <p style="
+        text-align:center;
+        line-height:1.5;
+      ">
+
+        Unlock CBC MASTER Premium for
+
+        <strong>
+          KSh 150
+        </strong>
+
+      </p>
+
+      <div style="
+        background:#ECFDF5;
+        border:1px solid #16A34A;
+        border-radius:10px;
+        padding:15px;
+        text-align:center;
+        margin:15px 0;
+      ">
+
+        <strong>
+          M-Pesa
+        </strong>
+
+        <br><br>
+
+        Send
+
+        <strong>
+          KSh 150
+        </strong>
+
+        to
+
+        <strong>
+          0707649890
+        </strong>
+
+      </div>
+
+      <a
+        href="https://wa.me/254707649890?text=Hello%20CBC%20MASTER%20Support.%20I%20have%20paid%20KSh%20150%20and%20need%20my%20activation%20code."
+        style="
+          display:block;
+          text-align:center;
+          text-decoration:none;
+          background:#16A34A;
+          color:white;
+          padding:14px;
+          border-radius:10px;
+          font-weight:bold;
+          margin-top:12px;
+        ">
+
+        💬 SEND PAYMENT CONFIRMATION
+
+      </a>
+
+      <hr style="
+        border:0;
+        border-top:1px solid #E5E7EB;
+        margin:20px 0;
+      ">
+
+      <p style="
+        font-size:14px;
+        color:#64748B;
+        text-align:center;
+      ">
+
+        Already received your activation code?
+
+      </p>
+
+      <input
+        id="activationCodeInput"
+        type="text"
+        placeholder="Enter activation code"
+        autocomplete="off"
+        style="
+          width:100%;
+          padding:13px;
+          border:1px solid #CBD5E1;
+          border-radius:10px;
+          font-size:16px;
+        ">
+
+      <button
+        id="activateCodeBtn"
+        type="button"
+        style="
+          width:100%;
+          padding:14px;
+          border:0;
+          border-radius:10px;
+          background:#0F766E;
+          color:white;
+          font-size:16px;
+          font-weight:bold;
+          margin-top:12px;
+          cursor:pointer;
+        ">
+
+        🔓 ACTIVATE NOW
+
+      </button>
+
+      <div
+        id="activationMessage"
+        style="
+          display:none;
+          margin-top:12px;
+          padding:10px;
+          border-radius:8px;
+          text-align:center;
+          font-size:14px;
+        ">
+      </div>
+
+    </div>
+
+  `;
+
+  document.body.appendChild(
+    modal
+  );
+
+
+  const closeBtn =
+    document.getElementById(
+      "closeActivation"
+    );
+
+  const activateBtn =
+    document.getElementById(
+      "activateCodeBtn"
+    );
+
+  const codeInput =
+    document.getElementById(
+      "activationCodeInput"
+    );
+
+  const message =
+    document.getElementById(
+      "activationMessage"
+    );
+
+
+  if(closeBtn){
+
+    closeBtn.addEventListener(
+      "click",
+      function(){
+
+        modal.remove();
+
+      }
+    );
+
+  }
+
+
+  if(activateBtn){
+
+    activateBtn.addEventListener(
+      "click",
+      function(){
+
+        const code =
+          String(
+            codeInput.value || ""
+          )
+          .trim()
+          .toUpperCase();
+
+        if(!code){
+
+          message.style.display =
+            "block";
+
+          message.style.background =
+            "#FEF2F2";
+
+          message.style.color =
+            "#DC2626";
+
+          message.textContent =
+            "Please enter your activation code.";
+
+          return;
+
+        }
+
+
+        let valid = false;
+
+        for(
+          const phone of APPROVED_PHONES
+        ){
+
+          if(
+            code ===
+            generateCode(phone)
+          ){
+
+            valid = true;
+
+            break;
+
+          }
+
+        }
+
+
+        if(valid){
+
+          localStorage.setItem(
+            "cbc_code",
+            code
+          );
+
+          message.style.display =
+            "block";
+
+          message.style.background =
+            "#ECFDF5";
+
+          message.style.color =
+            "#15803D";
+
+          message.textContent =
+            "✅ CBC MASTER activated successfully!";
+
+          setTimeout(
+            function(){
+
+              modal.remove();
+
+            },
+            1200
+          );
+
+        }else{
+
+          message.style.display =
+            "block";
+
+          message.style.background =
+            "#FEF2F2";
+
+          message.style.color =
+            "#DC2626";
+
+          message.textContent =
+            "❌ Invalid activation code.";
+
+        }
+
+      }
+    );
+
+  }
+
+}
+
+
+/* ==================================================
+   CONTACT / ACTIVATION
+================================================== */
+
+if(contactBtn){
+
+  contactBtn.onclick =
+    showActivation;
+
+}
+
+
+/* ==================================================
+   OPTIONAL ACTIVATION MENU
+================================================== */
+
+const premiumMenuBtn =
+  document.createElement("button");
+
+premiumMenuBtn.className =
+  "sidebar-link";
+
+premiumMenuBtn.type =
+  "button";
+
+premiumMenuBtn.textContent =
+  "🔓 Activate Premium";
+
+premiumMenuBtn.addEventListener(
+  "click",
+  showActivation
+);
+
+if(sidebar){
+
+  sidebar.appendChild(
+    premiumMenuBtn
+  );
+
+}
+
+
+/* ==================================================
+   DIRECT DOWNLOAD BUTTON
+================================================== */
+
+const downloadBtn =
+  document.getElementById(
+    "downloadBtn"
+  );
+
+
+if(downloadBtn){
+
+  downloadBtn.addEventListener(
+    "click",
+    function(){
+
+      const apkUrl =
+        downloadBtn.getAttribute(
+          "href"
+        );
+
+      /*
+       * Prevent accidental clicks while the
+       * placeholder URL is still present.
+       */
+
+      if(
+        !apkUrl ||
+        apkUrl ===
+        "YOUR-DIRECT-APK-URL.apk"
+      ){
+
+        alert(
+          "CBC MASTER APK download link has not been configured yet.\n\n" +
+          "Replace YOUR-DIRECT-APK-URL.apk in Part 1 with the real APK URL."
+        );
+
+        return;
+
+      }
+
+      /*
+       * The browser will now follow the direct
+       * APK URL normally.
+       */
+
+    }
+  );
+
+}
+
+
+/* ==================================================
+   PWA SERVICE WORKER
+================================================== */
+
+if(
+  "serviceWorker" in navigator
+){
+
+  window.addEventListener(
+    "load",
+    function(){
+
+      navigator.serviceWorker
+        .register(
+          "service-worker.js"
+        )
+        .then(
+          function(registration){
+
+            console.log(
+              "CBC MASTER Service Worker registered:",
+              registration.scope
+            );
+
+          }
+        )
+        .catch(
+          function(error){
+
+            console.error(
+              "CBC MASTER Service Worker registration failed:",
+              error
+            );
+
+          }
+        );
+
+    }
+  );
+
+}
+
+
+/* ==================================================
+   PWA INSTALL PROMPT
+================================================== */
+
+let deferredInstallPrompt =
+  null;
+
+
+/*
+ * Capture browser installation event.
+ */
+
+window.addEventListener(
+  "beforeinstallprompt",
+  function(event){
+
+    event.preventDefault();
+
+    deferredInstallPrompt =
+      event;
+
+    console.log(
+      "CBC MASTER PWA is installable."
+    );
+
+  }
+);
+
+
+/*
+ * Detect successful PWA installation.
+ */
+
+window.addEventListener(
+  "appinstalled",
+  function(){
+
+    console.log(
+      "CBC MASTER PWA installed."
+    );
+
+    deferredInstallPrompt =
+      null;
+
+  }
+);
+
+
+/* ==================================================
+   INSTALLED APP DETECTION
+================================================== */
+
+function isInstalledApp(){
+
+  return (
+    window.matchMedia(
+      "(display-mode: standalone)"
+    ).matches ||
+
+    window.navigator.standalone === true
+  );
+
+}
+
+
+if(isInstalledApp()){
+
+  console.log(
+    "CBC MASTER is running as an installed app."
+  );
+
+}
+
+
+/* ==================================================
+   SAVE LAST VISIT
+================================================== */
+
+try{
+
+  localStorage.setItem(
+    "cbc_last_visit",
+    new Date().toISOString()
+  );
+
+}catch(error){
+
+  console.log(
+    "Local storage unavailable."
+  );
+
+}
+
+
+/* ==================================================
+   FINAL STARTUP
+================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    renderHistory();
+
+    renderLeaderboard();
+
+  }
+);
+
+
+/* ==================================================
+   CBC MASTER READY
+================================================== */
+
+console.log(
+  "CBC MASTER loaded successfully."
+);
+
+</script>
+
+
+</body>
+</html>
