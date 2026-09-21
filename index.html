@@ -1,28 +1,37 @@
 <!doctype html>
 
-<html lang="en"><head>  <meta charset="utf-8"><meta
-name="viewport"
-content="width=device-width, initial-scale=1">
+<html lang="en">
+<head>
 
-<meta
-name="theme-color"
-content="#0B1F33">
+  <meta charset="utf-8">
 
-<meta
-name="apple-mobile-web-app-capable"
-content="yes">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1">
 
-<meta
-name="apple-mobile-web-app-status-bar-style"
-content="black">
+  <meta
+    name="theme-color"
+    content="#0B1F33">
 
-<meta
-name="description"
-content="CBC MASTER - Grade 4, 5 and 6 learning, quizzes, notes and projects">
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes">
 
-  <title>CBC MASTER</title>  <link
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black">
+
+  <meta
+    name="description"
+    content="CBC MASTER - Grade 4, 5 and 6 learning, quizzes, notes and projects">
+
+  <title>CBC MASTER</title>
+
+  <link
     rel="manifest"
-    href="./manifest.json">  <style>
+    href="./manifest.json">
+
+  <style>
 
     /* ==================================================
        RESET
@@ -256,11 +265,11 @@ content="CBC MASTER - Grade 4, 5 and 6 learning, quizzes, notes and projects">
 
 
     /* ==================================================
-       DOWNLOAD
+       PWA INSTALL
     ================================================== */
 
-    .download-btn {
-      display: block;
+    .install-btn {
+      display: none;
 
       width: 90%;
       max-width: 420px;
@@ -271,16 +280,18 @@ content="CBC MASTER - Grade 4, 5 and 6 learning, quizzes, notes and projects">
 
       text-align: center;
 
-      text-decoration: none;
-
-      background: #16A34A;
+      background: #0F9D58;
 
       color: white;
+
+      border: none;
 
       border-radius: 12px;
 
       font-size: 18px;
       font-weight: bold;
+
+      cursor: pointer;
 
       box-shadow:
         0 4px 10px rgba(0, 0, 0, .18);
@@ -290,12 +301,17 @@ content="CBC MASTER - Grade 4, 5 and 6 learning, quizzes, notes and projects">
         background .15s ease;
     }
 
-    .download-btn:hover {
-      background: #15803D;
+    .install-btn:hover {
+      background: #0B8043;
     }
 
-    .download-btn:active {
+    .install-btn:active {
       transform: scale(.97);
+    }
+
+    .install-btn:disabled {
+      opacity: .75;
+      cursor: default;
     }
 
 
@@ -937,7 +953,7 @@ content="CBC MASTER - Grade 4, 5 and 6 learning, quizzes, notes and projects">
         padding: 16px;
       }
 
-      .download-btn {
+      .install-btn {
         width: 95%;
       }
 
@@ -960,798 +976,827 @@ content="CBC MASTER - Grade 4, 5 and 6 learning, quizzes, notes and projects">
 
     }
 
-  </style></head><body>  <!-- ==================================================
+  </style>
+
+</head>
+
+<body>
+
+  <!-- ==================================================
        SIDEBAR
-  ================================================== -->  <aside
+  ================================================== -->
+
+  <aside
     id="sidebar"
     class="sidebar"
-    aria-label="CBC MASTER navigation"><button
-  id="closeMenuBtn"
-  class="close-menu"
-  type="button"
-  aria-label="Close menu">
-
-  ×
-
-</button>
-
-
-<div class="sidebar-header">
-
-  <img
-    src="./icon-192.png"
-    alt="CBC MASTER">
-
-  <div class="sidebar-brand-text">
-
-    <h3>CBC MASTER</h3>
-
-    <p>Grade 4-6 Learning</p>
-
-  </div>
-
-</div>
-
-
-<button
-  class="sidebar-link"
-  id="notesBtn"
-  type="button">
-
-  <span class="sidebar-link-icon">📝</span>
-  <span>Notes</span>
-
-</button>
-
-
-<button
-  class="sidebar-link"
-  id="projectsBtn"
-  type="button">
-
-  <span class="sidebar-link-icon">📚</span>
-  <span>CBC Projects</span>
-
-</button>
-
-
-<button
-  class="sidebar-link"
-  id="historyBtn"
-  type="button">
-
-  <span class="sidebar-link-icon">📊</span>
-  <span>Progress History</span>
-
-</button>
-
-
-<button
-  class="sidebar-link"
-  id="leaderboardBtn"
-  type="button">
-
-  <span class="sidebar-link-icon">🏆</span>
-  <span>Leaderboard</span>
-
-</button>
-
-
-<a
-  class="sidebar-link"
-  href="https://wa.me/254707649890"
-  target="_blank"
-  rel="noopener">
-
-  <span class="sidebar-link-icon">💬</span>
-  <span>Contact Support</span>
-
-</a>
-
-
-<button
-  class="sidebar-link"
-  id="rateBtn"
-  type="button">
-
-  <span class="sidebar-link-icon">⭐</span>
-  <span>Rate Us</span>
-
-</button>
-
-
-<button
-  class="sidebar-link"
-  id="shareBtn"
-  type="button">
-
-  <span class="sidebar-link-icon">📤</span>
-  <span>Share App</span>
-
-</button>
-
-  </aside>  <!-- ==================================================
-       OVERLAY
-  ================================================== -->  <div
-    id="overlay"
-    class="overlay">
-  </div>  <!-- ==================================================
-       MAIN APPLICATION
-  ================================================== -->  <main id="app"><header class="header">
-
-  <button
-    id="menuBtn"
-    class="menu"
-    type="button"
-    aria-label="Open menu"
-    aria-expanded="false">
-
-    ☰
-
-  </button>
-
-  CBC MASTER
-
-</header>
-
-
-<div class="accent"></div>
-
-
-<!-- ==================================================
-     APK DOWNLOAD
-================================================== -->
-
-<a
-  id="downloadBtn"
-  class="download-btn"
-  href="https://github.com/Jose-ctr/CBCMaster-web/releases"
-  target="_blank"
-  rel="noopener">
-
-  📲 DOWNLOAD CBC MASTER
-
-</a>
-
-
-<div class="container">
-
-
-  <!-- ==================================================
-       PAGE TITLE
-  ================================================== -->
-
-  <div class="section-title">
-
-    🎓 CBC MASTER
-
-  </div>
-
-
-  <!-- ==================================================
-       QUIZ START
-  ================================================== -->
-
-  <div class="card">
-
-    <h3>
-      🎯 QUIZZES
-    </h3>
-
-    <small>
-      Practice CBC questions for Grade 4-6
-    </small>
-
-    <input
-      id="student"
-      type="text"
-      placeholder="Student Name"
-      autocomplete="name">
-
-    <select id="grade">
-
-      <option value="4">
-        Grade 4
-      </option>
-
-      <option value="5">
-        Grade 5
-      </option>
-
-      <option value="6">
-        Grade 6
-      </option>
-
-    </select>
-
+    aria-label="CBC MASTER navigation">
 
     <button
-      id="startBtn"
-      class="action-btn"
-      type="button">
+      id="closeMenuBtn"
+      class="close-menu"
+      type="button"
+      aria-label="Close menu">
 
-      🚀 Start Quiz
+      ×
 
     </button>
 
 
-    <div
-      id="result"
-      class="result">
+    <div class="sidebar-header">
+
+      <img
+        src="./icon-192.png"
+        alt="CBC MASTER">
+
+      <div class="sidebar-brand-text">
+
+        <h3>CBC MASTER</h3>
+
+        <p>Grade 4-6 Learning</p>
+
+      </div>
+
     </div>
 
-  </div>
+
+    <button
+      class="sidebar-link"
+      id="notesBtn"
+      type="button">
+
+      <span class="sidebar-link-icon">📝</span>
+      <span>Notes</span>
+
+    </button>
+
+
+    <button
+      class="sidebar-link"
+      id="projectsBtn"
+      type="button">
+
+      <span class="sidebar-link-icon">📚</span>
+      <span>CBC Projects</span>
+
+    </button>
+
+
+    <button
+      class="sidebar-link"
+      id="historyBtn"
+      type="button">
+
+      <span class="sidebar-link-icon">📊</span>
+      <span>Progress History</span>
+
+    </button>
+
+
+    <button
+      class="sidebar-link"
+      id="leaderboardBtn"
+      type="button">
+
+      <span class="sidebar-link-icon">🏆</span>
+      <span>Leaderboard</span>
+
+    </button>
+
+
+    <a
+      class="sidebar-link"
+      href="https://wa.me/254707649890"
+      target="_blank"
+      rel="noopener">
+
+      <span class="sidebar-link-icon">💬</span>
+      <span>Contact Support</span>
+
+    </a>
+
+
+    <button
+      class="sidebar-link"
+      id="rateBtn"
+      type="button">
+
+      <span class="sidebar-link-icon">⭐</span>
+      <span>Rate Us</span>
+
+    </button>
+
+
+    <button
+      class="sidebar-link"
+      id="shareBtn"
+      type="button">
+
+      <span class="sidebar-link-icon">📤</span>
+      <span>Share App</span>
+
+    </button>
+
+  </aside>
 
 
   <!-- ==================================================
-       QUIZ AREA
+       OVERLAY
   ================================================== -->
 
   <div
-    id="quizBox"
-    class="card quiz-box">
-
-    <div
-      id="quizQuestion"
-      class="quiz-question">
-    </div>
-
-
-    <input
-      id="answerInput"
-      class="answer-input"
-      type="text"
-      placeholder="Type your answer"
-      autocomplete="off">
-
-
-    <button
-      id="nextBtn"
-      class="action-btn"
-      type="button">
-
-      Next Question →
-
-    </button>
-
+    id="overlay"
+    class="overlay">
   </div>
 
 
   <!-- ==================================================
-       NOTES PAGE
+       MAIN APPLICATION
   ================================================== -->
 
-  <section
-    id="notesPage"
-    class="content-page">
+  <main id="app">
 
-    <div class="card">
-
-      <h2>
-        📝 CBC NOTES
-      </h2>
-
-      <p>
-        Revision notes for Grade 4, Grade 5
-        and Grade 6 learners.
-      </p>
-
-
-      <div class="subject-note">
-
-        <h4>
-          🔢 Mathematics
-        </h4>
-
-        <ul>
-
-          <li>
-            Place value and whole numbers
-          </li>
-
-          <li>
-            Addition, subtraction,
-            multiplication and division
-          </li>
-
-          <li>
-            Fractions, decimals and percentages
-          </li>
-
-          <li>
-            Measurement and units
-          </li>
-
-          <li>
-            Geometry and shapes
-          </li>
-
-        </ul>
-
-      </div>
-
-
-      <div class="subject-note">
-
-        <h4>
-          📖 English
-        </h4>
-
-        <ul>
-
-          <li>
-            Nouns, verbs, adjectives and adverbs
-          </li>
-
-          <li>
-            Singular and plural nouns
-          </li>
-
-          <li>
-            Tenses and sentence construction
-          </li>
-
-          <li>
-            Reading comprehension
-          </li>
-
-          <li>
-            Vocabulary development
-          </li>
-
-        </ul>
-
-      </div>
-
-
-      <div class="subject-note">
-
-        <h4>
-          🔬 Science & Technology
-        </h4>
-
-        <ul>
-
-          <li>
-            Living and non-living things
-          </li>
-
-          <li>
-            Human body and health
-          </li>
-
-          <li>
-            Plants and animals
-          </li>
-
-          <li>
-            Matter and materials
-          </li>
-
-          <li>
-            Environment and conservation
-          </li>
-
-        </ul>
-
-      </div>
-
-
-      <div class="subject-note">
-
-        <h4>
-          🌍 Social Studies
-        </h4>
-
-        <ul>
-
-          <li>
-            Kenya and its counties
-          </li>
-
-          <li>
-            Communities and cultures
-          </li>
-
-          <li>
-            Maps and physical features
-          </li>
-
-          <li>
-            Government and citizenship
-          </li>
-
-          <li>
-            Environment and resources
-          </li>
-
-        </ul>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==================================================
-       PROJECTS PAGE
-  ================================================== -->
-
-  <section
-    id="projectsPage"
-    class="content-page">
-
-    <div class="card">
-
-      <h2>
-        📚 CBC PROJECTS
-      </h2>
-
-      <p>
-        Practical projects designed to help
-        learners research, create and present
-        their work.
-      </p>
-
-
-      <div class="project-card">
-
-        <h4>
-          🌱 Project 1 — School Garden
-        </h4>
-
-        <p>
-          Create a small school or home garden
-          and record the plants grown.
-        </p>
-
-        <ul>
-
-          <li>
-            Identify at least three plants.
-          </li>
-
-          <li>
-            Record watering and growth.
-          </li>
-
-          <li>
-            Explain why plants are important.
-          </li>
-
-          <li>
-            Present findings to the class.
-          </li>
-
-        </ul>
-
-
-        <table class="rubric">
-
-          <tr>
-            <th>Area</th>
-            <th>Marks</th>
-          </tr>
-
-          <tr>
-            <td>Research</td>
-            <td>5</td>
-          </tr>
-
-          <tr>
-            <td>Practical work</td>
-            <td>5</td>
-          </tr>
-
-          <tr>
-            <td>Presentation</td>
-            <td>5</td>
-          </tr>
-
-          <tr>
-            <td>Creativity</td>
-            <td>5</td>
-          </tr>
-
-        </table>
-
-      </div>
-
-
-      <div class="project-card">
-
-        <h4>
-          💧 Project 2 — Water Conservation
-        </h4>
-
-        <p>
-          Investigate how water is used at home
-          or school and propose ways to reduce
-          wastage.
-        </p>
-
-        <ul>
-
-          <li>
-            Observe water use.
-          </li>
-
-          <li>
-            Identify sources of wastage.
-          </li>
-
-          <li>
-            Suggest practical solutions.
-          </li>
-
-          <li>
-            Prepare a short presentation.
-          </li>
-
-        </ul>
-
-
-        <table class="rubric">
-
-          <tr>
-            <th>Area</th>
-            <th>Marks</th>
-          </tr>
-
-          <tr>
-            <td>Observation</td>
-            <td>5</td>
-          </tr>
-
-          <tr>
-            <td>Research</td>
-            <td>5</td>
-          </tr>
-
-          <tr>
-            <td>Solutions</td>
-            <td>5</td>
-          </tr>
-
-          <tr>
-            <td>Presentation</td>
-            <td>5</td>
-          </tr>
-
-        </table>
-
-      </div>
-
-
-      <div class="project-card">
-
-        <h4>
-          ♻️ Project 3 — Waste Management
-        </h4>
-
-        <p>
-          Study waste around the home or school
-          and create a simple waste-separation
-          plan.
-        </p>
-
-        <ul>
-
-          <li>
-            Identify different types of waste.
-          </li>
-
-          <li>
-            Separate recyclable and
-            non-recyclable materials.
-          </li>
-
-          <li>
-            Explain safe disposal.
-          </li>
-
-          <li>
-            Create a poster or model.
-          </li>
-
-        </ul>
-
-
-        <table class="rubric">
-
-          <tr>
-            <th>Area</th>
-            <th>Marks</th>
-          </tr>
-
-          <tr>
-            <td>Research</td>
-            <td>5</td>
-          </tr>
-
-          <tr>
-            <td>Practical work</td>
-            <td>5</td>
-          </tr>
-
-          <tr>
-            <td>Creativity</td>
-            <td>5</td>
-          </tr>
-
-          <tr>
-            <td>Presentation</td>
-            <td>5</td>
-          </tr>
-
-        </table>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ==================================================
-       NOTES MAIN CARD
-  ================================================== -->
-
-  <div class="card">
-
-    <h3>
-      📝 NOTES
-    </h3>
-
-    <small>
-      Grade 4-6 revision notes
-    </small>
-
-    <button
-      id="notesMainBtn"
-      class="action-btn"
-      type="button">
-
-      Open Notes
-
-    </button>
-
-  </div>
-
-
-  <!-- ==================================================
-       PROJECTS MAIN CARD
-  ================================================== -->
-
-  <div class="card">
-
-    <h3>
-      📚 CBC PROJECTS
-    </h3>
-
-    <small>
-      Grade 4-6 projects and marking rubrics
-    </small>
-
-    <button
-      id="projectsMainBtn"
-      class="action-btn"
-      type="button">
-
-      View Projects
-
-    </button>
-
-  </div>
-
-
-  <!-- ==================================================
-       HISTORY
-  ================================================== -->
-
-  <div class="card">
-
-    <h3>
-      📊 PROGRESS HISTORY
-    </h3>
-
-    <p>
-      Your completed quiz results are stored
-      on this device.
-    </p>
-
-    <div id="historyBox">
-
-      <p>
-        No history saved yet.
-      </p>
-
-    </div>
-
-
-    <div class="history-actions">
+    <header class="header">
 
       <button
-        id="clearHistoryBtn"
-        class="action-btn danger-btn"
-        type="button">
+        id="menuBtn"
+        class="menu"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false">
 
-        🗑️ Clear History
+        ☰
 
       </button>
 
+      CBC MASTER
+
+    </header>
+
+
+    <div class="accent"></div>
+
+
+    <!-- ==================================================
+         PWA INSTALL
+    ================================================== -->
+
+    <button
+      id="installBtn"
+      class="install-btn"
+      type="button"
+      aria-label="Install CBC MASTER">
+
+      📲 INSTALL CBC MASTER
+
+    </button>
+
+
+    <div class="container">
+
+
+      <!-- ==================================================
+           PAGE TITLE
+      ================================================== -->
+
+      <div class="section-title">
+
+        🎓 CBC MASTER
+
+      </div>
+
+
+      <!-- ==================================================
+           QUIZ START
+      ================================================== -->
+
+      <div class="card">
+
+        <h3>
+          🎯 QUIZZES
+        </h3>
+
+        <small>
+          Practice CBC questions for Grade 4-6
+        </small>
+
+        <input
+          id="student"
+          type="text"
+          placeholder="Student Name"
+          autocomplete="name">
+
+        <select id="grade">
+
+          <option value="4">
+            Grade 4
+          </option>
+
+          <option value="5">
+            Grade 5
+          </option>
+
+          <option value="6">
+            Grade 6
+          </option>
+
+        </select>
+
+
+        <button
+          id="startBtn"
+          class="action-btn"
+          type="button">
+
+          🚀 Start Quiz
+
+        </button>
+
+
+        <div
+          id="result"
+          class="result">
+        </div>
+
+      </div>
+
+
+      <!-- ==================================================
+           QUIZ AREA
+      ================================================== -->
+
+      <div
+        id="quizBox"
+        class="card quiz-box">
+
+        <div
+          id="quizQuestion"
+          class="quiz-question">
+        </div>
+
+
+        <input
+          id="answerInput"
+          class="answer-input"
+          type="text"
+          placeholder="Type your answer"
+          autocomplete="off">
+
+
+        <button
+          id="nextBtn"
+          class="action-btn"
+          type="button">
+
+          Next Question →
+
+        </button>
+
+      </div>
+
+
+      <!-- ==================================================
+           NOTES PAGE
+      ================================================== -->
+
+      <section
+        id="notesPage"
+        class="content-page">
+
+        <div class="card">
+
+          <h2>
+            📝 CBC NOTES
+          </h2>
+
+          <p>
+            Revision notes for Grade 4, Grade 5
+            and Grade 6 learners.
+          </p>
+
+
+          <div class="subject-note">
+
+            <h4>
+              🔢 Mathematics
+            </h4>
+
+            <ul>
+
+              <li>
+                Place value and whole numbers
+              </li>
+
+              <li>
+                Addition, subtraction,
+                multiplication and division
+              </li>
+
+              <li>
+                Fractions, decimals and percentages
+              </li>
+
+              <li>
+                Measurement and units
+              </li>
+
+              <li>
+                Geometry and shapes
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <div class="subject-note">
+
+            <h4>
+              📖 English
+            </h4>
+
+            <ul>
+
+              <li>
+                Nouns, verbs, adjectives and adverbs
+              </li>
+
+              <li>
+                Singular and plural nouns
+              </li>
+
+              <li>
+                Tenses and sentence construction
+              </li>
+
+              <li>
+                Reading comprehension
+              </li>
+
+              <li>
+                Vocabulary development
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <div class="subject-note">
+
+            <h4>
+              🔬 Science & Technology
+            </h4>
+
+            <ul>
+
+              <li>
+                Living and non-living things
+              </li>
+
+              <li>
+                Human body and health
+              </li>
+
+              <li>
+                Plants and animals
+              </li>
+
+              <li>
+                Matter and materials
+              </li>
+
+              <li>
+                Environment and conservation
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <div class="subject-note">
+
+            <h4>
+              🌍 Social Studies
+            </h4>
+
+            <ul>
+
+              <li>
+                Kenya and its counties
+              </li>
+
+              <li>
+                Communities and cultures
+              </li>
+
+              <li>
+                Maps and physical features
+              </li>
+
+              <li>
+                Government and citizenship
+              </li>
+
+              <li>
+                Environment and resources
+              </li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ==================================================
+           PROJECTS PAGE
+      ================================================== -->
+
+      <section
+        id="projectsPage"
+        class="content-page">
+
+        <div class="card">
+
+          <h2>
+            📚 CBC PROJECTS
+          </h2>
+
+          <p>
+            Practical projects designed to help
+            learners research, create and present
+            their work.
+          </p>
+
+
+          <div class="project-card">
+
+            <h4>
+              🌱 Project 1 — School Garden
+            </h4>
+
+            <p>
+              Create a small school or home garden
+              and record the plants grown.
+            </p>
+
+            <ul>
+
+              <li>
+                Identify at least three plants.
+              </li>
+
+              <li>
+                Record watering and growth.
+              </li>
+
+              <li>
+                Explain why plants are important.
+              </li>
+
+              <li>
+                Present findings to the class.
+              </li>
+
+            </ul>
+
+
+            <table class="rubric">
+
+              <tr>
+                <th>Area</th>
+                <th>Marks</th>
+              </tr>
+
+              <tr>
+                <td>Research</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Practical work</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Presentation</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Creativity</td>
+                <td>5</td>
+              </tr>
+
+            </table>
+
+          </div>
+
+
+          <div class="project-card">
+
+            <h4>
+              💧 Project 2 — Water Conservation
+            </h4>
+
+            <p>
+              Investigate how water is used at home
+              or school and propose ways to reduce
+              wastage.
+            </p>
+
+            <ul>
+
+              <li>
+                Observe water use.
+              </li>
+
+              <li>
+                Identify sources of wastage.
+              </li>
+
+              <li>
+                Suggest practical solutions.
+              </li>
+
+              <li>
+                Prepare a short presentation.
+              </li>
+
+            </ul>
+
+
+            <table class="rubric">
+
+              <tr>
+                <th>Area</th>
+                <th>Marks</th>
+              </tr>
+
+              <tr>
+                <td>Observation</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Research</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Solutions</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Presentation</td>
+                <td>5</td>
+              </tr>
+
+            </table>
+
+          </div>
+
+
+          <div class="project-card">
+
+            <h4>
+              ♻️ Project 3 — Waste Management
+            </h4>
+
+            <p>
+              Study waste around the home or school
+              and create a simple waste-separation
+              plan.
+            </p>
+
+            <ul>
+
+              <li>
+                Identify different types of waste.
+              </li>
+
+              <li>
+                Separate recyclable and
+                non-recyclable materials.
+              </li>
+
+              <li>
+                Explain safe disposal.
+              </li>
+
+              <li>
+                Create a poster or model.
+              </li>
+
+            </ul>
+
+
+            <table class="rubric">
+
+              <tr>
+                <th>Area</th>
+                <th>Marks</th>
+              </tr>
+
+              <tr>
+                <td>Research</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Practical work</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Creativity</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Presentation</td>
+                <td>5</td>
+              </tr>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ==================================================
+           NOTES MAIN CARD
+      ================================================== -->
+
+      <div class="card">
+
+        <h3>
+          📝 NOTES
+        </h3>
+
+        <small>
+          Grade 4-6 revision notes
+        </small>
+
+        <button
+          id="notesMainBtn"
+          class="action-btn"
+          type="button">
+
+          Open Notes
+
+        </button>
+
+      </div>
+
+
+      <!-- ==================================================
+           PROJECTS MAIN CARD
+      ================================================== -->
+
+      <div class="card">
+
+        <h3>
+          📚 CBC PROJECTS
+        </h3>
+
+        <small>
+          Grade 4-6 projects and marking rubrics
+        </small>
+
+        <button
+          id="projectsMainBtn"
+          class="action-btn"
+          type="button">
+
+          View Projects
+
+        </button>
+
+      </div>
+
+
+      <!-- ==================================================
+           HISTORY
+      ================================================== -->
+
+      <div class="card">
+
+        <h3>
+          📊 PROGRESS HISTORY
+        </h3>
+
+        <p>
+          Your completed quiz results are stored
+          on this device.
+        </p>
+
+        <div id="historyBox">
+
+          <p>
+            No history saved yet.
+          </p>
+
+        </div>
+
+
+        <div class="history-actions">
+
+          <button
+            id="clearHistoryBtn"
+            class="action-btn danger-btn"
+            type="button">
+
+            🗑️ Clear History
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==================================================
+           LEADERBOARD
+      ================================================== -->
+
+      <div class="card">
+
+        <h3>
+          🏆 LEADERBOARD
+        </h3>
+
+        <div id="leaderboardBox">
+
+          <p>
+            No scores yet.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==================================================
+           SUPPORT THE DEVELOPER
+      ================================================== -->
+
+      <div class="support-card">
+
+        <h3>
+          ❤️ Support CBC MASTER
+        </h3>
+
+        <p>
+          CBC MASTER is free for learners and teachers.
+          If you find the app useful and would like to
+          support its continued development, you can
+          support the developer voluntarily.
+        </p>
+
+        <div class="support-mpesa">
+
+          M-Pesa:
+          <strong>0707649890</strong>
+
+        </div>
+
+        <p>
+          Thank you for supporting CBC MASTER.
+        </p>
+
+      </div>
+
     </div>
 
-  </div>
+
+    <!-- ==================================================
+         FOOTER
+    ================================================== -->
+
+    <footer>
+
+      © 2026 CBC MASTER<br>
+
+      Developed by Joseph Mbui
+
+    </footer>
+
+  </main>
 
 
   <!-- ==================================================
-       LEADERBOARD
-  ================================================== -->
-
-  <div class="card">
-
-    <h3>
-      🏆 LEADERBOARD
-    </h3>
-
-    <div id="leaderboardBox">
-
-      <p>
-        No scores yet.
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <!-- ==================================================
-       SUPPORT THE DEVELOPER
-  ================================================== -->
-
-  <div class="support-card">
-
-    <h3>
-      ❤️ Support CBC MASTER
-    </h3>
-
-    <p>
-      CBC MASTER is free for learners and teachers.
-      If you find the app useful and would like to
-      support its continued development, you can
-      support the developer voluntarily.
-    </p>
-
-    <div class="support-mpesa">
-
-      M-Pesa:
-      <strong>0707649890</strong>
-
-    </div>
-
-    <p>
-      Thank you for supporting CBC MASTER.
-    </p>
-
-  </div>
-
-</div>
-
-
-<!-- ==================================================
-     FOOTER
-================================================== -->
-
-<footer>
-
-  © 2026 CBC MASTER<br>
-
-  Developed by Joseph Mbui
-
-</footer>
-
-  </main>  <!-- ==================================================
        JAVASCRIPT
-  ================================================== -->  <script src="./script.js"></script></body></html>
+  ================================================== -->
+
+  <script src="./script.js"></script>
+
+</body>
+</html>
