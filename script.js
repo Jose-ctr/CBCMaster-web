@@ -6,7 +6,7 @@
 
 /* ==================================================
    DIAGNOSTIC
-   ================================================== */
+================================================== */
 
 document.body.insertAdjacentHTML(
   "afterbegin",
@@ -100,175 +100,222 @@ const leaderboardBox =
 const questionBank = {
 
   MATH: [
+
     {
       q: "What is 5 + 7?",
       a: "12"
     },
+
     {
       q: "What is 9 × 3?",
       a: "27"
     },
+
     {
       q: "What is 48 ÷ 6?",
       a: "8"
     },
+
     {
       q: "What is 100 − 45?",
       a: "55"
     },
+
     {
       q: "What is 12 × 4?",
       a: "48"
     },
+
     {
       q: "What is 81 ÷ 9?",
       a: "9"
     },
+
     {
       q: "What is 25 + 36?",
       a: "61"
     },
+
     {
       q: "What is 90 − 27?",
       a: "63"
     },
+
     {
       q: "What is 7 × 8?",
       a: "56"
     },
+
     {
       q: "What is 144 ÷ 12?",
       a: "12"
     }
+
   ],
 
+
   ENGLISH: [
+
     {
       q: "What is the opposite of 'hot'?",
       a: "cold"
     },
+
     {
       q: "What is the plural of 'child'?",
       a: "children"
     },
+
     {
       q: "What is a noun?",
       a: "name"
     },
+
     {
       q: "What is the opposite of 'big'?",
       a: "small"
     },
+
     {
       q: "Complete: The sun ___ brightly.",
       a: "shines"
     },
+
     {
       q: "What is the past tense of 'go'?",
       a: "went"
     },
+
     {
       q: "What is the plural of 'book'?",
       a: "books"
     },
+
     {
       q: "What is the opposite of 'early'?",
       a: "late"
     },
+
     {
       q: "What is the past tense of 'eat'?",
       a: "ate"
     },
+
     {
       q: "What is the opposite of 'happy'?",
       a: "sad"
     }
+
   ],
 
+
   SCIENCE: [
+
     {
       q: "What planet do we live on?",
       a: "earth"
     },
+
     {
       q: "What gas do humans breathe in?",
       a: "oxygen"
     },
+
     {
       q: "What do plants need to make food?",
       a: "sunlight"
     },
+
     {
       q: "How many legs does a spider have?",
       a: "8"
     },
+
     {
       q: "What organ pumps blood around the body?",
       a: "heart"
     },
+
     {
       q: "What is H2O commonly called?",
       a: "water"
     },
+
     {
       q: "Which sense organ helps us see?",
       a: "eye"
     },
+
     {
       q: "What force pulls objects toward Earth?",
       a: "gravity"
     },
+
     {
       q: "What do humans use to breathe?",
       a: "lungs"
     },
+
     {
       q: "What is the natural satellite of Earth?",
       a: "moon"
     }
+
   ],
 
+
   SOCIAL: [
+
     {
       q: "What is the capital city of Kenya?",
       a: "nairobi"
     },
+
     {
       q: "What is the currency of Kenya?",
       a: "kenyan shilling"
     },
+
     {
       q: "How many counties are in Kenya?",
       a: "47"
     },
+
     {
       q: "What is the national language of Kenya?",
       a: "swahili"
     },
+
     {
       q: "What is the largest lake in Kenya?",
       a: "lake victoria"
     },
+
     {
       q: "What is the Kenyan national flag's main color at the top?",
       a: "black"
     },
+
     {
       q: "Which ocean borders Kenya?",
       a: "indian ocean"
     },
+
     {
       q: "What is Kenya's national animal?",
       a: "lion"
     },
+
     {
       q: "What is the name of Kenya's parliament?",
       a: "parliament"
     },
+
     {
       q: "What continent is Kenya in?",
       a: "africa"
     }
+
   ]
 
 };
@@ -312,11 +359,19 @@ function escapeHTML(value) {
 function openSidebar() {
 
   if (sidebar) {
-    sidebar.classList.add("open");
+
+    sidebar.classList.add(
+      "open"
+    );
+
   }
 
   if (overlay) {
-    overlay.classList.add("show");
+
+    overlay.classList.add(
+      "show"
+    );
+
   }
 
 }
@@ -325,11 +380,19 @@ function openSidebar() {
 function closeSidebar() {
 
   if (sidebar) {
-    sidebar.classList.remove("open");
+
+    sidebar.classList.remove(
+      "open"
+    );
+
   }
 
   if (overlay) {
-    overlay.classList.remove("show");
+
+    overlay.classList.remove(
+      "show"
+    );
+
   }
 
 }
@@ -369,8 +432,12 @@ document.addEventListener(
   "keydown",
   function (event) {
 
-    if (event.key === "Escape") {
+    if (
+      event.key === "Escape"
+    ) {
+
       closeSidebar();
+
     }
 
   }
@@ -392,10 +459,15 @@ function showNotes() {
 
 
 const notesBtn =
-  document.getElementById("notesBtn");
+  document.getElementById(
+    "notesBtn"
+  );
+
 
 const notesMainBtn =
-  document.getElementById("notesMainBtn");
+  document.getElementById(
+    "notesMainBtn"
+  );
 
 
 if (notesBtn) {
@@ -405,6 +477,7 @@ if (notesBtn) {
     function () {
 
       closeSidebar();
+
       showNotes();
 
     }
@@ -438,10 +511,15 @@ function showProjects() {
 
 
 const projectsBtn =
-  document.getElementById("projectsBtn");
+  document.getElementById(
+    "projectsBtn"
+  );
+
 
 const projectsMainBtn =
-  document.getElementById("projectsMainBtn");
+  document.getElementById(
+    "projectsMainBtn"
+  );
 
 
 if (projectsBtn) {
@@ -451,6 +529,7 @@ if (projectsBtn) {
     function () {
 
       closeSidebar();
+
       showProjects();
 
     }
@@ -483,13 +562,21 @@ function getHistory() {
       );
 
     if (!stored) {
+
       return [];
+
     }
 
-    const parsed =
-      JSON.parse(stored);
 
-    return Array.isArray(parsed)
+    const parsed =
+      JSON.parse(
+        stored
+      );
+
+
+    return Array.isArray(
+      parsed
+    )
       ? parsed
       : [];
 
@@ -512,10 +599,18 @@ function saveHistory(record) {
   const history =
     getHistory();
 
-  history.unshift(record);
+
+  history.unshift(
+    record
+  );
+
 
   const limitedHistory =
-    history.slice(0, 50);
+    history.slice(
+      0,
+      50
+    );
+
 
   localStorage.setItem(
     "cbc_history",
@@ -530,13 +625,19 @@ function saveHistory(record) {
 function renderHistory() {
 
   if (!historyBox) {
+
     return;
+
   }
+
 
   const history =
     getHistory();
 
-  if (history.length === 0) {
+
+  if (
+    history.length === 0
+  ) {
 
     historyBox.innerHTML = `
       <p>
@@ -548,45 +649,51 @@ function renderHistory() {
 
   }
 
+
   historyBox.innerHTML =
     history
-      .map(function (item) {
+      .map(
+        function (item) {
 
-        return `
-          <div class="history-item">
+          return `
+            <div class="history-item">
 
-            <strong>
-              ${escapeHTML(
-                item.student || "Student"
-              )}
-            </strong>
+              <strong>
+                ${escapeHTML(
+                  item.student ||
+                  "Student"
+                )}
+              </strong>
 
-            <div>
-              Grade:
-              ${escapeHTML(
-                item.grade || "-"
-              )}
+              <div>
+                Grade:
+                ${escapeHTML(
+                  item.grade ||
+                  "-"
+                )}
+              </div>
+
+              <div>
+                Score:
+                ${escapeHTML(
+                  item.score ?? 0
+                )}/${escapeHTML(
+                  item.total ?? 0
+                )}
+              </div>
+
+              <small>
+                ${escapeHTML(
+                  item.date ||
+                  ""
+                )}
+              </small>
+
             </div>
+          `;
 
-            <div>
-              Score:
-              ${escapeHTML(
-                item.score ?? 0
-              )}/${escapeHTML(
-                item.total ?? 0
-              )}
-            </div>
-
-            <small>
-              ${escapeHTML(
-                item.date || ""
-              )}
-            </small>
-
-          </div>
-        `;
-
-      })
+        }
+      )
       .join("");
 
 }
@@ -599,13 +706,19 @@ function renderHistory() {
 function renderLeaderboard() {
 
   if (!leaderboardBox) {
+
     return;
+
   }
+
 
   const history =
     getHistory();
 
-  if (history.length === 0) {
+
+  if (
+    history.length === 0
+  ) {
 
     leaderboardBox.innerHTML = `
       <p>
@@ -617,44 +730,61 @@ function renderLeaderboard() {
 
   }
 
+
   const sorted =
     [...history]
-      .sort(function (a, b) {
+      .sort(
+        function (a, b) {
 
-        return (
-          Number(b.score || 0) -
-          Number(a.score || 0)
-        );
+          return (
+            Number(
+              b.score || 0
+            ) -
+            Number(
+              a.score || 0
+            )
+          );
 
-      })
-      .slice(0, 10);
+        }
+      )
+      .slice(
+        0,
+        10
+      );
+
 
   leaderboardBox.innerHTML =
     sorted
-      .map(function (item, index) {
+      .map(
+        function (
+          item,
+          index
+        ) {
 
-        return `
-          <div class="leaderboard-item">
+          return `
+            <div class="leaderboard-item">
 
-            <strong>
-              ${index + 1}.
-              ${escapeHTML(
-                item.student || "Student"
-              )}
-            </strong>
+              <strong>
+                ${index + 1}.
+                ${escapeHTML(
+                  item.student ||
+                  "Student"
+                )}
+              </strong>
 
-            <span>
-              ${escapeHTML(
-                item.score ?? 0
-              )}/${escapeHTML(
-                item.total ?? 0
-              )}
-            </span>
+              <span>
+                ${escapeHTML(
+                  item.score ?? 0
+                )}/${escapeHTML(
+                  item.total ?? 0
+                )}
+              </span>
 
-          </div>
-        `;
+            </div>
+          `;
 
-      })
+        }
+      )
       .join("");
 
 }
@@ -667,6 +797,7 @@ function renderLeaderboard() {
 function showHistory() {
 
   closeSidebar();
+
 
   if (historyBox) {
 
@@ -681,7 +812,9 @@ function showHistory() {
 
 
 const historyBtn =
-  document.getElementById("historyBtn");
+  document.getElementById(
+    "historyBtn"
+  );
 
 
 if (historyBtn) {
@@ -701,6 +834,7 @@ if (historyBtn) {
 function showLeaderboard() {
 
   closeSidebar();
+
 
   if (leaderboardBox) {
 
@@ -741,35 +875,49 @@ function startQuiz() {
       ? studentInput.value.trim()
       : "";
 
+
   currentGrade =
     gradeSelect
       ? gradeSelect.value
       : "";
 
-  if (!currentStudent) {
+
+  if (
+    !currentStudent
+  ) {
 
     alert(
       "Please enter the student's name."
     );
 
+
     if (studentInput) {
+
       studentInput.focus();
+
     }
+
 
     return;
 
   }
 
 
-  if (!currentGrade) {
+  if (
+    !currentGrade
+  ) {
 
     alert(
       "Please select a grade."
     );
 
+
     if (gradeSelect) {
+
       gradeSelect.focus();
+
     }
+
 
     return;
 
@@ -781,44 +929,64 @@ function startQuiz() {
       questionBank
     );
 
+
   let allQuestions = [];
+
 
   subjects.forEach(
     function (subject) {
 
-      questionBank[subject]
-        .forEach(
-          function (question) {
+      questionBank[
+        subject
+      ].forEach(
+        function (question) {
 
-            allQuestions.push({
-              subject: subject,
-              q: question.q,
-              a: question.a
-            });
+          allQuestions.push({
 
-          }
-        );
+            subject:
+              subject,
+
+            q:
+              question.q,
+
+            a:
+              question.a
+
+          });
+
+        }
+      );
 
     }
   );
 
 
   allQuestions =
-    allQuestions
-      .sort(
-        function () {
-          return Math.random() - 0.5;
-        }
-      )
-      .slice(0, 10);
+    allQuestions.sort(
+      function () {
+
+        return (
+          Math.random() -
+          0.5
+        );
+
+      }
+    ).slice(
+      0,
+      10
+    );
 
 
   currentQuestions =
     allQuestions;
 
-  currentQuestionIndex = 0;
 
-  currentScore = 0;
+  currentQuestionIndex =
+    0;
+
+
+  currentScore =
+    0;
 
 
   if (quizBox) {
@@ -832,6 +1000,22 @@ function startQuiz() {
   if (resultBox) {
 
     resultBox.innerHTML =
+      "";
+
+  }
+
+
+  if (answerInput) {
+
+    answerInput.style.display =
+      "";
+
+  }
+
+
+  if (nextBtn) {
+
+    nextBtn.style.display =
       "";
 
   }
@@ -862,7 +1046,9 @@ function displayQuestion() {
     !currentQuestions ||
     currentQuestions.length === 0
   ) {
+
     return;
+
   }
 
 
@@ -884,8 +1070,14 @@ function displayQuestion() {
         </strong>
       </div>
 
-      <div style="margin-top:10px;">
-        ${escapeHTML(question.q)}
+      <div
+        style="
+          margin-top:10px;
+        "
+      >
+        ${escapeHTML(
+          question.q
+        )}
       </div>
     `;
 
@@ -894,7 +1086,8 @@ function displayQuestion() {
 
   if (answerInput) {
 
-    answerInput.value = "";
+    answerInput.value =
+      "";
 
     answerInput.focus();
 
@@ -918,12 +1111,19 @@ function displayQuestion() {
    ANSWER NORMALIZATION
 ================================================== */
 
-function normalizeAnswer(value) {
+function normalizeAnswer(
+  value
+) {
 
-  return String(value || "")
+  return String(
+    value || ""
+  )
     .trim()
     .toLowerCase()
-    .replace(/\s+/g, " ");
+    .replace(
+      /\s+/g,
+      " "
+    );
 
 }
 
@@ -938,7 +1138,9 @@ function checkAnswer() {
     !currentQuestions ||
     currentQuestions.length === 0
   ) {
+
     return;
+
   }
 
 
@@ -962,15 +1164,21 @@ function checkAnswer() {
     );
 
 
-  if (!userAnswer) {
+  if (
+    !userAnswer
+  ) {
 
     alert(
       "Please enter an answer."
     );
 
+
     if (answerInput) {
+
       answerInput.focus();
+
     }
+
 
     return;
 
@@ -983,6 +1191,7 @@ function checkAnswer() {
   ) {
 
     currentScore++;
+
 
     if (resultBox) {
 
@@ -1025,9 +1234,14 @@ function checkAnswer() {
 
         currentQuestionIndex++;
 
+
         if (resultBox) {
-          resultBox.innerHTML = "";
+
+          resultBox.innerHTML =
+            "";
+
         }
+
 
         displayQuestion();
 
@@ -1071,7 +1285,10 @@ function finishQuiz() {
   const percentage =
     total > 0
       ? Math.round(
-          (currentScore / total) * 100
+          (
+            currentScore /
+            total
+          ) * 100
         )
       : 0;
 
@@ -1099,7 +1316,10 @@ function finishQuiz() {
   };
 
 
-  saveHistory(record);
+  saveHistory(
+    record
+  );
+
 
   renderHistory();
 
@@ -1191,6 +1411,7 @@ function rateApp() {
 
   closeSidebar();
 
+
   alert(
     "Thank you for using CBC MASTER!"
   );
@@ -1240,17 +1461,16 @@ function shareApp() {
 
     navigator.share(
       shareData
-    )
-      .catch(
-        function (error) {
+    ).catch(
+      function (error) {
 
-          console.log(
-            "Share cancelled:",
-            error
-          );
+        console.log(
+          "Share cancelled:",
+          error
+        );
 
-        }
-      );
+      }
+    );
 
   } else {
 
@@ -1296,13 +1516,17 @@ function showPremium() {
 
 
   if (!phone) {
+
     return;
+
   }
 
 
   const normalizedPhone =
-    phone
-      .replace(/\D/g, "");
+    phone.replace(
+      /\D/g,
+      ""
+    );
 
 
   if (
@@ -1321,7 +1545,9 @@ function showPremium() {
       "CBC-" +
       SECRET +
       "-" +
-      normalizedPhone.slice(-4);
+      normalizedPhone.slice(
+        -4
+      );
 
 
     if (
@@ -1334,6 +1560,7 @@ function showPremium() {
         "cbc_premium",
         "true"
       );
+
 
       alert(
         "Premium activated successfully."
@@ -1421,7 +1648,7 @@ if (downloadBtn) {
     function () {
 
       window.location.href =
-        "https://github.com/Jose-ctr/CBCMast/releases/download/v1/cbc-master.apk";
+        "https://github.com/Jose-ctr/CBCMaster-web/releases/download/v1/cbc-master.apk";
 
     }
   );
@@ -1442,7 +1669,8 @@ renderLeaderboard();
    PWA INSTALL
 ================================================== */
 
-let deferredInstallPrompt = null;
+let deferredInstallPrompt =
+  null;
 
 
 window.addEventListener(
@@ -1464,7 +1692,8 @@ function isInstalledApp() {
     window.matchMedia(
       "(display-mode: standalone)"
     ).matches ||
-    window.navigator.standalone === true
+    window.navigator.standalone ===
+      true
   );
 
 }
@@ -1496,7 +1725,8 @@ try {
 ================================================== */
 
 if (
-  "serviceWorker" in navigator
+  "serviceWorker" in
+  navigator
 ) {
 
   window.addEventListener(
@@ -1504,7 +1734,9 @@ if (
     function () {
 
       navigator.serviceWorker
-        .register("./sw.js")
+        .register(
+          "./sw.js"
+        )
         .then(
           function (registration) {
 
