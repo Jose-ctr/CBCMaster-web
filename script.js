@@ -74,6 +74,9 @@ const projectsPage =
 const clearHistoryBtn =
   document.getElementById("clearHistoryBtn");
 
+const downloadBtn =
+  document.getElementById("downloadBtn");
+
 
 /* ==================================================
    QUESTION BANK
@@ -321,6 +324,13 @@ let answerLocked = false;
 
 
 /* ==================================================
+   PWA INSTALL STATE
+================================================== */
+
+let deferredInstallPrompt = null;
+
+
+/* ==================================================
    UTILITY
 ================================================== */
 
@@ -564,11 +574,7 @@ if (notesMainBtn) {
 
   notesMainBtn.addEventListener(
     "click",
-    function () {
-
-      showNotes();
-
-    }
+    showNotes
   );
 
 }
@@ -609,11 +615,7 @@ if (projectsMainBtn) {
 
   projectsMainBtn.addEventListener(
     "click",
-    function () {
-
-      showProjects();
-
-    }
+    showProjects
   );
 
 }
@@ -1536,10 +1538,12 @@ function finishQuiz() {
       </button>
     `;
 
+
     const tryAgainBtn =
       document.getElementById(
         "tryAgainBtn"
       );
+
 
     if (tryAgainBtn) {
 
@@ -1796,59 +1800,8 @@ if (contactBtn) {
 
 
 /* ==================================================
-   APK / DOWNLOAD
-================================================== */
-
-/*
-   The current index.html owns the download link.
-
-   Do NOT replace it with the old:
-   /releases/download/v1/cbc-master.apk
-
-   This prevents the JavaScript from overriding
-   the corrected CBCMaster-web Releases link.
-*/
-
-const downloadBtn =
-  document.getElementById(
-    "downloadBtn"
-  );
-
-
-if (downloadBtn) {
-
-  downloadBtn.addEventListener(
-    "click",
-    function () {
-
-      /*
-       * Allow the HTML <a> element to perform
-       * the actual navigation.
-       *
-       * No hard-coded APK URL here.
-       */
-
-    }
-  );
-
-}
-
-
-/* ==================================================
-   HISTORY / LEADERBOARD INITIALIZATION
-================================================== */
-
-renderHistory();
-
-renderLeaderboard();
-
-
-/* ==================================================
    PWA INSTALL
 ================================================== */
-
-let deferredInstallPrompt = null;
-
 
 window.addEventListener(
   "beforeinstallprompt",
@@ -1858,6 +1811,10 @@ window.addEventListener(
 
     deferredInstallPrompt =
       event;
+
+    console.log(
+      "CBC MASTER PWA install prompt available."
+    );
 
   }
 );
@@ -1873,6 +1830,92 @@ function isInstalledApp() {
   );
 
 }
+
+
+if (downloadBtn) {
+
+  downloadBtn.addEventListener(
+    "click",
+    async function (event) {
+
+      event.preventDefault();
+
+      closeSidebar();
+
+
+      /* Already installed */
+
+      if (isInstalledApp()) {
+
+        alert(
+          "CBC MASTER is already installed on this device."
+        );
+
+        return;
+
+      }
+
+
+      /* Native browser installation prompt */
+
+      if (deferredInstallPrompt) {
+
+        deferredInstallPrompt.prompt();
+
+
+        try {
+
+          const choice =
+            await deferredInstallPrompt.userChoice;
+
+          console.log(
+            "CBC MASTER install result:",
+            choice.outcome
+          );
+
+        } catch (error) {
+
+          console.error(
+            "CBC MASTER installation prompt failed:",
+            error
+          );
+
+        }
+
+
+        deferredInstallPrompt = null;
+
+        return;
+
+      }
+
+
+      /*
+       * Android browsers can sometimes hide
+       * the install prompt until the PWA has
+       * satisfied their install conditions.
+       */
+
+      alert(
+        "To install CBC MASTER:\n\n" +
+        "1. Open your browser menu ⋮\n" +
+        "2. Choose 'Install app' or 'Add to Home screen'\n" +
+        "3. Confirm the installation."
+      );
+
+    }
+  );
+
+}
+
+
+/* ==================================================
+   HISTORY / LEADERBOARD INITIALIZATION
+================================================== */
+
+renderHistory();
+
+renderLeaderboard();
 
 
 /* ==================================================
