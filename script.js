@@ -5,36 +5,6 @@
 
 
 /* ==================================================
-   DIAGNOSTIC
-================================================== */
-
-document.body.insertAdjacentHTML(
-  "afterbegin",
-  `
-    <div
-      id="cbc-js-status"
-      style="
-        position:fixed;
-        top:0;
-        left:0;
-        right:0;
-        z-index:99999;
-        background:#A6FF80;
-        color:#000;
-        padding:12px;
-        text-align:center;
-        font-weight:bold;
-        font-family:Arial,sans-serif;
-        box-shadow:0 2px 8px rgba(0,0,0,.25);
-      "
-    >
-      CBC MASTER JavaScript is running
-    </div>
-  `
-);
-
-
-/* ==================================================
    CONFIGURATION
 ================================================== */
 
