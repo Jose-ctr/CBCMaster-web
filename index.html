@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
 
   <meta charset="utf-8">
@@ -26,7 +27,9 @@
 
   <title>CBC MASTER</title>
 
-  <link rel="manifest" href="./manifest.json">
+  <link
+    rel="manifest"
+    href="./manifest.json">
 
   <style>
 
@@ -47,10 +50,17 @@
       font-family: Arial, sans-serif;
       background: #F5F7FA;
       color: #111827;
+      scroll-behavior: smooth;
     }
 
     body {
       overflow-x: hidden;
+    }
+
+    button,
+    input,
+    select {
+      font-family: inherit;
     }
 
 
@@ -60,6 +70,7 @@
 
     .header {
       height: 64px;
+
       background: #0B1F33;
       color: white;
 
@@ -112,12 +123,17 @@
 
     #app {
       min-height: 100vh;
+
+      transition:
+        transform .30s ease;
     }
 
     .container {
       width: 100%;
       max-width: 800px;
+
       margin: auto;
+
       padding: 14px;
     }
 
@@ -190,7 +206,11 @@
     input:focus,
     select:focus {
       outline: none;
+
       border: 2px solid #0F766E;
+
+      box-shadow:
+        0 0 0 2px rgba(15, 118, 110, .10);
     }
 
 
@@ -218,6 +238,14 @@
       cursor: pointer;
 
       font-weight: bold;
+
+      transition:
+        transform .15s ease,
+        background .15s ease;
+    }
+
+    button.action-btn:hover {
+      background: #115E59;
     }
 
     button.action-btn:active {
@@ -226,6 +254,14 @@
 
     button.secondary-btn {
       background: #0B1F33;
+    }
+
+    button.danger-btn {
+      background: #B91C1C;
+    }
+
+    button.danger-btn:hover {
+      background: #991B1B;
     }
 
 
@@ -237,7 +273,6 @@
       display: block;
 
       width: 90%;
-
       max-width: 420px;
 
       margin: 20px auto;
@@ -255,11 +290,18 @@
       border-radius: 12px;
 
       font-size: 18px;
-
       font-weight: bold;
 
       box-shadow:
         0 4px 10px rgba(0, 0, 0, .18);
+
+      transition:
+        transform .15s ease,
+        background .15s ease;
+    }
+
+    .download-btn:hover {
+      background: #15803D;
     }
 
     .download-btn:active {
@@ -282,11 +324,25 @@
 
       margin-top: 12px;
 
-      display: none;
+      display: block;
 
       font-size: 16px;
 
       line-height: 1.6;
+    }
+
+    .result:empty {
+      display: none;
+    }
+
+    .correct {
+      color: #166534;
+      font-weight: bold;
+    }
+
+    .incorrect {
+      color: #991B1B;
+      font-weight: bold;
     }
 
 
@@ -340,6 +396,15 @@
       margin: 15px 0;
     }
 
+    .quiz-complete {
+      text-align: center;
+      padding: 10px;
+    }
+
+    .quiz-complete h2 {
+      color: #0F766E;
+    }
+
 
     /* ==================================================
        HISTORY
@@ -361,6 +426,145 @@
       line-height: 1.6;
     }
 
+    .history-actions {
+      display: flex;
+
+      gap: 10px;
+
+      margin-top: 14px;
+    }
+
+    .history-actions button {
+      flex: 1;
+    }
+
+
+    /* ==================================================
+       LEADERBOARD
+    ================================================== */
+
+    .leaderboard-item {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      background: #F8FAFC;
+
+      border: 1px solid #D1D5DB;
+
+      border-radius: 10px;
+
+      padding: 12px;
+
+      margin-top: 10px;
+    }
+
+    .leaderboard-item strong {
+      color: #0B1F33;
+    }
+
+
+    /* ==================================================
+       NOTES
+    ================================================== */
+
+    .content-page {
+      display: none;
+    }
+
+    .content-page.active {
+      display: block;
+    }
+
+    .subject-note {
+      background: #F8FAFC;
+
+      border: 1px solid #CBD5E1;
+
+      border-left: 5px solid #0F766E;
+
+      border-radius: 10px;
+
+      padding: 15px;
+
+      margin-top: 12px;
+    }
+
+    .subject-note h4 {
+      color: #0F766E;
+
+      margin-bottom: 8px;
+    }
+
+    .subject-note ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    .subject-note li {
+      margin-bottom: 7px;
+      line-height: 1.5;
+    }
+
+
+    /* ==================================================
+       PROJECTS
+    ================================================== */
+
+    .project-card {
+      background: #F8FAFC;
+
+      border: 1px solid #CBD5E1;
+
+      border-radius: 10px;
+
+      padding: 16px;
+
+      margin-top: 12px;
+    }
+
+    .project-card h4 {
+      color: #0F766E;
+
+      margin-bottom: 8px;
+    }
+
+    .project-card ul {
+      padding-left: 20px;
+    }
+
+    .project-card li {
+      margin-bottom: 7px;
+      line-height: 1.5;
+    }
+
+    .rubric {
+      width: 100%;
+
+      border-collapse: collapse;
+
+      margin-top: 12px;
+
+      font-size: 14px;
+    }
+
+    .rubric th,
+    .rubric td {
+      border: 1px solid #CBD5E1;
+
+      padding: 9px;
+
+      text-align: left;
+
+      vertical-align: top;
+    }
+
+    .rubric th {
+      background: #0B1F33;
+      color: white;
+    }
+
 
     /* ==================================================
        SIDEBAR
@@ -372,7 +576,8 @@
       top: 0;
       left: 0;
 
-      width: 64px;
+      width: 0;
+
       height: 100vh;
 
       background: #0B1F33;
@@ -382,7 +587,8 @@
       overflow-x: hidden;
       overflow-y: auto;
 
-      transition: width .35s ease;
+      transition:
+        width .30s ease;
 
       box-shadow:
         5px 0 20px rgba(0, 0, 0, .35);
@@ -390,20 +596,29 @@
       padding-top: 0;
     }
 
+    .sidebar.open {
+      width: 285px;
+    }
+
 
     /* ==================================================
-       DESKTOP HOVER EXPANSION
+       DESKTOP SIDEBAR
     ================================================== */
 
     @media (min-width: 769px) {
+
+      .sidebar {
+        width: 64px;
+      }
 
       .sidebar:hover {
         width: 220px;
       }
 
       .sidebar:hover .sidebar-brand-text,
-      .sidebar:hover .sidebar-link span {
+      .sidebar:hover .sidebar-link span:not(.sidebar-link-icon) {
         opacity: 1;
+
         visibility: visible;
       }
 
@@ -424,6 +639,7 @@
       color: white;
 
       display: flex;
+
       align-items: center;
 
       gap: 10px;
@@ -457,6 +673,11 @@
       transition:
         opacity .2s ease,
         visibility .2s ease;
+    }
+
+    .sidebar.open .sidebar-brand-text {
+      opacity: 1;
+      visibility: visible;
     }
 
     .sidebar-brand-text h3 {
@@ -527,6 +748,7 @@
       min-width: 44px;
 
       display: flex;
+
       align-items: center;
       justify-content: center;
 
@@ -542,13 +764,21 @@
         visibility .2s ease;
     }
 
+    .sidebar.open .sidebar-link span:not(.sidebar-link-icon) {
+      opacity: 1;
+      visibility: visible;
+    }
+
 
     /* ==================================================
        SIDEBAR CLOSE BUTTON
     ================================================== */
 
     .close-menu {
-      display: none;
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
 
       position: absolute;
 
@@ -571,6 +801,14 @@
       cursor: pointer;
 
       z-index: 5;
+
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .sidebar.open .close-menu {
+      opacity: 1;
+      visibility: visible;
     }
 
 
@@ -582,29 +820,22 @@
 
       .sidebar {
         width: 0;
-
-        transition: width .30s ease;
       }
 
       .sidebar.open {
-        width: 285px;
-      }
-
-      .sidebar.open .sidebar-brand-text,
-      .sidebar.open .sidebar-link span:not(.sidebar-link-icon) {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .sidebar.open .close-menu {
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
+        width: min(285px, 88vw);
       }
 
       .sidebar.open .sidebar-header {
         padding-right: 55px;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      body.menu-open #app {
+        transform: translateX(min(285px, 88vw));
       }
 
     }
@@ -701,11 +932,29 @@
         width: 95%;
       }
 
+      .container {
+        padding: 10px;
+      }
+
+      .history-actions {
+        flex-direction: column;
+      }
+
+      .rubric {
+        font-size: 12px;
+      }
+
+      .rubric th,
+      .rubric td {
+        padding: 7px;
+      }
+
     }
 
   </style>
 
 </head>
+
 
 <body>
 
@@ -793,7 +1042,9 @@
 
     <a
       class="sidebar-link"
-      href="https://wa.me/254707649890">
+      href="https://wa.me/254707649890"
+      target="_blank"
+      rel="noopener">
 
       <span class="sidebar-link-icon">💬</span>
       <span>Contact Support</span>
@@ -880,8 +1131,9 @@
     <a
       id="downloadBtn"
       class="download-btn"
-      href="https://github.com/Jose-ctr/CBCMast/releases/download/v1/cbc-master.apk"
-      download>
+      href="https://github.com/Jose-ctr/CBCMaster-web/releases"
+      target="_blank"
+      rel="noopener">
 
       📲 DOWNLOAD CBC MASTER
 
@@ -889,6 +1141,11 @@
 
 
     <div class="container">
+
+
+      <!-- ==================================================
+           PAGE TITLE
+      ================================================== -->
 
       <div class="section-title">
 
@@ -970,7 +1227,8 @@
           id="answerInput"
           class="answer-input"
           type="text"
-          placeholder="Type your answer">
+          placeholder="Type your answer"
+          autocomplete="off">
 
 
         <button
@@ -986,7 +1244,384 @@
 
 
       <!-- ==================================================
-           NOTES
+           NOTES PAGE
+      ================================================== -->
+
+      <section
+        id="notesPage"
+        class="content-page">
+
+        <div class="card">
+
+          <h2>
+            📝 CBC NOTES
+          </h2>
+
+          <p>
+            Revision notes for Grade 4, Grade 5
+            and Grade 6 learners.
+          </p>
+
+
+          <div class="subject-note">
+
+            <h4>
+              🔢 Mathematics
+            </h4>
+
+            <ul>
+
+              <li>
+                Place value and whole numbers
+              </li>
+
+              <li>
+                Addition, subtraction,
+                multiplication and division
+              </li>
+
+              <li>
+                Fractions, decimals and percentages
+              </li>
+
+              <li>
+                Measurement and units
+              </li>
+
+              <li>
+                Geometry and shapes
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <div class="subject-note">
+
+            <h4>
+              📖 English
+            </h4>
+
+            <ul>
+
+              <li>
+                Nouns, verbs, adjectives and adverbs
+              </li>
+
+              <li>
+                Singular and plural nouns
+              </li>
+
+              <li>
+                Tenses and sentence construction
+              </li>
+
+              <li>
+                Reading comprehension
+              </li>
+
+              <li>
+                Vocabulary development
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <div class="subject-note">
+
+            <h4>
+              🔬 Science & Technology
+            </h4>
+
+            <ul>
+
+              <li>
+                Living and non-living things
+              </li>
+
+              <li>
+                Human body and health
+              </li>
+
+              <li>
+                Plants and animals
+              </li>
+
+              <li>
+                Matter and materials
+              </li>
+
+              <li>
+                Environment and conservation
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <div class="subject-note">
+
+            <h4>
+              🌍 Social Studies
+            </h4>
+
+            <ul>
+
+              <li>
+                Kenya and its counties
+              </li>
+
+              <li>
+                Communities and cultures
+              </li>
+
+              <li>
+                Maps and physical features
+              </li>
+
+              <li>
+                Government and citizenship
+              </li>
+
+              <li>
+                Environment and resources
+              </li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ==================================================
+           PROJECTS PAGE
+      ================================================== -->
+
+      <section
+        id="projectsPage"
+        class="content-page">
+
+        <div class="card">
+
+          <h2>
+            📚 CBC PROJECTS
+          </h2>
+
+          <p>
+            Practical projects designed to help
+            learners research, create and present
+            their work.
+          </p>
+
+
+          <div class="project-card">
+
+            <h4>
+              🌱 Project 1 — School Garden
+            </h4>
+
+            <p>
+              Create a small school or home garden
+              and record the plants grown.
+            </p>
+
+            <ul>
+
+              <li>
+                Identify at least three plants.
+              </li>
+
+              <li>
+                Record watering and growth.
+              </li>
+
+              <li>
+                Explain why plants are important.
+              </li>
+
+              <li>
+                Present findings to the class.
+              </li>
+
+            </ul>
+
+
+            <table class="rubric">
+
+              <tr>
+                <th>Area</th>
+                <th>Marks</th>
+              </tr>
+
+              <tr>
+                <td>Research</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Practical work</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Presentation</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Creativity</td>
+                <td>5</td>
+              </tr>
+
+            </table>
+
+          </div>
+
+
+          <div class="project-card">
+
+            <h4>
+              💧 Project 2 — Water Conservation
+            </h4>
+
+            <p>
+              Investigate how water is used at home
+              or school and propose ways to reduce
+              wastage.
+            </p>
+
+            <ul>
+
+              <li>
+                Observe water use.
+              </li>
+
+              <li>
+                Identify sources of wastage.
+              </li>
+
+              <li>
+                Suggest practical solutions.
+              </li>
+
+              <li>
+                Prepare a short presentation.
+              </li>
+
+            </ul>
+
+
+            <table class="rubric">
+
+              <tr>
+                <th>Area</th>
+                <th>Marks</th>
+              </tr>
+
+              <tr>
+                <td>Observation</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Research</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Solutions</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Presentation</td>
+                <td>5</td>
+              </tr>
+
+            </table>
+
+          </div>
+
+
+          <div class="project-card">
+
+            <h4>
+              ♻️ Project 3 — Waste Management
+            </h4>
+
+            <p>
+              Study waste around the home or school
+              and create a simple waste-separation
+              plan.
+            </p>
+
+            <ul>
+
+              <li>
+                Identify different types of waste.
+              </li>
+
+              <li>
+                Separate recyclable and
+                non-recyclable materials.
+              </li>
+
+              <li>
+                Explain safe disposal.
+              </li>
+
+              <li>
+                Create a poster or model.
+              </li>
+
+            </ul>
+
+
+            <table class="rubric">
+
+              <tr>
+                <th>Area</th>
+                <th>Marks</th>
+              </tr>
+
+              <tr>
+                <td>Research</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Practical work</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Creativity</td>
+                <td>5</td>
+              </tr>
+
+              <tr>
+                <td>Presentation</td>
+                <td>5</td>
+              </tr>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ==================================================
+           NOTES MAIN CARD
       ================================================== -->
 
       <div class="card">
@@ -1012,7 +1647,7 @@
 
 
       <!-- ==================================================
-           PROJECTS
+           PROJECTS MAIN CARD
       ================================================== -->
 
       <div class="card">
@@ -1047,11 +1682,30 @@
           📊 PROGRESS HISTORY
         </h3>
 
+        <p>
+          Your completed quiz results are stored
+          on this device.
+        </p>
+
         <div id="historyBox">
 
           <p>
             No history saved yet.
           </p>
+
+        </div>
+
+
+        <div class="history-actions">
+
+          <button
+            id="clearHistoryBtn"
+            class="action-btn danger-btn"
+            type="button">
+
+            🗑️ Clear History
+
+          </button>
 
         </div>
 
@@ -1135,6 +1789,10 @@
     </div>
 
 
+    <!-- ==================================================
+         FOOTER
+    ================================================== -->
+
     <footer>
 
       © 2026 CBC MASTER<br>
@@ -1153,4 +1811,5 @@
   <script src="./script.js"></script>
 
 </body>
+
 </html>
