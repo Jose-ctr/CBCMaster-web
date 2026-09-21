@@ -26,10 +26,7 @@
 
   <title>CBC MASTER</title>
 
-  <link
-    rel="manifest"
-    href="manifest.json">
-
+  <link rel="manifest" href="./manifest.json">
 
   <style>
 
@@ -110,8 +107,12 @@
 
 
     /* ==================================================
-       MAIN CONTAINER
+       MAIN APPLICATION
     ================================================== */
+
+    #app {
+      min-height: 100vh;
+    }
 
     .container {
       width: 100%;
@@ -390,7 +391,9 @@
     }
 
 
-    /* Desktop hover expansion */
+    /* ==================================================
+       DESKTOP HOVER EXPANSION
+    ================================================== */
 
     @media (min-width: 769px) {
 
@@ -530,7 +533,7 @@
       font-size: 21px;
     }
 
-    .sidebar-link span {
+    .sidebar-link span:not(.sidebar-link-icon) {
       opacity: 0;
       visibility: hidden;
 
@@ -588,7 +591,7 @@
       }
 
       .sidebar.open .sidebar-brand-text,
-      .sidebar.open .sidebar-link span {
+      .sidebar.open .sidebar-link span:not(.sidebar-link-icon) {
         opacity: 1;
         visibility: visible;
       }
@@ -704,7 +707,6 @@
 
 </head>
 
-
 <body>
 
 
@@ -716,7 +718,6 @@
     id="sidebar"
     class="sidebar"
     aria-label="CBC MASTER navigation">
-
 
     <button
       id="closeMenuBtn"
@@ -732,7 +733,7 @@
     <div class="sidebar-header">
 
       <img
-        src="icon-192.png"
+        src="./icon-192.png"
         alt="CBC MASTER">
 
       <div class="sidebar-brand-text">
@@ -752,7 +753,6 @@
       type="button">
 
       <span class="sidebar-link-icon">📝</span>
-
       <span>Notes</span>
 
     </button>
@@ -764,7 +764,6 @@
       type="button">
 
       <span class="sidebar-link-icon">📚</span>
-
       <span>CBC Projects</span>
 
     </button>
@@ -776,7 +775,6 @@
       type="button">
 
       <span class="sidebar-link-icon">📊</span>
-
       <span>Progress History</span>
 
     </button>
@@ -788,7 +786,6 @@
       type="button">
 
       <span class="sidebar-link-icon">🏆</span>
-
       <span>Leaderboard</span>
 
     </button>
@@ -799,7 +796,6 @@
       href="https://wa.me/254707649890">
 
       <span class="sidebar-link-icon">💬</span>
-
       <span>Contact Support</span>
 
     </a>
@@ -811,7 +807,6 @@
       type="button">
 
       <span class="sidebar-link-icon">⭐</span>
-
       <span>Rate Us</span>
 
     </button>
@@ -823,7 +818,6 @@
       type="button">
 
       <span class="sidebar-link-icon">📤</span>
-
       <span>Share App</span>
 
     </button>
@@ -835,11 +829,9 @@
       type="button">
 
       <span class="sidebar-link-icon">🔓</span>
-
       <span>Activate Premium</span>
 
     </button>
-
 
   </aside>
 
@@ -859,9 +851,6 @@
   ================================================== -->
 
   <main id="app">
-
-
-    <!-- HEADER -->
 
     <header class="header">
 
@@ -899,12 +888,7 @@
     </a>
 
 
-    <!-- ==================================================
-         CONTENT
-    ================================================== -->
-
     <div class="container">
-
 
       <div class="section-title">
 
@@ -927,13 +911,11 @@
           Practice CBC questions for Grade 4-6
         </small>
 
-
         <input
           id="student"
           type="text"
           placeholder="Student Name"
           autocomplete="name">
-
 
         <select id="grade">
 
@@ -1150,7 +1132,6 @@
 
       </div>
 
-
     </div>
 
 
@@ -1161,7 +1142,6 @@
       Developed by Joseph Mbui
 
     </footer>
-
 
   </main>
 
@@ -1275,34 +1255,22 @@
     }
 
 
-    if (menuBtn) {
-
-      menuBtn.addEventListener(
-        "click",
-        openMenu
-      );
-
-    }
+    menuBtn?.addEventListener(
+      "click",
+      openMenu
+    );
 
 
-    if (closeMenuBtn) {
-
-      closeMenuBtn.addEventListener(
-        "click",
-        closeMenu
-      );
-
-    }
+    closeMenuBtn?.addEventListener(
+      "click",
+      closeMenu
+    );
 
 
-    if (overlay) {
-
-      overlay.addEventListener(
-        "click",
-        closeMenu
-      );
-
-    }
+    overlay?.addEventListener(
+      "click",
+      closeMenu
+    );
 
 
     document.addEventListener(
@@ -2407,46 +2375,32 @@
     }
 
 
-    if (startBtn) {
-
-      startBtn.addEventListener(
-        "click",
-        startQuiz
-      );
-
-    }
+    startBtn?.addEventListener(
+      "click",
+      startQuiz
+    );
 
 
-    if (nextBtn) {
-
-      nextBtn.addEventListener(
-        "click",
-        checkAnswer
-      );
-
-    }
+    nextBtn?.addEventListener(
+      "click",
+      checkAnswer
+    );
 
 
-    if (answerInput) {
+    answerInput?.addEventListener(
+      "keydown",
+      function (event) {
 
-      answerInput.addEventListener(
-        "keydown",
-        function (event) {
+        if (event.key === "Enter") {
 
-          if (
-            event.key === "Enter"
-          ) {
+          event.preventDefault();
 
-            event.preventDefault();
-
-            checkAnswer();
-
-          }
+          checkAnswer();
 
         }
-      );
 
-    }
+      }
+    );
 
 
     /* ==================================================
@@ -2990,6 +2944,7 @@
 
     /* ==================================================
        PWA SERVICE WORKER
+       IMPORTANT: FILE IS sw.js
     ================================================== */
 
     if (
@@ -3002,7 +2957,7 @@
 
           navigator.serviceWorker
             .register(
-              "service-worker.js"
+              "./sw.js"
             )
             .then(
               function (registration) {
