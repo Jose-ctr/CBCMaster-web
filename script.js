@@ -15,6 +15,9 @@ const APPROVED_PHONES = [
   "254782609857"
 ];
 
+const HISTORY_KEY = "cbc_history";
+const PREMIUM_KEY = "cbc_premium";
+
 
 /* ==================================================
    DOM ELEMENTS
@@ -61,6 +64,15 @@ const historyBox =
 
 const leaderboardBox =
   document.getElementById("leaderboardBox");
+
+const notesPage =
+  document.getElementById("notesPage");
+
+const projectsPage =
+  document.getElementById("projectsPage");
+
+const clearHistoryBtn =
+  document.getElementById("clearHistoryBtn");
 
 
 /* ==================================================
@@ -305,6 +317,8 @@ let currentStudent = "";
 
 let currentGrade = "";
 
+let answerLocked = false;
+
 
 /* ==================================================
    UTILITY
@@ -312,12 +326,22 @@ let currentGrade = "";
 
 function escapeHTML(value) {
 
-  return String(value)
+  return String(value ?? "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+
+}
+
+
+function normalizeAnswer(value) {
+
+  return String(value ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ");
 
 }
 
@@ -330,16 +354,25 @@ function openSidebar() {
 
   if (sidebar) {
 
-    sidebar.classList.add(
-      "open"
-    );
+    sidebar.classList.add("open");
 
   }
 
   if (overlay) {
 
-    overlay.classList.add(
-      "show"
+    overlay.classList.add("show");
+
+  }
+
+  document.body.classList.add(
+    "menu-open"
+  );
+
+  if (menuBtn) {
+
+    menuBtn.setAttribute(
+      "aria-expanded",
+      "true"
     );
 
   }
@@ -351,16 +384,25 @@ function closeSidebar() {
 
   if (sidebar) {
 
-    sidebar.classList.remove(
-      "open"
-    );
+    sidebar.classList.remove("open");
 
   }
 
   if (overlay) {
 
-    overlay.classList.remove(
-      "show"
+    overlay.classList.remove("show");
+
+  }
+
+  document.body.classList.remove(
+    "menu-open"
+  );
+
+  if (menuBtn) {
+
+    menuBtn.setAttribute(
+      "aria-expanded",
+      "false"
     );
 
   }
@@ -402,9 +444,7 @@ document.addEventListener(
   "keydown",
   function (event) {
 
-    if (
-      event.key === "Escape"
-    ) {
+    if (event.key === "Escape") {
 
       closeSidebar();
 
@@ -415,24 +455,88 @@ document.addEventListener(
 
 
 /* ==================================================
-   NOTES
+   PAGE NAVIGATION
 ================================================== */
 
-function showNotes() {
+function hideAllExtraPages() {
 
-  alert(
-    "CBC MASTER Notes\n\n" +
-    "Notes feature is ready for the next development stage."
-  );
+  if (notesPage) {
+
+    notesPage.style.display = "none";
+
+  }
+
+  if (projectsPage) {
+
+    projectsPage.style.display = "none";
+
+  }
 
 }
 
+
+function showMainContent() {
+
+  hideAllExtraPages();
+
+  const mainContent =
+    document.getElementById(
+      "mainContent"
+    );
+
+  if (mainContent) {
+
+    mainContent.style.display = "";
+
+  }
+
+}
+
+
+function showNotes() {
+
+  hideAllExtraPages();
+
+  if (notesPage) {
+
+    notesPage.style.display = "block";
+
+    notesPage.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  }
+
+}
+
+
+function showProjects() {
+
+  hideAllExtraPages();
+
+  if (projectsPage) {
+
+    projectsPage.style.display = "block";
+
+    projectsPage.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  }
+
+}
+
+
+/* ==================================================
+   NOTES
+================================================== */
 
 const notesBtn =
   document.getElementById(
     "notesBtn"
   );
-
 
 const notesMainBtn =
   document.getElementById(
@@ -460,7 +564,11 @@ if (notesMainBtn) {
 
   notesMainBtn.addEventListener(
     "click",
-    showNotes
+    function () {
+
+      showNotes();
+
+    }
   );
 
 }
@@ -470,21 +578,10 @@ if (notesMainBtn) {
    PROJECTS
 ================================================== */
 
-function showProjects() {
-
-  alert(
-    "CBC MASTER Projects\n\n" +
-    "Project management features are coming soon."
-  );
-
-}
-
-
 const projectsBtn =
   document.getElementById(
     "projectsBtn"
   );
-
 
 const projectsMainBtn =
   document.getElementById(
@@ -512,7 +609,11 @@ if (projectsMainBtn) {
 
   projectsMainBtn.addEventListener(
     "click",
-    showProjects
+    function () {
+
+      showProjects();
+
+    }
   );
 
 }
@@ -528,7 +629,7 @@ function getHistory() {
 
     const stored =
       localStorage.getItem(
-        "cbc_history"
+        HISTORY_KEY
       );
 
     if (!stored) {
@@ -537,16 +638,10 @@ function getHistory() {
 
     }
 
-
     const parsed =
-      JSON.parse(
-        stored
-      );
+      JSON.parse(stored);
 
-
-    return Array.isArray(
-      parsed
-    )
+    return Array.isArray(parsed)
       ? parsed
       : [];
 
@@ -569,25 +664,28 @@ function saveHistory(record) {
   const history =
     getHistory();
 
-
-  history.unshift(
-    record
-  );
-
+  history.unshift(record);
 
   const limitedHistory =
-    history.slice(
-      0,
-      50
+    history.slice(0, 50);
+
+  try {
+
+    localStorage.setItem(
+      HISTORY_KEY,
+      JSON.stringify(
+        limitedHistory
+      )
     );
 
+  } catch (error) {
 
-  localStorage.setItem(
-    "cbc_history",
-    JSON.stringify(
-      limitedHistory
-    )
-  );
+    console.error(
+      "Unable to save CBC history:",
+      error
+    );
+
+  }
 
 }
 
@@ -600,14 +698,10 @@ function renderHistory() {
 
   }
 
-
   const history =
     getHistory();
 
-
-  if (
-    history.length === 0
-  ) {
+  if (history.length === 0) {
 
     historyBox.innerHTML = `
       <p>
@@ -619,52 +713,112 @@ function renderHistory() {
 
   }
 
-
   historyBox.innerHTML =
     history
-      .map(
-        function (item) {
+      .map(function (item) {
 
-          return `
-            <div class="history-item">
+        return `
+          <div class="history-item">
 
-              <strong>
-                ${escapeHTML(
-                  item.student ||
-                  "Student"
-                )}
-              </strong>
+            <strong>
+              ${escapeHTML(
+                item.student || "Student"
+              )}
+            </strong>
 
-              <div>
-                Grade:
-                ${escapeHTML(
-                  item.grade ||
-                  "-"
-                )}
-              </div>
-
-              <div>
-                Score:
-                ${escapeHTML(
-                  item.score ?? 0
-                )}/${escapeHTML(
-                  item.total ?? 0
-                )}
-              </div>
-
-              <small>
-                ${escapeHTML(
-                  item.date ||
-                  ""
-                )}
-              </small>
-
+            <div>
+              Grade:
+              ${escapeHTML(
+                item.grade || "-"
+              )}
             </div>
-          `;
 
-        }
-      )
+            <div>
+              Score:
+              ${escapeHTML(
+                item.score ?? 0
+              )}/${escapeHTML(
+                item.total ?? 0
+              )}
+            </div>
+
+            <small>
+              ${escapeHTML(
+                item.date || ""
+              )}
+            </small>
+
+          </div>
+        `;
+
+      })
       .join("");
+
+}
+
+
+/* ==================================================
+   CLEAR HISTORY
+================================================== */
+
+function clearHistory() {
+
+  const history =
+    getHistory();
+
+  if (history.length === 0) {
+
+    alert(
+      "There is no quiz history to clear."
+    );
+
+    return;
+
+  }
+
+  const confirmed =
+    window.confirm(
+      "Clear all CBC MASTER quiz history?\n\nThis cannot be undone."
+    );
+
+  if (!confirmed) {
+
+    return;
+
+  }
+
+  try {
+
+    localStorage.removeItem(
+      HISTORY_KEY
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Unable to clear CBC history:",
+      error
+    );
+
+  }
+
+  renderHistory();
+
+  renderLeaderboard();
+
+  alert(
+    "Quiz history cleared."
+  );
+
+}
+
+
+if (clearHistoryBtn) {
+
+  clearHistoryBtn.addEventListener(
+    "click",
+    clearHistory
+  );
 
 }
 
@@ -681,14 +835,10 @@ function renderLeaderboard() {
 
   }
 
-
   const history =
     getHistory();
 
-
-  if (
-    history.length === 0
-  ) {
+  if (history.length === 0) {
 
     leaderboardBox.innerHTML = `
       <p>
@@ -700,61 +850,67 @@ function renderLeaderboard() {
 
   }
 
-
   const sorted =
     [...history]
-      .sort(
-        function (a, b) {
+      .sort(function (a, b) {
 
-          return (
-            Number(
-              b.score || 0
-            ) -
-            Number(
-              a.score || 0
-            )
-          );
+        const scoreA =
+          Number(a.score || 0);
 
-        }
-      )
-      .slice(
-        0,
-        10
-      );
+        const scoreB =
+          Number(b.score || 0);
 
+        const totalA =
+          Number(a.total || 0);
+
+        const totalB =
+          Number(b.total || 0);
+
+        const percentageA =
+          totalA > 0
+            ? scoreA / totalA
+            : 0;
+
+        const percentageB =
+          totalB > 0
+            ? scoreB / totalB
+            : 0;
+
+        return (
+          percentageB -
+          percentageA
+        );
+
+      })
+      .slice(0, 10);
 
   leaderboardBox.innerHTML =
     sorted
-      .map(
-        function (
-          item,
-          index
-        ) {
+      .map(function (item, index) {
 
-          return `
-            <div class="leaderboard-item">
+        return `
+          <div class="leaderboard-item">
 
-              <strong>
-                ${index + 1}.
-                ${escapeHTML(
-                  item.student ||
-                  "Student"
-                )}
-              </strong>
+            <strong>
+              ${index + 1}.
+              ${escapeHTML(
+                item.student ||
+                "Student"
+              )}
+            </strong>
 
-              <span>
-                ${escapeHTML(
-                  item.score ?? 0
-                )}/${escapeHTML(
-                  item.total ?? 0
-                )}
-              </span>
+            <span>
+              ${escapeHTML(
+                item.score ?? 0
+              )}/${escapeHTML(
+                item.total ?? 0
+              )}
+            </span>
 
-            </div>
-          `;
+          </div>
+        `;
 
-        }
-      )
+      })
       .join("");
 
 }
@@ -768,6 +924,7 @@ function showHistory() {
 
   closeSidebar();
 
+  showMainContent();
 
   if (historyBox) {
 
@@ -805,6 +962,7 @@ function showLeaderboard() {
 
   closeSidebar();
 
+  showMainContent();
 
   if (leaderboardBox) {
 
@@ -835,6 +993,67 @@ if (leaderboardBtn) {
 
 
 /* ==================================================
+   QUIZ QUESTION PREPARATION
+================================================== */
+
+function buildQuizQuestions() {
+
+  const allQuestions = [];
+
+  Object.keys(questionBank)
+    .forEach(function (subject) {
+
+      questionBank[subject]
+        .forEach(function (question) {
+
+          allQuestions.push({
+
+            subject: subject,
+
+            q: question.q,
+
+            a: question.a
+
+          });
+
+        });
+
+    });
+
+
+  /* Fisher-Yates shuffle */
+
+  for (
+    let i = allQuestions.length - 1;
+    i > 0;
+    i--
+  ) {
+
+    const randomIndex =
+      Math.floor(
+        Math.random() * (i + 1)
+      );
+
+    [
+      allQuestions[i],
+      allQuestions[randomIndex]
+    ] = [
+      allQuestions[randomIndex],
+      allQuestions[i]
+    ];
+
+  }
+
+
+  return allQuestions.slice(
+    0,
+    Math.min(10, allQuestions.length)
+  );
+
+}
+
+
+/* ==================================================
    QUIZ
 ================================================== */
 
@@ -845,21 +1064,17 @@ function startQuiz() {
       ? studentInput.value.trim()
       : "";
 
-
   currentGrade =
     gradeSelect
       ? gradeSelect.value
       : "";
 
 
-  if (
-    !currentStudent
-  ) {
+  if (!currentStudent) {
 
     alert(
       "Please enter the student's name."
     );
-
 
     if (studentInput) {
 
@@ -867,20 +1082,16 @@ function startQuiz() {
 
     }
 
-
     return;
 
   }
 
 
-  if (
-    !currentGrade
-  ) {
+  if (!currentGrade) {
 
     alert(
       "Please select a grade."
     );
-
 
     if (gradeSelect) {
 
@@ -888,105 +1099,66 @@ function startQuiz() {
 
     }
 
+    return;
+
+  }
+
+
+  currentQuestions =
+    buildQuizQuestions();
+
+
+  if (
+    currentQuestions.length === 0
+  ) {
+
+    alert(
+      "No quiz questions are available."
+    );
 
     return;
 
   }
 
 
-  const subjects =
-    Object.keys(
-      questionBank
-    );
+  currentQuestionIndex = 0;
+
+  currentScore = 0;
+
+  answerLocked = false;
 
 
-  let allQuestions = [];
-
-
-  subjects.forEach(
-    function (subject) {
-
-      questionBank[
-        subject
-      ].forEach(
-        function (question) {
-
-          allQuestions.push({
-
-            subject:
-              subject,
-
-            q:
-              question.q,
-
-            a:
-              question.a
-
-          });
-
-        }
-      );
-
-    }
-  );
-
-
-  allQuestions =
-    allQuestions.sort(
-      function () {
-
-        return (
-          Math.random() -
-          0.5
-        );
-
-      }
-    ).slice(
-      0,
-      10
-    );
-
-
-  currentQuestions =
-    allQuestions;
-
-
-  currentQuestionIndex =
-    0;
-
-
-  currentScore =
-    0;
+  showMainContent();
 
 
   if (quizBox) {
 
-    quizBox.style.display =
-      "block";
+    quizBox.style.display = "block";
 
   }
 
 
   if (resultBox) {
 
-    resultBox.innerHTML =
-      "";
+    resultBox.innerHTML = "";
 
   }
 
 
   if (answerInput) {
 
-    answerInput.style.display =
-      "";
+    answerInput.style.display = "";
+
+    answerInput.disabled = false;
 
   }
 
 
   if (nextBtn) {
 
-    nextBtn.style.display =
-      "";
+    nextBtn.style.display = "";
+
+    nextBtn.disabled = false;
 
   }
 
@@ -1028,6 +1200,16 @@ function displayQuestion() {
     ];
 
 
+  if (!question) {
+
+    return;
+
+  }
+
+
+  answerLocked = false;
+
+
   if (quizQuestion) {
 
     quizQuestion.innerHTML = `
@@ -1045,9 +1227,7 @@ function displayQuestion() {
           margin-top:10px;
         "
       >
-        ${escapeHTML(
-          question.q
-        )}
+        ${escapeHTML(question.q)}
       </div>
     `;
 
@@ -1056,15 +1236,22 @@ function displayQuestion() {
 
   if (answerInput) {
 
-    answerInput.value =
-      "";
+    answerInput.value = "";
 
-    answerInput.focus();
+    answerInput.disabled = false;
+
+    setTimeout(function () {
+
+      answerInput.focus();
+
+    }, 50);
 
   }
 
 
   if (nextBtn) {
+
+    nextBtn.disabled = false;
 
     nextBtn.textContent =
       currentQuestionIndex ===
@@ -1078,31 +1265,17 @@ function displayQuestion() {
 
 
 /* ==================================================
-   ANSWER NORMALIZATION
-================================================== */
-
-function normalizeAnswer(
-  value
-) {
-
-  return String(
-    value || ""
-  )
-    .trim()
-    .toLowerCase()
-    .replace(
-      /\s+/g,
-      " "
-    );
-
-}
-
-
-/* ==================================================
    CHECK ANSWER
 ================================================== */
 
 function checkAnswer() {
+
+  if (answerLocked) {
+
+    return;
+
+  }
+
 
   if (
     !currentQuestions ||
@@ -1120,6 +1293,13 @@ function checkAnswer() {
     ];
 
 
+  if (!question) {
+
+    return;
+
+  }
+
+
   const userAnswer =
     normalizeAnswer(
       answerInput
@@ -1134,14 +1314,11 @@ function checkAnswer() {
     );
 
 
-  if (
-    !userAnswer
-  ) {
+  if (!userAnswer) {
 
     alert(
       "Please enter an answer."
     );
-
 
     if (answerInput) {
 
@@ -1149,8 +1326,24 @@ function checkAnswer() {
 
     }
 
-
     return;
+
+  }
+
+
+  answerLocked = true;
+
+
+  if (answerInput) {
+
+    answerInput.disabled = true;
+
+  }
+
+
+  if (nextBtn) {
+
+    nextBtn.disabled = true;
 
   }
 
@@ -1161,7 +1354,6 @@ function checkAnswer() {
   ) {
 
     currentScore++;
-
 
     if (resultBox) {
 
@@ -1182,9 +1374,7 @@ function checkAnswer() {
           ✗ Incorrect.
           Correct answer:
           <strong>
-            ${escapeHTML(
-              question.a
-            )}
+            ${escapeHTML(question.a)}
           </strong>
         </div>
       `;
@@ -1194,7 +1384,7 @@ function checkAnswer() {
   }
 
 
-  setTimeout(
+  window.setTimeout(
     function () {
 
       if (
@@ -1204,14 +1394,11 @@ function checkAnswer() {
 
         currentQuestionIndex++;
 
-
         if (resultBox) {
 
-          resultBox.innerHTML =
-            "";
+          resultBox.innerHTML = "";
 
         }
-
 
         displayQuestion();
 
@@ -1286,10 +1473,7 @@ function finishQuiz() {
   };
 
 
-  saveHistory(
-    record
-  );
-
+  saveHistory(record);
 
   renderHistory();
 
@@ -1306,9 +1490,7 @@ function finishQuiz() {
         </h2>
 
         <p>
-          ${escapeHTML(
-            currentStudent
-          )}
+          ${escapeHTML(currentStudent)}
         </p>
 
         <h3>
@@ -1328,16 +1510,16 @@ function finishQuiz() {
 
   if (answerInput) {
 
-    answerInput.style.display =
-      "none";
+    answerInput.style.display = "none";
+
+    answerInput.disabled = true;
 
   }
 
 
   if (nextBtn) {
 
-    nextBtn.style.display =
-      "none";
+    nextBtn.style.display = "none";
 
   }
 
@@ -1348,11 +1530,25 @@ function finishQuiz() {
       <button
         type="button"
         class="action-btn"
-        onclick="startQuiz()"
+        id="tryAgainBtn"
       >
         🔄 Try Another Quiz
       </button>
     `;
+
+    const tryAgainBtn =
+      document.getElementById(
+        "tryAgainBtn"
+      );
+
+    if (tryAgainBtn) {
+
+      tryAgainBtn.addEventListener(
+        "click",
+        startQuiz
+      );
+
+    }
 
   }
 
@@ -1380,7 +1576,6 @@ if (startBtn) {
 function rateApp() {
 
   closeSidebar();
-
 
   alert(
     "Thank you for using CBC MASTER!"
@@ -1431,16 +1626,14 @@ function shareApp() {
 
     navigator.share(
       shareData
-    ).catch(
-      function (error) {
+    ).catch(function (error) {
 
-        console.log(
-          "Share cancelled:",
-          error
-        );
+      console.log(
+        "Share cancelled:",
+        error
+      );
 
-      }
-    );
+    });
 
   } else {
 
@@ -1515,9 +1708,7 @@ function showPremium() {
       "CBC-" +
       SECRET +
       "-" +
-      normalizedPhone.slice(
-        -4
-      );
+      normalizedPhone.slice(-4);
 
 
     if (
@@ -1527,7 +1718,7 @@ function showPremium() {
     ) {
 
       localStorage.setItem(
-        "cbc_premium",
+        PREMIUM_KEY,
         "true"
       );
 
@@ -1590,9 +1781,12 @@ if (contactBtn) {
     "click",
     function () {
 
+      closeSidebar();
+
       window.open(
         "https://wa.me/254707649890",
-        "_blank"
+        "_blank",
+        "noopener,noreferrer"
       );
 
     }
@@ -1602,8 +1796,18 @@ if (contactBtn) {
 
 
 /* ==================================================
-   APK DOWNLOAD
+   APK / DOWNLOAD
 ================================================== */
+
+/*
+   The current index.html owns the download link.
+
+   Do NOT replace it with the old:
+   /releases/download/v1/cbc-master.apk
+
+   This prevents the JavaScript from overriding
+   the corrected CBCMaster-web Releases link.
+*/
 
 const downloadBtn =
   document.getElementById(
@@ -1617,8 +1821,12 @@ if (downloadBtn) {
     "click",
     function () {
 
-      window.location.href =
-        "https://github.com/Jose-ctr/CBCMaster-web/releases/download/v1/cbc-master.apk";
+      /*
+       * Allow the HTML <a> element to perform
+       * the actual navigation.
+       *
+       * No hard-coded APK URL here.
+       */
 
     }
   );
@@ -1639,8 +1847,7 @@ renderLeaderboard();
    PWA INSTALL
 ================================================== */
 
-let deferredInstallPrompt =
-  null;
+let deferredInstallPrompt = null;
 
 
 window.addEventListener(
@@ -1662,8 +1869,7 @@ function isInstalledApp() {
     window.matchMedia(
       "(display-mode: standalone)"
     ).matches ||
-    window.navigator.standalone ===
-      true
+    window.navigator.standalone === true
   );
 
 }
@@ -1695,8 +1901,7 @@ try {
 ================================================== */
 
 if (
-  "serviceWorker" in
-  navigator
+  "serviceWorker" in navigator
 ) {
 
   window.addEventListener(
@@ -1704,29 +1909,23 @@ if (
     function () {
 
       navigator.serviceWorker
-        .register(
-          "./sw.js"
-        )
-        .then(
-          function (registration) {
+        .register("./sw.js")
+        .then(function (registration) {
 
-            console.log(
-              "CBC MASTER Service Worker registered:",
-              registration.scope
-            );
+          console.log(
+            "CBC MASTER Service Worker registered:",
+            registration.scope
+          );
 
-          }
-        )
-        .catch(
-          function (error) {
+        })
+        .catch(function (error) {
 
-            console.error(
-              "CBC MASTER Service Worker registration failed:",
-              error
-            );
+          console.error(
+            "CBC MASTER Service Worker registration failed:",
+            error
+          );
 
-          }
-        );
+        });
 
     }
   );
