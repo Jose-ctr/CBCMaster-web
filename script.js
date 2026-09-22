@@ -66,8 +66,8 @@ const projectsPage =
 const clearHistoryBtn =
   document.getElementById("clearHistoryBtn");
 
-const downloadBtn =
-  document.getElementById("downloadBtn");
+const installBtn =
+  document.getElementById("installBtn");
 
 
 /* ==================================================
@@ -1667,10 +1667,32 @@ window.addEventListener(
   "beforeinstallprompt",
   function (event) {
 
+    /*
+     * Prevent the browser from showing
+     * its automatic mini-infobar.
+     *
+     * We will trigger installation from
+     * the CBC MASTER install button.
+     */
+
     event.preventDefault();
 
     deferredInstallPrompt =
       event;
+
+    if (installBtn) {
+
+      installBtn.disabled = false;
+
+      installBtn.textContent =
+        "📲 INSTALL CBC MASTER";
+
+      installBtn.setAttribute(
+        "aria-label",
+        "Install CBC MASTER"
+      );
+
+    }
 
     console.log(
       "CBC MASTER PWA install prompt available."
@@ -1679,6 +1701,10 @@ window.addEventListener(
   }
 );
 
+
+/* ==================================================
+   CHECK WHETHER APP IS INSTALLED
+================================================== */
 
 function isInstalledApp() {
 
@@ -1692,79 +1718,178 @@ function isInstalledApp() {
 }
 
 
-if (downloadBtn) {
+/* ==================================================
+   PWA INSTALL BUTTON
+================================================== */
 
-  downloadBtn.addEventListener(
-    "click",
-    async function (event) {
+async function installCBCMaster() {
 
-      event.preventDefault();
-
-      closeSidebar();
+  closeSidebar();
 
 
-      /* Already installed */
+  /* Already installed */
 
-      if (isInstalledApp()) {
+  if (isInstalledApp()) {
 
-        alert(
-          "CBC MASTER is already installed on this device."
-        );
+    if (installBtn) {
 
-        return;
+      installBtn.textContent =
+        "✅ CBC MASTER INSTALLED";
 
-      }
+      installBtn.disabled = true;
+
+    }
+
+    alert(
+      "CBC MASTER is already installed on this device."
+    );
+
+    return;
+
+  }
 
 
-      /* Native browser installation prompt */
+  /* Native browser installation prompt */
 
-      if (deferredInstallPrompt) {
+  if (deferredInstallPrompt) {
 
-        deferredInstallPrompt.prompt();
+    try {
+
+      deferredInstallPrompt.prompt();
+
+      const choice =
+        await deferredInstallPrompt.userChoice;
+
+      console.log(
+        "CBC MASTER install result:",
+        choice.outcome
+      );
 
 
-        try {
+      if (
+        choice.outcome === "accepted"
+      ) {
 
-          const choice =
-            await deferredInstallPrompt.userChoice;
+        if (installBtn) {
 
-          console.log(
-            "CBC MASTER install result:",
-            choice.outcome
-          );
+          installBtn.textContent =
+            "✅ Installing CBC MASTER...";
 
-        } catch (error) {
-
-          console.error(
-            "CBC MASTER installation prompt failed:",
-            error
-          );
+          installBtn.disabled = true;
 
         }
 
+      } else {
 
-        deferredInstallPrompt = null;
+        if (installBtn) {
 
-        return;
+          installBtn.textContent =
+            "📲 INSTALL CBC MASTER";
+
+          installBtn.disabled = false;
+
+        }
 
       }
 
+    } catch (error) {
 
-      /*
-       * Android browsers can sometimes hide
-       * the install prompt until the PWA has
-       * satisfied their install conditions.
-       */
-
-      alert(
-        "To install CBC MASTER:\n\n" +
-        "1. Open your browser menu ⋮\n" +
-        "2. Choose 'Install app' or 'Add to Home screen'\n" +
-        "3. Confirm the installation."
+      console.error(
+        "CBC MASTER installation prompt failed:",
+        error
       );
 
     }
+
+
+    /*
+     * The browser installation prompt
+     * can only be used once.
+     */
+
+    deferredInstallPrompt = null;
+
+    return;
+
+  }
+
+
+  /*
+   * The browser has not provided a native
+   * installation prompt.
+   *
+   * Give the user the normal Android
+   * browser installation instructions.
+   */
+
+  alert(
+    "To install CBC MASTER:\n\n" +
+    "1. Open your browser menu ⋮\n" +
+    "2. Choose 'Install app' or 'Add to Home screen'\n" +
+    "3. Confirm the installation."
   );
+
+}
+
+
+if (installBtn) {
+
+  installBtn.addEventListener(
+    "click",
+    installCBCMaster
+  );
+
+}
+
+
+/* ==================================================
+   APP INSTALLED EVENT
+================================================== */
+
+window.addEventListener(
+  "appinstalled",
+  function () {
+
+    console.log(
+      "CBC MASTER was installed successfully."
+    );
+
+    deferredInstallPrompt = null;
+
+    if (installBtn) {
+
+      installBtn.textContent =
+        "✅ CBC MASTER INSTALLED";
+
+      installBtn.disabled = true;
+
+    }
+
+  }
+);
+
+
+/* ==================================================
+   INITIAL INSTALL BUTTON STATE
+================================================== */
+
+if (installBtn) {
+
+  if (isInstalledApp()) {
+
+    installBtn.textContent =
+      "✅ CBC MASTER INSTALLED";
+
+    installBtn.disabled = true;
+
+  } else {
+
+    installBtn.textContent =
+      "📲 INSTALL CBC MASTER";
+
+    installBtn.disabled = false;
+
+  }
 
 }
 
