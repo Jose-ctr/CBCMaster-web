@@ -57,6 +57,10 @@
       overflow-x: hidden;
     }
 
+    body.popup-open {
+      overflow: hidden;
+    }
+
     button,
     input,
     select {
@@ -945,6 +949,8 @@
       opacity: 0;
       visibility: hidden;
 
+      pointer-events: none;
+
       transition:
         opacity .20s ease,
         visibility .20s ease;
@@ -953,6 +959,8 @@
     .custom-popup-overlay.show {
       opacity: 1;
       visibility: visible;
+
+      pointer-events: auto;
     }
 
     .custom-popup {
@@ -1008,6 +1016,8 @@
       font-size: 16px;
 
       line-height: 1.5;
+
+      white-space: pre-line;
     }
 
     #popupOkBtn {
@@ -1104,6 +1114,7 @@
 </head>
 
 <body>
+
 
   <!-- ==================================================
        SIDEBAR
@@ -1922,11 +1933,13 @@
   <div
     id="myPopup"
     class="custom-popup-overlay"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="popupText">
+    aria-hidden="true">
 
-    <div class="custom-popup">
+    <div
+      class="custom-popup"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="popupText">
 
       <div
         class="custom-popup-icon"
@@ -1957,79 +1970,6 @@
 
   <script src="./script.js"></script>
 
-
-  <!-- ==================================================
-       CUSTOM POPUP FUNCTIONS
-  ================================================== -->
-
-  <script>
-
-    function showPopup(message) {
-
-      const popup =
-        document.getElementById("myPopup");
-
-      const popupText =
-        document.getElementById("popupText");
-
-      popupText.textContent = message;
-
-      popup.classList.add("show");
-
-      document
-        .getElementById("popupOkBtn")
-        .focus();
-
-    }
-
-
-    function closePopup() {
-
-      document
-        .getElementById("myPopup")
-        .classList.remove("show");
-
-    }
-
-
-    document
-      .getElementById("popupOkBtn")
-      .addEventListener(
-        "click",
-        closePopup
-      );
-
-
-    document
-      .getElementById("myPopup")
-      .addEventListener(
-        "click",
-        function (event) {
-
-          if (event.target === this) {
-
-            closePopup();
-
-          }
-
-        }
-      );
-
-
-    document.addEventListener(
-      "keydown",
-      function (event) {
-
-        if (event.key === "Escape") {
-
-          closePopup();
-
-        }
-
-      }
-    );
-
-  </script>
-
 </body>
+
 </html>
