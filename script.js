@@ -12,6 +12,156 @@ const HISTORY_KEY = "cbc_history";
 
 
 /* ==================================================
+   CUSTOM POPUP
+================================================== */
+
+/*
+ * CBC MASTER custom notification popup.
+ *
+ * This replaces native alert() dialogs so the browser
+ * does not display:
+ *
+ * "jose-ctr.github.io says"
+ *
+ * The popup elements are looked up when the function
+ * is called, making this safe even if the HTML appears
+ * before or after this script.
+ */
+
+function showPopup(message) {
+
+  const popup =
+    document.getElementById("myPopup");
+
+  const popupText =
+    document.getElementById("popupText");
+
+  if (!popup || !popupText) {
+
+    console.warn(
+      "CBC MASTER popup elements were not found."
+    );
+
+    return;
+
+  }
+
+  popupText.textContent =
+    String(message ?? "");
+
+  popup.style.display = "flex";
+
+  popup.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.classList.add(
+    "popup-open"
+  );
+
+  const okButton =
+    document.getElementById(
+      "popupOkBtn"
+    );
+
+  if (okButton) {
+
+    setTimeout(function () {
+
+      okButton.focus();
+
+    }, 50);
+
+  }
+
+}
+
+
+function closePopup() {
+
+  const popup =
+    document.getElementById("myPopup");
+
+  if (!popup) {
+
+    return;
+
+  }
+
+  popup.style.display = "none";
+
+  popup.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.classList.remove(
+    "popup-open"
+  );
+
+}
+
+
+const popupOkBtn =
+  document.getElementById(
+    "popupOkBtn"
+  );
+
+
+if (popupOkBtn) {
+
+  popupOkBtn.addEventListener(
+    "click",
+    closePopup
+  );
+
+}
+
+
+const popupOverlay =
+  document.getElementById(
+    "myPopup"
+  );
+
+
+if (popupOverlay) {
+
+  popupOverlay.addEventListener(
+    "click",
+    function (event) {
+
+      if (
+        event.target === popupOverlay
+      ) {
+
+        closePopup();
+
+      }
+
+    }
+  );
+
+}
+
+
+document.addEventListener(
+  "keydown",
+  function (event) {
+
+    if (
+      event.key === "Escape"
+    ) {
+
+      closePopup();
+
+    }
+
+  }
+);
+
+
+/* ==================================================
    DOM ELEMENTS
 ================================================== */
 
@@ -762,7 +912,7 @@ function clearHistory() {
 
   if (history.length === 0) {
 
-    alert(
+    showPopup(
       "There is no quiz history to clear."
     );
 
@@ -800,7 +950,7 @@ function clearHistory() {
 
   renderLeaderboard();
 
-  alert(
+  showPopup(
     "Quiz history cleared."
   );
 
@@ -1066,7 +1216,7 @@ function startQuiz() {
 
   if (!currentStudent) {
 
-    alert(
+    showPopup(
       "Please enter the student's name."
     );
 
@@ -1083,7 +1233,7 @@ function startQuiz() {
 
   if (!currentGrade) {
 
-    alert(
+    showPopup(
       "Please select a grade."
     );
 
@@ -1106,7 +1256,7 @@ function startQuiz() {
     currentQuestions.length === 0
   ) {
 
-    alert(
+    showPopup(
       "No quiz questions are available."
     );
 
@@ -1310,7 +1460,7 @@ function checkAnswer() {
 
   if (!userAnswer) {
 
-    alert(
+    showPopup(
       "Please enter an answer."
     );
 
@@ -1573,7 +1723,7 @@ function rateApp() {
 
   closeSidebar();
 
-  alert(
+  showPopup(
     "Thank you for using CBC MASTER!"
   );
 
@@ -1633,7 +1783,7 @@ function shareApp() {
 
   } else {
 
-    alert(
+    showPopup(
       "Share this link:\n\n" +
       window.location.href
     );
@@ -1740,7 +1890,7 @@ async function installCBCMaster() {
 
     }
 
-    alert(
+    showPopup(
       "CBC MASTER is already installed on this device."
     );
 
@@ -1822,7 +1972,7 @@ async function installCBCMaster() {
    * browser installation instructions.
    */
 
-  alert(
+  showPopup(
     "To install CBC MASTER:\n\n" +
     "1. Open your browser menu ⋮\n" +
     "2. Choose 'Install app' or 'Add to Home screen'\n" +
